@@ -1,4 +1,4 @@
-gym
 torch
 numpy
-mujoco_py
+gymnasium[mujoco]
+tensorboard

@@ -13,12 +13,13 @@
 # limitations under the License.
 # ==============================================================================
 
-"""Wrapper for creating the ant environment in gym_mujoco."""
+"""Wrapper for creating the ant environment using Gymnasium's MujocoEnv."""
 
 import math
+import os
 import numpy as np
-from gym import utils
-from gym.envs.mujoco import mujoco_env
+from gymnasium import utils
+from gymnasium.envs.mujoco import mujoco_env
 
 
 class AntEnv(mujoco_env.MujocoEnv, utils.EzPickle):
@@ -32,7 +33,13 @@ class AntEnv(mujoco_env.MujocoEnv, utils.EzPickle):
     self._body_com_indices = {}
     self._body_comvel_indices = {}
 
-    mujoco_env.MujocoEnv.__init__(self, file_path, 5)
+    # Resolve default model path if none provided
+    if file_path is None:
+      file_path = os.path.join(os.path.dirname(__file__), "assets", self.FILE)
+
+    # Gymnasium's MujocoEnv requires an observation_space argument; we
+    # provide None to let the env infer it from _get_obs during setup.
+    mujoco_env.MujocoEnv.__init__(self, file_path, 5, observation_space=None)
     utils.EzPickle.__init__(self)
 
   @property
@@ -40,6 +47,7 @@ class AntEnv(mujoco_env.MujocoEnv, utils.EzPickle):
     return self.model
 
   def _step(self, a):
+    # Backwards-compat: alias to step for old callers
     return self.step(a)
 
   def step(self, a):
@@ -81,7 +89,11 @@ class AntEnv(mujoco_env.MujocoEnv, utils.EzPickle):
 
     if self._expose_body_comvels is not None:
       for name in self._expose_body_comvels:
-        comvel = self.get_body_comvel(name)
+        # Gymnasium MujocoEnv may not expose get_body_comvel; fall back gracefully
+        comvel_fn = getattr(self, "get_body_comvel", None)
+        if comvel_fn is None:
+          continue
+        comvel = comvel_fn(name)
         if name not in self._body_comvel_indices:
           indices = range(len(obs), len(obs) + len(comvel))
           self._body_comvel_indices[name] = indices
@@ -91,7 +103,8 @@ class AntEnv(mujoco_env.MujocoEnv, utils.EzPickle):
   def reset_model(self):
     qpos = self.init_qpos + self.np_random.uniform(
         size=self.model.nq, low=-.1, high=.1)
-    qvel = self.init_qvel + self.np_random.randn(self.model.nv) * .1
+    # np_random is a numpy Generator in Gymnasium; use standard_normal
+    qvel = self.init_qvel + self.np_random.standard_normal(self.model.nv) * .1
 
     # Set everything other than ant to original position and 0 velocity.
     qpos[15:] = self.init_qpos[15:]
@@ -100,6 +113,8 @@ class AntEnv(mujoco_env.MujocoEnv, utils.EzPickle):
     return self._get_obs()
 
   def viewer_setup(self):
-    self.viewer.cam.trackbodyid = -1
-    self.viewer.cam.distance = 50
-    self.viewer.cam.elevation = -90
+    viewer = getattr(self, "viewer", None)
+    if viewer is not None and hasattr(viewer, "cam"):
+      viewer.cam.trackbodyid = -1
+      viewer.cam.distance = 50
+      viewer.cam.elevation = -90

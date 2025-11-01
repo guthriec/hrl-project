@@ -51,7 +51,14 @@ class EnvWithGoal(object):
         self.action_dim = self.base_env.action_space.shape[0]
 
     def seed(self, seed):
-        self.base_env.seed(seed)
+        # Gymnasium prefers seeding via reset(seed=...); fall back to old API if available
+        if hasattr(self.base_env, 'seed'):
+            self.base_env.seed(seed)
+        else:
+            try:
+                self.base_env.reset(seed=seed)
+            except TypeError:
+                pass
 
     def reset(self):
         # self.viewer_setup()
