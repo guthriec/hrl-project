@@ -17,14 +17,43 @@ from .ant_maze_env import AntMazeEnv
 
 
 def create_maze_env(env_name=None):
-  maze_id = None
-  if env_name.startswith('AntMaze'):
-    maze_id = 'Maze'
-  elif env_name.startswith('AntPush'):
-    maze_id = 'Push'
-  elif env_name.startswith('AntFall'):
-    maze_id = 'Fall'
-  else:
-    raise ValueError('Unknown maze environment %s' % env_name)
+    env_name = env_name or ""
+    maze_id = None
+    easy = bool(env_name and env_name.endswith("Easy"))
+    kwargs = {}
+    if env_name.startswith("AntMaze"):
+        maze_id = "Maze"
+        if easy:
+            kwargs.update(
+                dict(
+                    maze_size_scaling=6,  # smaller cells -> shorter paths
+                    maze_height=0.3,  # thinner platforms
+                    force_flat=True,  # ignore elevation
+                    disable_walls=True,  # open field
+                    max_episode_steps=200,  # shorter episodes
+                )
+            )
+    elif env_name.startswith("AntPush"):
+        maze_id = "Push"
+        if easy:
+            kwargs.update(
+                dict(
+                    maze_size_scaling=6,
+                    maze_height=0.3,
+                    max_episode_steps=200,
+                )
+            )
+    elif env_name.startswith("AntFall"):
+        maze_id = "Fall"
+        if easy:
+            kwargs.update(
+                dict(
+                    maze_size_scaling=6,
+                    maze_height=0.3,
+                    max_episode_steps=300,
+                )
+            )
+    else:
+        raise ValueError("Unknown maze environment %s" % env_name)
 
-  return AntMazeEnv(maze_id=maze_id)
+    return AntMazeEnv(maze_id=maze_id, **kwargs)

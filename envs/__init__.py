@@ -3,7 +3,7 @@
 import numpy as np
 import argparse
 
-import envs.create_maze_env
+from . import create_maze_env
 
 
 def get_goal_sample_fn(env_name, evaluate):
@@ -96,7 +96,7 @@ class EnvWithGoal(object):
         width = data[1]
         height = data[2]
 
-        tmp = np.fromstring(img_data, dtype=np.uint8)
+        tmp = np.frombuffer(img_data, dtype=np.uint8)
         image_obs = np.reshape(tmp, [height, width, 3])
         image_obs = np.flipud(image_obs)
 
