@@ -7,7 +7,7 @@ from . import create_maze_env
 
 
 def get_goal_sample_fn(env_name, evaluate):
-    if env_name == 'AntMaze':
+    if env_name.startswith('AntMaze'):
         # NOTE: When evaluating (i.e. the metrics shown in the paper,
         # we use the commented out goal sampling function.    The uncommented
         # one is only used for training.
@@ -24,7 +24,7 @@ def get_goal_sample_fn(env_name, evaluate):
 
 
 def get_reward_fn(env_name):
-    if env_name == 'AntMaze':
+    if env_name.startswith('AntMaze'):
         return lambda obs, goal: -np.sum(np.square(obs[:2] - goal)) ** 0.5
     elif env_name == 'AntPush':
         return lambda obs, goal: -np.sum(np.square(obs[:2] - goal)) ** 0.5
@@ -45,7 +45,7 @@ class EnvWithGoal(object):
         self.evaluate = False
         self.reward_fn = get_reward_fn(env_name)
         self.goal = None
-        self.distance_threshold = 5
+        self.distance_threshold = 0.1
         self.count = 0
         self.state_dim = self.base_env.observation_space.shape[0] + 1
         self.action_dim = self.base_env.action_space.shape[0]
@@ -63,7 +63,7 @@ class EnvWithGoal(object):
     def reset(self):
         # self.viewer_setup()
         self.goal_sample_fn = get_goal_sample_fn(self.env_name, self.evaluate)
-        obs = self.base_env.reset()
+        obs, info = self.base_env.reset()
         self.count = 0
         self.goal = self.goal_sample_fn()
         return {
@@ -74,8 +74,9 @@ class EnvWithGoal(object):
         }
 
     def step(self, a):
-        obs, _, done, info = self.base_env.step(a)
+        obs, _, done, truncated, info = self.base_env.step(a)
         reward = self.reward_fn(obs, self.goal)
+        done = done or reward > -self.distance_threshold
         self.count += 1
         next_obs = {
             # add timestep

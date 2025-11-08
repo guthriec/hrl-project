@@ -18,7 +18,6 @@
 import os
 import tempfile
 import xml.etree.ElementTree as ET
-import math
 import numpy as np
 import gymnasium as gym
 
@@ -64,8 +63,9 @@ class MazeEnv(gym.Env):
 
         self.MAZE_HEIGHT = height = maze_height
         self.MAZE_SIZE_SCALING = size_scaling = maze_size_scaling
+        assert self._maze_id is not None, "MazeEnv requires a maze_id."
         self.MAZE_STRUCTURE = structure = maze_env_utils.construct_maze(
-            maze_id=self._maze_id
+            maze_id=self._maze_id,
         )
         self.elevated = any(
             -1 in row for row in structure
@@ -104,6 +104,7 @@ class MazeEnv(gym.Env):
             for j in range(len(structure[0])):
                 if self.elevated and structure[i][j] not in [-1]:
                     # Create elevated platform.
+                    assert worldbody is not None
                     ET.SubElement(
                         worldbody,
                         "geom",
@@ -129,6 +130,7 @@ class MazeEnv(gym.Env):
                 if structure[i][j] == 1:  # Unmovable block.
                     if self._disable_walls:
                         continue
+                    assert worldbody is not None
                     ET.SubElement(
                         worldbody,
                         "geom",
@@ -158,6 +160,7 @@ class MazeEnv(gym.Env):
                     # ensure that it can fall easily through a gap in the platform blocks.
                     falling = maze_env_utils.can_move_z(structure[i][j])
                     shrink = 0.99 if falling else 1.0
+                    assert worldbody is not None
                     moveable_body = ET.SubElement(
                         worldbody,
                         "body",
@@ -231,6 +234,7 @@ class MazeEnv(gym.Env):
                         )
 
         torso = tree.find(".//body[@name='torso']")
+        assert torso is not None, "Could not find a body named 'torso' in the model XML."
         geoms = torso.findall(".//geom")
         for geom in geoms:
             if "name" not in geom.attrib:
@@ -244,7 +248,7 @@ class MazeEnv(gym.Env):
         tree.write(file_path)
         self._temp_xml_path = file_path
 
-        self.wrapped_env = model_cls(*args, file_path=file_path, **kwargs)
+        self.wrapped_env: MazeEnv = model_cls(*args, file_path=file_path, **kwargs)
 
     def _get_obs(self):
         return np.concatenate([self.wrapped_env._get_obs(), [self.t * 0.001]])
@@ -279,6 +283,7 @@ class MazeEnv(gym.Env):
 
     def _find_robot(self):
         structure = self.MAZE_STRUCTURE
+        assert self.MAZE_SIZE_SCALING is not None, "MazeEnv requires MAZE_SIZE_SCALING."
         size_scaling = self.MAZE_SIZE_SCALING
         for i in range(len(structure)):
             for j in range(len(structure[0])):
@@ -289,17 +294,20 @@ class MazeEnv(gym.Env):
     def step(self, action):
         # Normalize Gymnasium step signature.
         self.t += 1
-        step_ret = self.wrapped_env.step(action)
-        # Accept both old Gym (4-tuple) and Gymnasium (5-tuple).
-        if isinstance(step_ret, tuple) and len(step_ret) == 4:
-            inner_next_obs, reward, done, info = step_ret
-            terminated, truncated = bool(done), False
-        elif isinstance(step_ret, tuple) and len(step_ret) == 5:
-            inner_next_obs, reward, terminated, truncated, info = step_ret
+        if isinstance(self.wrapped_env, gym.Env):
+          step_ret = self.wrapped_env.step(action)
+          # Accept both old Gym (4-tuple) and Gymnasium (5-tuple).
+          if isinstance(step_ret, tuple) and len(step_ret) == 4:
+              inner_next_obs, reward, done, info = step_ret
+              terminated, truncated = bool(done), False
+          elif isinstance(step_ret, tuple) and len(step_ret) == 5:
+              inner_next_obs, reward, terminated, truncated, info = step_ret
+          else:
+              raise ValueError(
+                  "Unexpected step return from wrapped_env: %r" % (type(step_ret),)
+              )
         else:
-            raise ValueError(
-                "Unexpected step return from wrapped_env: %r" % (type(step_ret),)
-            )
+            raise ValueError("wrapped_env is not a Gym environment.")
         next_obs = self._get_obs()
         return next_obs, reward, bool(terminated), bool(truncated), info
 

@@ -26,10 +26,11 @@ def create_maze_env(env_name=None):
         if easy:
             kwargs.update(
                 dict(
-                    maze_size_scaling=6,  # smaller cells -> shorter paths
+                    maze_size_scaling=2,  # smaller cells -> shorter paths
                     maze_height=0.3,  # thinner platforms
                     force_flat=True,  # ignore elevation
                     disable_walls=True,  # open field
+                    disable_movable_blocks=True,  # no obstacles
                     max_episode_steps=200,  # shorter episodes
                 )
             )
