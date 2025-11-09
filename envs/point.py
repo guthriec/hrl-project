@@ -4,6 +4,7 @@ from gymnasium import spaces
 from gymnasium.envs.mujoco import mujoco_env
 from gymnasium import utils
 import os
+import xml.etree.ElementTree as ET
 
 
 class PointEnv(mujoco_env.MujocoEnv, utils.EzPickle):
@@ -26,30 +27,53 @@ class PointEnv(mujoco_env.MujocoEnv, utils.EzPickle):
         if file_path is None:
             file_path = os.path.join(os.path.dirname(__file__), "assets", self.FILE)
 
-        observation_space = spaces.Box(
-            low=-np.inf, high=np.inf, shape=(4,), dtype=np.float64
+        # Parse XML to get joint limits
+        tree = ET.parse(file_path)
+        joints = tree.findall(".//joint")
+
+        # Build observation bounds: [x, y, theta, vx, vy, vtheta]
+        qpos_low = []
+        qpos_high = []
+        for joint in joints:
+            if joint.get("limited") == "true" and "range" in joint.attrib:
+                range_str = joint.get("range")
+                assert range_str is not None
+                low, high = map(float, range_str.split())
+                qpos_low.append(low)
+                qpos_high.append(high)
+            else:
+                # Unlimited joint
+                qpos_low.append(-np.inf)
+                qpos_high.append(np.inf)
+
+        # Velocity limits (assume symmetric and large)
+        qvel_low = [-np.inf] * 3
+        qvel_high = [np.inf] * 3
+
+        obs_low = np.array(qpos_low + qvel_low, dtype=np.float64)
+        obs_high = np.array(qpos_high + qvel_high, dtype=np.float64)
+
+        observation_space = spaces.Box(low=obs_low, high=obs_high, dtype=np.float64)
+
+        mujoco_env.MujocoEnv.__init__(
+            self, file_path, frame_skip=frame_skip, observation_space=observation_space
         )
-
-        # Gymnasium's MujocoEnv requires an observation_space argument; we
-        # provide None to let the env infer it from _get_obs during setup.
-        mujoco_env.MujocoEnv.__init__(self, file_path, frame_skip=frame_skip, observation_space=None)
         utils.EzPickle.__init__(self, file_path, frame_skip, expose_all_qpos, **kwargs)
-
 
     def _get_obs(self):
         return np.concatenate(
             [
-                self.data.qpos.flat[:2],  # x, y position
-                self.data.qvel.flat[:2],  # x, y velocity
+                self.data.qpos.flat[:3],  # x, y, theta position
+                self.data.qvel.flat[:3],  # x, y, theta velocity
             ]
         )
 
     def get_xy(self):
-        """Get the x, y position of the point mass."""
+        """Get the x, y position of the car."""
         return self.data.qpos.flat[:2].copy()
 
     def set_xy(self, xy):
-        """Set the x, y position of the point mass."""
+        """Set the x, y position of the car."""
         qpos = self.data.qpos.copy()
         qpos[:2] = xy
         qvel = self.data.qvel.copy()
@@ -62,8 +86,23 @@ class PointEnv(mujoco_env.MujocoEnv, utils.EzPickle):
         return self._get_obs()
 
     def step(self, action):
+        # Convert car controls (steering, throttle) to x/y velocities
+        # action[0] = steering rate (angular velocity)
+        # action[1] = throttle (forward speed)
+
+        theta = self.data.qpos[2]  # Current heading
+        steering = action[0] if len(action) > 0 else 0.0
+        throttle = action[1] if len(action) > 1 else 0.0
+
+        # Convert to world frame velocities
+        vx = throttle * np.cos(theta)
+        vy = throttle * np.sin(theta)
+
+        # Create control vector: [steering, vx, vy]
+        ctrl = np.array([steering, vx, vy])
+
         # Apply action and simulate
-        self.do_simulation(action, self.frame_skip)
+        self.do_simulation(ctrl, self.frame_skip)
 
         obs = self._get_obs()
         reward = 0.0  # Reward handled by MazeEnv wrapper
