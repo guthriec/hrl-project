@@ -3,7 +3,7 @@ import numpy as np
 import time
 import gymnasium
 from .models import TD3Controller, HigherController, LowerController
-from hiro.hiro_utils import LowReplayBuffer, HighReplayBuffer, ReplayBuffer, Subgoal
+from hiro.hiro_utils import LowReplayBuffer, HighReplayBuffer, ReplayBuffer, WorkerReward
 
 
 class Agent:
@@ -162,7 +162,7 @@ class HiroAgent(Agent):
         state_dim,
         action_dim,
         goal_dim,
-        subgoal_dim,
+        # subgoal_dim,
         scale_low,
         start_training_steps,
         model_save_freq,
@@ -175,24 +175,26 @@ class HiroAgent(Agent):
         policy_freq_high,
         policy_freq_low,
     ):
-
-        self.subgoal = Subgoal(subgoal_dim)
-        scale_high = self.subgoal.action_space.high * np.ones(subgoal_dim)
+        self.worker_reward = WorkerReward(state_dim)
+        # self.subgoal = Subgoal(subgoal_dim)
+        # scale_high = self.subgoal.action_space.high * np.ones(subgoal_dim)
 
         self.model_save_freq = model_save_freq
 
         self.high_con = HigherController(
             state_dim=state_dim,
             goal_dim=goal_dim,
-            action_dim=subgoal_dim,
-            scale=scale_high,
+            worker_reward=self.worker_reward,
+            # action_dim=subgoal_dim,
+            # scale=scale_high,
             model_path=model_path,
             policy_freq=policy_freq_high,
         )
 
         self.low_con = LowerController(
             state_dim=state_dim,
-            goal_dim=subgoal_dim,
+            # goal_dim=subgoal_dim,
+            worker_reward=self.worker_reward,
             action_dim=action_dim,
             scale=scale_low,
             model_path=model_path,
@@ -201,7 +203,8 @@ class HiroAgent(Agent):
 
         self.replay_buffer_low = LowReplayBuffer(
             state_dim=state_dim,
-            goal_dim=subgoal_dim,
+            # goal_dim=subgoal_dim,
+            worker_reward=self.worker_reward,
             action_dim=action_dim,
             buffer_size=buffer_size,
             batch_size=batch_size,
@@ -210,7 +213,8 @@ class HiroAgent(Agent):
         self.replay_buffer_high = HighReplayBuffer(
             state_dim=state_dim,
             goal_dim=goal_dim,
-            subgoal_dim=subgoal_dim,
+            # subgoal_dim=subgoal_dim,
+            worker_reward=self.worker_reward,
             action_dim=action_dim,
             buffer_size=buffer_size,
             batch_size=batch_size,
@@ -225,7 +229,7 @@ class HiroAgent(Agent):
 
         self.buf = [None, None, None, 0, None, None, [], []]
         self.fg = np.array([0, 0])
-        self.sg = self.subgoal.action_space.sample()
+        self.sg = self.worker_reward.sample_goal()
 
         self.start_training_steps = start_training_steps
 
@@ -248,7 +252,7 @@ class HiroAgent(Agent):
         # Take random action for start_training steps
         if explore:
             if global_step < self.start_training_steps:
-                n_sg = self.subgoal.action_space.sample()
+                n_sg = self.worker_reward.sample_goal()
             else:
                 n_sg = self._choose_subgoal_with_noise(step, s, self.sg, n_s)
         else:

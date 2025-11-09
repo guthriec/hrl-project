@@ -15,7 +15,6 @@
 
 """Wrapper for creating the ant environment using Gymnasium's MujocoEnv."""
 
-import math
 import os
 import numpy as np
 from gymnasium import utils

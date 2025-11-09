@@ -11,9 +11,13 @@ import numpy as np
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from .utils import get_tensor
+
+from hiro.hiro_utils import HighReplayBuffer
+from .utils import ReplayBuffer, get_tensor
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+print("Using device:", device)
 
 class TD3Actor(nn.Module):
     def __init__(self, state_dim, goal_dim, action_dim, scale=None):
@@ -249,8 +253,9 @@ class HigherController(TD3Controller):
         self,
         state_dim,
         goal_dim,
-        action_dim,
-        scale,
+        worker_reward,
+        # action_dim,
+        # scale,
         model_path,
         actor_lr=0.0001,
         critic_lr=0.001,
@@ -264,8 +269,8 @@ class HigherController(TD3Controller):
         super(HigherController, self).__init__(
             state_dim,
             goal_dim,
-            action_dim,
-            scale,
+            worker_reward.goal_dim(),
+            worker_reward.goal_scale(),
             model_path,
             actor_lr,
             critic_lr,
@@ -277,7 +282,7 @@ class HigherController(TD3Controller):
             tau,
         )
         self.name = "high"
-        self.action_dim = action_dim
+        self.worker_reward = worker_reward
 
     def off_policy_corrections(
         self, low_con, batch_size, sgoals, states, actions, candidate_goals=8
@@ -288,7 +293,7 @@ class HigherController(TD3Controller):
         # Shape: (batch_size, 1, subgoal_dim)
         # diff = 1
         diff_goal = (np.array(last_s) - np.array(first_s))[
-            :, np.newaxis, : self.action_dim
+            :, np.newaxis, : self.worker_reward.goal_dim()
         ]
 
         # Shape: (batch_size, 1, subgoal_dim)
@@ -316,7 +321,7 @@ class HigherController(TD3Controller):
 
         true_actions = actions.reshape((new_batch_sz,) + action_dim)
         observations = states.reshape((new_batch_sz,) + obs_dim)
-        goal_shape = (new_batch_sz, self.action_dim)
+        goal_shape = (new_batch_sz, self.worker_reward.goal_dim())
         # observations = get_obs_tensor(observations, sg_corrections=True)
 
         # batched_candidates = np.tile(candidates, [seq_len, 1, 1])
@@ -326,8 +331,8 @@ class HigherController(TD3Controller):
 
         for c in range(ncands):
             subgoal = candidates[:, c]
-            candidate = (subgoal + states[:, 0, : self.action_dim])[:, None] - states[
-                :, :, : self.action_dim
+            candidate = (subgoal + states[:, 0, : self.worker_reward.goal_dim()])[:, None] - states[
+                :, :, : self.worker_reward.goal_dim()
             ]
             candidate = candidate.reshape(*goal_shape)
             policy_actions[c] = low_con.policy(observations, candidate)
@@ -343,7 +348,7 @@ class HigherController(TD3Controller):
 
         return candidates[np.arange(batch_size), max_indices]
 
-    def train(self, replay_buffer, low_con):
+    def train(self, replay_buffer: HighReplayBuffer, low_con):
         if not self._initialized:
             self._initialize_target_networks()
 
@@ -367,7 +372,7 @@ class LowerController(TD3Controller):
     def __init__(
         self,
         state_dim,
-        goal_dim,
+        worker_reward,
         action_dim,
         scale,
         model_path,
@@ -382,7 +387,7 @@ class LowerController(TD3Controller):
     ):
         super(LowerController, self).__init__(
             state_dim,
-            goal_dim,
+            worker_reward.goal_dim(),
             action_dim,
             scale,
             model_path,
