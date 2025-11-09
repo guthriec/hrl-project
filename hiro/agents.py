@@ -2,7 +2,7 @@ from hiro.utils import _is_update
 import numpy as np
 import time
 import gymnasium
-from models import TD3Controller, HigherController, LowerController
+from .models import TD3Controller, HigherController, LowerController
 from hiro.hiro_utils import LowReplayBuffer, HighReplayBuffer, ReplayBuffer, Subgoal
 
 
@@ -17,6 +17,9 @@ class Agent:
         raise NotImplementedError
 
     def append(self, step, s, a, n_s, r, d):
+        """
+        Adds the given transition to the agent's replay buffer.
+        """
         raise NotImplementedError
 
     def train(self, global_step):

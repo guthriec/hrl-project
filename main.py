@@ -118,7 +118,7 @@ if __name__ == "__main__":
     parser.add_argument("--save_video", action="store_true")
     parser.add_argument("--sleep", type=float, default=-1)
     parser.add_argument("--eval_episodes", type=float, default=5, help="Unit = Episode")
-    parser.add_argument("--env", default="AntMaze", type=str)
+    parser.add_argument("--env", default="AntMazeEasy", type=str)
     parser.add_argument("--td3", action="store_true")
 
     # Training

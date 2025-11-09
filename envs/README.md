@@ -8,6 +8,3 @@ Notes:
 - Public methods keep the legacy Gym API for compatibility with the rest of the codebase/tests:
   - reset() returns only the observation (not (obs, info)).
   - step(action) returns (obs, reward, done, info) where done combines termination/truncation.
-
-Minor edit: visual observations, which we needed for some our own work.
-

@@ -45,6 +45,7 @@ def can_move(movable):
 
 
 def construct_maze(maze_id='Maze'):
+  
   if maze_id == 'Maze':
     structure = [
         [1, 1, 1, 1, 1],
