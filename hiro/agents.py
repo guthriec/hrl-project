@@ -73,7 +73,7 @@ class Agent:
                 subgoal_error = np.sqrt(np.sum(np.square(self.worker_goal[:2] - s[:2])))
                 subgoal_total_error = np.sqrt(np.sum(np.square(self.worker_goal - s[:-1])))
                 print(
-                    "Goal, Curr, SG: (%5.2f, %5.2f), (%5.2f, %5.2f), (%5.2f, %5.2f)   Error:%5.2f  SG Err:%5.2f  SG Total Err:%5.2f"
+                    "Goal, Curr, SG: (%5.2f, %5.2f), (%6.2f, %6.2f), (%6.2f, %6.2f)   Error:%5.2f  SG Err:%5.2f  SG Total Err:%5.2f"
                     % (
                         fg[0],
                         fg[1],
@@ -263,6 +263,9 @@ class HiroAgent(Agent):
         else:
             n_sg = self._choose_subgoal(step, s, self.sg, n_s)
 
+        # n_sg = np.array([0.0, 16.0, 0.0, 0.0, 0.0, 0.0]) - s[:-1]  # Hardcoded goal
+        # self.worker_goal = s[:-1] + n_sg
+
         self.n_sg = n_sg
 
         return a, r, n_s, done
@@ -338,9 +341,12 @@ class HiroAgent(Agent):
     def subgoal_transition(self, s, sg, n_s):
         return s[: sg.shape[0]] + sg - n_s[: sg.shape[0]]
 
+    # Use potential-based reward
     def low_reward(self, s, sg, n_s):
         abs_s = s[: sg.shape[0]] + sg
-        return -np.sqrt(np.sum((abs_s - n_s[: sg.shape[0]]) ** 2))
+        prev_dist = np.sqrt(np.sum((abs_s - s[: sg.shape[0]]) ** 2))
+        new_dist = np.sqrt(np.sum((abs_s - n_s[: sg.shape[0]]) ** 2))
+        return prev_dist - new_dist
 
     def end_step(self):
         self.episode_subreward += self.sr

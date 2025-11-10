@@ -7,12 +7,12 @@
       <geom name="carbody" type="box" size="0.2 0.1 0.05" rgba="0.8 0.2 0.2 1" mass="1.0"/>
       <joint name="x" type="slide" pos="0 0 0" axis="1 0 0" range="-50 50" limited="true"/>
       <joint name="y" type="slide" pos="0 0 0" axis="0 1 0" range="-50 50" limited="true"/>
-      <joint name="theta" type="hinge" pos="0 0 0" axis="0 0 1" range="-3.14159 3.14159" limited="false"/>
+      <joint name="theta" type="hinge" pos="0 0 0" axis="0 0 1" range="-3.14159 3.14159" limited="false" damping="0.8"/>
     </body>
   </worldbody>
   
   <actuator>
-    <motor joint="theta" ctrlrange="-1.0 1.0" ctrllimited="true" gear="5"/>
+    <motor joint="theta" ctrlrange="-1.0 1.0" ctrllimited="true" gear="3"/>
     <velocity joint="x" ctrlrange="-2.0 2.0" ctrllimited="true" kv="10"/>
     <velocity joint="y" ctrlrange="-2.0 2.0" ctrllimited="true" kv="10"/>
   </actuator>

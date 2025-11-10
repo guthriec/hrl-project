@@ -93,6 +93,14 @@ class PointEnv(mujoco_env.MujocoEnv, utils.EzPickle):
         self.set_state(qpos, qvel)
         return self._get_obs()
 
+    @property
+    def action_space(self):
+        return spaces.Box(low=np.array([-1.0, -2.0]), high=np.array([1.0, 2.0]), dtype=np.float64)
+
+    @action_space.setter
+    def action_space(self, value):
+        self._action_space = value
+
     def step(self, action):
         # Convert car controls (steering, throttle) to x/y velocities
         # action[0] = steering rate (angular velocity)
