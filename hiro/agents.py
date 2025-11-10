@@ -2,12 +2,8 @@ from hiro.utils import _is_update
 import numpy as np
 import time
 from .models import TD3Controller, HigherController, LowerController
-from hiro.hiro_utils import (
-    LowReplayBuffer,
-    HighReplayBuffer,
-    ReplayBuffer,
-    WorkerGoalConfig,
-)
+from hiro.buffers import ReplayBuffer, LowReplayBuffer, HighReplayBuffer
+from hiro.worker_goal_config import WorkerGoalConfig
 
 
 class Agent:

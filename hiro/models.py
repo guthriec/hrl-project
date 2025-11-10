@@ -12,8 +12,8 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-from hiro.hiro_utils import HighReplayBuffer
-from .utils import ReplayBuffer, get_tensor
+from hiro.buffers import HighReplayBuffer
+from .utils import get_tensor
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
