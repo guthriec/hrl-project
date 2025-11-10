@@ -130,8 +130,8 @@ class WorkerReward(object):
         # self.shape = (dim, 1)
         # self.low = limits[:dim]
         # self.high = -self.low
-        self.low = np.maximum(observation_box.low, -10)
-        self.high = np.minimum(observation_box.high, 10)
+        self.low = np.where(np.isfinite(observation_box.low), observation_box.low, -1)
+        self.high = np.where(np.isfinite(observation_box.high), observation_box.high, 1)
 
     def sample_goal(self):
         return (self.high - self.low) * np.random.sample(self.high.shape)

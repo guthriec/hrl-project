@@ -1,11 +1,6 @@
 from hiro.utils import _is_update
 import numpy as np
 import time
-import gymnasium
-try:
-    from gymnasium.wrappers import RecordVideo
-except ImportError:
-    from gymnasium.experimental.wrappers import RecordVideo
 from .models import TD3Controller, HigherController, LowerController
 from hiro.hiro_utils import (
     LowReplayBuffer,
