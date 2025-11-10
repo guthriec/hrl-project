@@ -101,10 +101,8 @@ class AntEnv(mujoco_env.MujocoEnv, utils.EzPickle):
             dtype=np.float64,
         )
 
-        # Gymnasium's MujocoEnv requires an observation_space argument; we
-        # provide None to let the env infer it from _get_obs during setup.
         mujoco_env.MujocoEnv.__init__(
-            self, file_path, 5, observation_space=observation_space
+            self, file_path, 5, observation_space=observation_space, render_mode="human"
         )
         utils.EzPickle.__init__(self)
 

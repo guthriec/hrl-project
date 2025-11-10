@@ -17,11 +17,13 @@ from .ant_maze_env import AntMazeEnv
 from .point_maze_env import PointMazeEnv
 
 
-def create_maze_env(env_name=None):
+def create_maze_env(env_name=None, render_mode=None):
     env_name = env_name or ""
     maze_id = None
     easy = bool(env_name and env_name.endswith("Easy"))
-    kwargs = {}
+    kwargs = {
+        "render_mode": render_mode,
+    }
 
     # Determine if using Point or Ant
     use_point = env_name.startswith("Point")

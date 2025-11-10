@@ -1,3 +1,4 @@
+from gymnasium import spaces
 import torch
 import numpy as np
 
@@ -123,20 +124,23 @@ class HighReplayBuffer(ReplayBuffer):
 
 
 class WorkerReward(object):
-    def __init__(self, dim):
-        limits = -10 * np.ones(dim)
-        self.shape = (dim, 1)
-        self.low = limits[:dim]
-        self.high = -self.low
+    def __init__(self, observation_box: spaces.Box):
+        # limits = -10 * np.ones(dim)
+        self.shape = observation_box.shape
+        # self.shape = (dim, 1)
+        # self.low = limits[:dim]
+        # self.high = -self.low
+        self.low = np.maximum(observation_box.low, -10)
+        self.high = np.minimum(observation_box.high, 10)
 
     def sample_goal(self):
-        return (self.high - self.low) * np.random.sample(self.high.shape) + self.low
+        return (self.high - self.low) * np.random.sample(self.high.shape)
 
     def goal_dim(self):
         return self.shape[0]  # x, y position
 
     def goal_scale(self):
-        return 10.0 * np.ones(self.goal_dim())
+        return self.high/2
 
     def compute_reward(self, achieved_goal, desired_goal):
         # Compute distance between achieved and desired goal

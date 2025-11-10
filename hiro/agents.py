@@ -2,8 +2,17 @@ from hiro.utils import _is_update
 import numpy as np
 import time
 import gymnasium
+try:
+    from gymnasium.wrappers import RecordVideo
+except ImportError:
+    from gymnasium.experimental.wrappers import RecordVideo
 from .models import TD3Controller, HigherController, LowerController
-from hiro.hiro_utils import LowReplayBuffer, HighReplayBuffer, ReplayBuffer, WorkerReward
+from hiro.hiro_utils import (
+    LowReplayBuffer,
+    HighReplayBuffer,
+    ReplayBuffer,
+    WorkerReward,
+)
 
 
 class Agent:
@@ -35,13 +44,11 @@ class Agent:
         self, env, eval_episodes=10, render=False, save_video=False, sleep=-1
     ):
         if save_video:
-            env = gymnasium.wrappers.Monitor(
+            env = RecordVideo(
                 env,
-                directory="video",
-                write_upon_reset=True,
-                force=True,
-                resume=True,
-                mode="evaluation",
+                video_folder="video",
+                episode_trigger=lambda x: True,
+                disable_logger=True,
             )
             render = False
 
@@ -159,6 +166,7 @@ class TD3Agent(Agent):
 class HiroAgent(Agent):
     def __init__(
         self,
+        observation_box,
         state_dim,
         action_dim,
         goal_dim,
@@ -175,7 +183,7 @@ class HiroAgent(Agent):
         policy_freq_high,
         policy_freq_low,
     ):
-        self.worker_reward = WorkerReward(state_dim)
+        self.worker_reward = WorkerReward(observation_box)
         # self.subgoal = Subgoal(subgoal_dim)
         # scale_high = self.subgoal.action_space.high * np.ones(subgoal_dim)
 

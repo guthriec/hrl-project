@@ -94,7 +94,12 @@ class Trainer:
         # Print
         if _is_update(e, args.print_freq):
             agent = copy.deepcopy(self.agent)
-            rewards, success_rate = agent.evaluate_policy(self.env)
+            rewards, success_rate = agent.evaluate_policy(
+                self.env,
+                render=self.args.render,
+                save_video=self.args.save_video,
+                sleep=self.args.sleep,
+            )
             self.logger.write("Success Rate", success_rate, e)
 
             print(
@@ -164,7 +169,7 @@ if __name__ == "__main__":
     print(experiment_name)
 
     # Environment and its attributes
-    env = EnvWithGoal(create_maze_env(args.env), args.env)
+    env = EnvWithGoal(create_maze_env(args.env, render_mode=("human" if args.render else None)), args.env)
     goal_dim = 2
     state_dim = env.state_dim
     action_dim = env.action_dim
@@ -185,6 +190,7 @@ if __name__ == "__main__":
         )
     else:
         agent = HiroAgent(
+            observation_box=env.observation_space,
             state_dim=state_dim,
             action_dim=action_dim,
             goal_dim=goal_dim,

@@ -56,17 +56,25 @@ class PointEnv(mujoco_env.MujocoEnv, utils.EzPickle):
         observation_space = spaces.Box(low=obs_low, high=obs_high, dtype=np.float64)
 
         mujoco_env.MujocoEnv.__init__(
-            self, file_path, frame_skip=frame_skip, observation_space=observation_space
+            self,
+            file_path,
+            frame_skip=frame_skip,
+            observation_space=observation_space,
+            render_mode=kwargs.get("render_mode", None),
         )
         utils.EzPickle.__init__(self, file_path, frame_skip, expose_all_qpos, **kwargs)
 
     def _get_obs(self):
-        return np.concatenate(
+        obs = np.concatenate(
             [
                 self.data.qpos.flat[:3],  # x, y, theta position
                 self.data.qvel.flat[:3],  # x, y, theta velocity
             ]
         )
+        assert self.observation_space.contains(
+            obs
+        ), f"Observation {obs} not in space {self.observation_space}"
+        return obs
 
     def get_xy(self):
         """Get the x, y position of the car."""
