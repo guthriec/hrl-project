@@ -19,6 +19,7 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 print("Using device:", device)
 
+
 class TD3Actor(nn.Module):
     def __init__(self, state_dim, goal_dim, action_dim, scale=None):
         super(TD3Actor, self).__init__()
@@ -253,7 +254,7 @@ class HigherController(TD3Controller):
         self,
         state_dim,
         goal_dim,
-        worker_reward,
+        worker_goal_config,
         # action_dim,
         # scale,
         model_path,
@@ -269,8 +270,8 @@ class HigherController(TD3Controller):
         super(HigherController, self).__init__(
             state_dim,
             goal_dim,
-            worker_reward.goal_dim(),
-            worker_reward.goal_scale(),
+            worker_goal_config.goal_dim(),
+            worker_goal_config.goal_scale(),
             model_path,
             actor_lr,
             critic_lr,
@@ -282,7 +283,7 @@ class HigherController(TD3Controller):
             tau,
         )
         self.name = "high"
-        self.worker_reward = worker_reward
+        self.worker_goal_config = worker_goal_config
 
     def off_policy_corrections(
         self, low_con, batch_size, sgoals, states, actions, candidate_goals=8
@@ -293,7 +294,7 @@ class HigherController(TD3Controller):
         # Shape: (batch_size, 1, subgoal_dim)
         # diff = 1
         diff_goal = (np.array(last_s) - np.array(first_s))[
-            :, np.newaxis, : self.worker_reward.goal_dim()
+            :, np.newaxis, : self.worker_goal_config.goal_dim()
         ]
 
         # Shape: (batch_size, 1, subgoal_dim)
@@ -321,7 +322,7 @@ class HigherController(TD3Controller):
 
         true_actions = actions.reshape((new_batch_sz,) + action_dim)
         observations = states.reshape((new_batch_sz,) + obs_dim)
-        goal_shape = (new_batch_sz, self.worker_reward.goal_dim())
+        goal_shape = (new_batch_sz, self.worker_goal_config.goal_dim())
         # observations = get_obs_tensor(observations, sg_corrections=True)
 
         # batched_candidates = np.tile(candidates, [seq_len, 1, 1])
@@ -331,9 +332,9 @@ class HigherController(TD3Controller):
 
         for c in range(ncands):
             subgoal = candidates[:, c]
-            candidate = (subgoal + states[:, 0, : self.worker_reward.goal_dim()])[:, None] - states[
-                :, :, : self.worker_reward.goal_dim()
-            ]
+            candidate = (subgoal + states[:, 0, : self.worker_goal_config.goal_dim()])[
+                :, None
+            ] - states[:, :, : self.worker_goal_config.goal_dim()]
             candidate = candidate.reshape(*goal_shape)
             policy_actions[c] = low_con.policy(observations, candidate)
 
@@ -372,7 +373,7 @@ class LowerController(TD3Controller):
     def __init__(
         self,
         state_dim,
-        worker_reward,
+        worker_goal_config,
         action_dim,
         scale,
         model_path,
@@ -387,7 +388,7 @@ class LowerController(TD3Controller):
     ):
         super(LowerController, self).__init__(
             state_dim,
-            worker_reward.goal_dim(),
+            worker_goal_config.goal_dim(),
             action_dim,
             scale,
             model_path,

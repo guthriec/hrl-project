@@ -45,11 +45,17 @@ class ReplayBuffer:
 
 
 class LowReplayBuffer(ReplayBuffer):
-    def __init__(self, state_dim, worker_reward, action_dim, buffer_size, batch_size):
+    def __init__(
+        self, state_dim, worker_goal_config, action_dim, buffer_size, batch_size
+    ):
         super(LowReplayBuffer, self).__init__(
-            state_dim, worker_reward.goal_dim(), action_dim, buffer_size, batch_size
+            state_dim,
+            worker_goal_config.goal_dim(),
+            action_dim,
+            buffer_size,
+            batch_size,
         )
-        self.n_goal = np.zeros((buffer_size, worker_reward.goal_dim()))
+        self.n_goal = np.zeros((buffer_size, worker_goal_config.goal_dim()))
 
     def append(self, state, goal, action, n_state, n_goal, reward, done):
         self.state[self.ptr] = state
@@ -82,7 +88,7 @@ class HighReplayBuffer(ReplayBuffer):
         self,
         state_dim,
         goal_dim,
-        worker_reward,
+        worker_goal_config,
         action_dim,
         buffer_size,
         batch_size,
@@ -91,7 +97,7 @@ class HighReplayBuffer(ReplayBuffer):
         super(HighReplayBuffer, self).__init__(
             state_dim, goal_dim, action_dim, buffer_size, batch_size
         )
-        self.action = np.zeros((buffer_size, worker_reward.goal_dim()))
+        self.action = np.zeros((buffer_size, worker_goal_config.goal_dim()))
         self.state_arr = np.zeros((buffer_size, freq, state_dim))
         self.action_arr = np.zeros((buffer_size, freq, action_dim))
 
@@ -123,13 +129,9 @@ class HighReplayBuffer(ReplayBuffer):
         )
 
 
-class WorkerReward(object):
+class WorkerGoalConfig(object):
     def __init__(self, observation_box: spaces.Box):
-        # limits = -10 * np.ones(dim)
         self.shape = observation_box.shape
-        # self.shape = (dim, 1)
-        # self.low = limits[:dim]
-        # self.high = -self.low
         self.low = np.where(np.isfinite(observation_box.low), observation_box.low, -1)
         self.high = np.where(np.isfinite(observation_box.high), observation_box.high, 1)
 
@@ -140,26 +142,4 @@ class WorkerReward(object):
         return self.shape[0]  # x, y position
 
     def goal_scale(self):
-        return self.high/2
-
-    def compute_reward(self, achieved_goal, desired_goal):
-        # Compute distance between achieved and desired goal
-        d = np.linalg.norm(achieved_goal - desired_goal, axis=-1)
-        return -d
-
-
-# class SubgoalActionSpace(object):
-#     def __init__(self, dim):
-#         limits = np.array([-10, -10, -0.5, -1, -1, -1, -1,
-#                     -0.5, -0.3, -0.5, -0.3, -0.5, -0.3, -0.5, -0.3])
-#         self.shape = (dim,1)
-#         self.low = limits[:dim]
-#         self.high = -self.low
-
-#     def sample(self):
-#         return (self.high - self.low) * np.random.sample(self.high.shape) + self.low
-
-# class Subgoal(object):
-#     def __init__(self, dim=15):
-#         self.action_space = SubgoalActionSpace(dim)
-#         self.action_dim = self.action_space.shape[0]
+        return self.high / 2
