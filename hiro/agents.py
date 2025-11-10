@@ -8,11 +8,11 @@ from hiro.worker_goal_config import WorkerGoalConfig
 
 class Agent:
     def __init__(self):
-        pass
+        self.sg = tuple()
 
     def set_final_goal(self, fg):
         self.fg = fg
-
+    
     def step(self, s, env, step, global_step=0, explore=False):
         raise NotImplementedError
 
@@ -71,8 +71,8 @@ class Agent:
             else:
                 error = np.sqrt(np.sum(np.square(fg - s[:2])))
                 print(
-                    "Goal, Curr: (%02.2f, %02.2f, %02.2f, %02.2f)     Error:%.2f"
-                    % (fg[0], fg[1], s[0], s[1], error)
+                    "Goal, Curr, Subgoal: (%02.2f, %02.2f), (%02.2f, %02.2f), (%02.2f, %02.2f)    Error:%.2f"
+                    % (fg[0], fg[1], s[0], s[1], self.sg[0], self.sg[1], error)
                 )
                 rewards.append(reward_episode_sum)
                 success += 1 if error <= 5 else 0

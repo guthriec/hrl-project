@@ -234,6 +234,7 @@ class TD3Controller(object):
         action = self.actor(state, goal)
 
         action = action + self._sample_exploration_noise(action)
+        # TODO: this should use the worker goal box instead of the scale
         action = torch.min(action, self.actor.scale)
         action = torch.max(action, -self.actor.scale)
 
@@ -255,8 +256,6 @@ class HigherController(TD3Controller):
         state_dim,
         goal_dim,
         worker_goal_config,
-        # action_dim,
-        # scale,
         model_path,
         actor_lr=0.0001,
         critic_lr=0.001,
