@@ -8,11 +8,11 @@ from hiro.worker_goal_config import WorkerGoalConfig
 
 class Agent:
     def __init__(self):
-        self.sg = tuple()
+        self.worker_goal = tuple()
 
     def set_final_goal(self, fg):
         self.fg = fg
-    
+
     def step(self, s, env, step, global_step=0, explore=False):
         raise NotImplementedError
 
@@ -70,9 +70,21 @@ class Agent:
                 self.end_step()
             else:
                 error = np.sqrt(np.sum(np.square(fg - s[:2])))
+                subgoal_error = np.sqrt(np.sum(np.square(self.worker_goal[:2] - s[:2])))
+                subgoal_total_error = np.sqrt(np.sum(np.square(self.worker_goal - s[:-1])))
                 print(
-                    "Goal, Curr, Subgoal: (%02.2f, %02.2f), (%02.2f, %02.2f), (%02.2f, %02.2f)    Error:%.2f"
-                    % (fg[0], fg[1], s[0], s[1], self.sg[0], self.sg[1], error)
+                    "Goal, Curr, SG: (%5.2f, %5.2f), (%5.2f, %5.2f), (%5.2f, %5.2f)   Error:%5.2f  SG Err:%5.2f  SG Total Err:%5.2f"
+                    % (
+                        fg[0],
+                        fg[1],
+                        s[0],
+                        s[1],
+                        self.worker_goal[0],
+                        self.worker_goal[1],
+                        error,
+                        subgoal_error,
+                        subgoal_total_error
+                    )
                 )
                 rewards.append(reward_episode_sum)
                 success += 1 if error <= 5 else 0
@@ -244,8 +256,10 @@ class HiroAgent(Agent):
         if explore:
             if global_step < self.start_training_steps:
                 n_sg = self.worker_goal_config.sample_goal()
+                self.worker_goal = s[:-1] + n_sg
             else:
                 n_sg = self._choose_subgoal_with_noise(step, s, self.sg, n_s)
+                self.worker_goal = s[:-1] + n_sg
         else:
             n_sg = self._choose_subgoal(step, s, self.sg, n_s)
 
@@ -315,6 +329,7 @@ class HiroAgent(Agent):
     def _choose_subgoal(self, step, s, sg, n_s):
         if step % self.buffer_freq == 0:
             sg = self.high_con.policy(s, self.fg)
+            self.worker_goal = s[:-1] + sg
         else:
             sg = self.subgoal_transition(s, sg, n_s)
 

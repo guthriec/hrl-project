@@ -21,9 +21,10 @@ def create_maze_env(env_name=None, render_mode=None):
     env_name = env_name or ""
     maze_id = None
     easy = bool(env_name and env_name.endswith("Easy"))
-    kwargs = {
-        "render_mode": render_mode,
-    }
+    kwargs = {}
+    kwargs.update(dict(
+        render_mode=render_mode
+    ))
 
     # Determine if using Point or Ant
     use_point = env_name.startswith("Point")
@@ -38,7 +39,7 @@ def create_maze_env(env_name=None, render_mode=None):
                     force_flat=True,  # ignore elevation
                     disable_walls=True,  # open field
                     disable_movable_blocks=True,  # no obstacles
-                    max_episode_steps=200,  # shorter episodes
+                    # max_episode_steps=200,  # shorter episodes
                 )
             )
     elif env_name.startswith("AntPush") or env_name.startswith("PointPush"):
