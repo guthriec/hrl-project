@@ -73,6 +73,7 @@ class EnvWithGoal(object):
             "desired_goal": self.goal,
         }
 
+    # TODO: reward shaping via potentials
     def step(self, a):
         obs, _, done, truncated, info = self.base_env.step(a)
         reward = self.reward_fn(obs, self.goal)

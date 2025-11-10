@@ -9,6 +9,9 @@ from hiro.worker_goal_config import WorkerGoalConfig
 class Agent:
     def __init__(self):
         self.worker_goal = tuple()
+        self.last_worker_goal = tuple()
+        self.last_worker_start_state = None
+        self.last_worker_end_state = None
 
     def set_final_goal(self, fg):
         self.fg = fg
@@ -70,22 +73,30 @@ class Agent:
                 self.end_step()
             else:
                 error = np.sqrt(np.sum(np.square(fg - s[:2])))
-                subgoal_error = np.sqrt(np.sum(np.square(self.worker_goal[:2] - s[:2])))
-                subgoal_total_error = np.sqrt(np.sum(np.square(self.worker_goal - s[:-1])))
                 print(
-                    "Goal, Curr, SG: (%5.2f, %5.2f), (%6.2f, %6.2f), (%6.2f, %6.2f)   Error:%5.2f  SG Err:%5.2f  SG Total Err:%5.2f"
+                    "Goal, Curr: (%5.2f, %5.2f), (%6.2f, %6.2f)   Error:%5.2f"
                     % (
                         fg[0],
                         fg[1],
                         s[0],
                         s[1],
-                        self.worker_goal[0],
-                        self.worker_goal[1],
                         error,
-                        subgoal_error,
-                        subgoal_total_error
                     )
                 )
+                if len(self.last_worker_goal) > 1 and self.last_worker_end_state is not None and self.last_worker_start_state is not None:
+                    subgoal_error = np.sqrt(np.sum(np.square(self.last_worker_goal[:2] - self.last_worker_end_state[:2])))
+                    subgoal_total_error = np.sqrt(np.sum(np.square(self.last_worker_goal - self.last_worker_start_state[:-1])))
+                    subgoal_start_error = np.sqrt(np.sum(np.square(self.last_worker_goal[:2] - self.last_worker_start_state[:2])))
+                    print(
+                        "Last SG, Last State: (%6.2f, %6.2f), (%6.2f, %6.2f)  SG Improvement:%5.2f \n"
+                        % (
+                            self.last_worker_goal[0],
+                            self.last_worker_goal[1],
+                            self.last_worker_end_state[0],
+                            self.last_worker_end_state[1],
+                            subgoal_start_error - subgoal_error
+                        )
+                    )
                 rewards.append(reward_episode_sum)
                 success += 1 if error <= 5 else 0
                 self.end_episode(e)
@@ -185,6 +196,7 @@ class HiroAgent(Agent):
         policy_freq_high,
         policy_freq_low,
     ):
+        super().__init__()
         self.worker_goal_config = WorkerGoalConfig(observation_box)
 
         self.model_save_freq = model_save_freq
@@ -256,10 +268,12 @@ class HiroAgent(Agent):
         if explore:
             if global_step < self.start_training_steps:
                 n_sg = self.worker_goal_config.sample_goal()
+                self.last_worker_goal = self.worker_goal
+                self.last_worker_start_state = self.last_worker_end_state
+                self.last_worker_end_state = s
                 self.worker_goal = s[:-1] + n_sg
             else:
                 n_sg = self._choose_subgoal_with_noise(step, s, self.sg, n_s)
-                self.worker_goal = s[:-1] + n_sg
         else:
             n_sg = self._choose_subgoal(step, s, self.sg, n_s)
 
@@ -321,6 +335,10 @@ class HiroAgent(Agent):
     def _choose_subgoal_with_noise(self, step, s, sg, n_s):
         if step % self.buffer_freq == 0:  # Should be zero
             sg = self.high_con.policy_with_noise(s, self.fg)
+            self.last_worker_goal = self.worker_goal
+            self.last_worker_start_state = self.last_worker_end_state
+            self.last_worker_end_state = s
+            self.worker_goal = s[:-1] + sg
         else:
             sg = self.subgoal_transition(s, sg, n_s)
 
@@ -332,6 +350,9 @@ class HiroAgent(Agent):
     def _choose_subgoal(self, step, s, sg, n_s):
         if step % self.buffer_freq == 0:
             sg = self.high_con.policy(s, self.fg)
+            self.last_worker_goal = self.worker_goal
+            self.last_worker_start_state = self.last_worker_end_state
+            self.last_worker_end_state = s
             self.worker_goal = s[:-1] + sg
         else:
             sg = self.subgoal_transition(s, sg, n_s)
@@ -346,6 +367,8 @@ class HiroAgent(Agent):
         abs_s = s[: sg.shape[0]] + sg
         prev_dist = np.sqrt(np.sum((abs_s - s[: sg.shape[0]]) ** 2))
         new_dist = np.sqrt(np.sum((abs_s - n_s[: sg.shape[0]]) ** 2))
+        if new_dist < 0.01:
+            return 100.0
         return prev_dist - new_dist
 
     def end_step(self):
