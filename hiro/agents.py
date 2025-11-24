@@ -83,10 +83,35 @@ class Agent:
                         error,
                     )
                 )
-                if len(self.last_worker_goal) > 1 and self.last_worker_end_state is not None and self.last_worker_start_state is not None:
-                    subgoal_error = np.sqrt(np.sum(np.square(self.last_worker_goal[:2] - self.last_worker_end_state[:2])))
-                    subgoal_total_error = np.sqrt(np.sum(np.square(self.last_worker_goal - self.last_worker_start_state[:-1])))
-                    subgoal_start_error = np.sqrt(np.sum(np.square(self.last_worker_goal[:2] - self.last_worker_start_state[:2])))
+                if (
+                    len(self.last_worker_goal) > 1
+                    and self.last_worker_end_state is not None
+                    and self.last_worker_start_state is not None
+                ):
+                    subgoal_error = np.sqrt(
+                        np.sum(
+                            np.square(
+                                self.last_worker_goal[:2]
+                                - self.last_worker_end_state[:2]
+                            )
+                        )
+                    )
+                    subgoal_total_error = np.sqrt(
+                        np.sum(
+                            np.square(
+                                self.last_worker_goal
+                                - self.last_worker_start_state[:-1]
+                            )
+                        )
+                    )
+                    subgoal_start_error = np.sqrt(
+                        np.sum(
+                            np.square(
+                                self.last_worker_goal[:2]
+                                - self.last_worker_start_state[:2]
+                            )
+                        )
+                    )
                     print(
                         "Last SG, Last State: (%6.2f, %6.2f), (%6.2f, %6.2f)  SG Improvement:%5.2f \n"
                         % (
@@ -94,7 +119,7 @@ class Agent:
                             self.last_worker_goal[1],
                             self.last_worker_end_state[0],
                             self.last_worker_end_state[1],
-                            subgoal_start_error - subgoal_error
+                            subgoal_start_error - subgoal_error,
                         )
                     )
                 rewards.append(reward_episode_sum)
@@ -118,6 +143,7 @@ class TD3Agent(Agent):
         batch_size,
         start_training_steps,
     ):
+        super().__init__()
         self.con = TD3Controller(
             state_dim=state_dim,
             goal_dim=goal_dim,
