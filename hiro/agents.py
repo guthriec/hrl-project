@@ -5,7 +5,6 @@ from .models import TD3Controller, HigherController, LowerController
 from hiro.buffers import ReplayBuffer, LowReplayBuffer, HighReplayBuffer
 from hiro.worker_goal_config import WorkerGoalConfig
 
-
 class Agent:
     def __init__(self):
         self.worker_goal = tuple()
@@ -222,9 +221,9 @@ class HiroAgent(Agent):
         policy_freq_high,
         policy_freq_low,
     ):
+
         super().__init__()
         self.worker_goal_config = WorkerGoalConfig(observation_box)
-
         self.model_save_freq = model_save_freq
 
         self.high_con = HigherController(
