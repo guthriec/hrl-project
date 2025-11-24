@@ -224,7 +224,6 @@ class HiroAgent(Agent):
     ):
         super().__init__()
         self.worker_goal_config = WorkerGoalConfig(observation_box)
-
         self.model_save_freq = model_save_freq
 
         self.high_con = HigherController(
