@@ -366,7 +366,7 @@ class HiroAgent(Agent):
             self.last_worker_end_state = s
             self.worker_goal = s[:-1] + sg
         else:
-            sg = self.subgoal_transition(s, sg, n_s)
+            sg = self.worker_goal_config.subgoal_transition(s, sg, n_s)
 
         return sg
 
@@ -381,12 +381,9 @@ class HiroAgent(Agent):
             self.last_worker_end_state = s
             self.worker_goal = s[:-1] + sg
         else:
-            sg = self.subgoal_transition(s, sg, n_s)
+            sg = self.worker_goal_config.subgoal_transition(s, sg, n_s)
 
         return sg
-
-    def subgoal_transition(self, s, sg, n_s):
-        return s[: sg.shape[0]] + sg - n_s[: sg.shape[0]]
 
     # Use potential-based reward
     def low_reward(self, s, sg, n_s):
