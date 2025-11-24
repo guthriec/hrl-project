@@ -3,8 +3,8 @@ import numpy as np
 import time
 import gymnasium
 from .models import TD3Controller, HigherController, LowerController
-from hiro.hiro_utils import LowReplayBuffer, HighReplayBuffer, ReplayBuffer, Subgoal
-
+from hiro.buffers import LowReplayBuffer, HighReplayBuffer, ReplayBuffer
+from hiro.hiro_utils import Subgoal
 
 class Agent:
     def __init__(self):
