@@ -15,6 +15,7 @@ from .utils import get_tensor
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
+
 class TD3Actor(nn.Module):
     def __init__(self, state_dim, goal_dim, action_dim, scale=None):
         super(TD3Actor, self).__init__()
