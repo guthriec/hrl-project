@@ -33,7 +33,9 @@ class WorkerGoalConfig(object):
     def goal_scale(self):
         raise NotImplementedError
 
-    def point_representation(self, sg):
+    # Returns the ideal difference in state space represented by the given goal.
+    # Used for logging purposes.
+    def ideal_state_change(self, sg):
         return sg
 
     def worker_reward(self, s, sg, n_s):
@@ -148,7 +150,7 @@ class EllipsoidGoalConfig(WorkerGoalConfig):
         res = 2 * self.obs_shape[0]  # all observation dims + ellipsoid radii
         return res
 
-    def point_representation(self, sg):
+    def ideal_state_change(self, sg):
         return sg[: self.obs_shape[0]]
 
     def goal_scale(self):

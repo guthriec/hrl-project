@@ -297,7 +297,13 @@ class HiroAgent(Agent):
                 self.last_worker_goal = self.worker_goal
                 self.last_worker_start_state = self.last_worker_end_state
                 self.last_worker_end_state = s
+<<<<<<< HEAD
                 self.worker_goal = s[:-1] + self.worker_goal_config.point_representation(n_sg)
+=======
+                self.worker_goal = s[:-1] + self.worker_goal_config.ideal_state_change(
+                    n_sg
+                )
+>>>>>>> representation-in-config
             else:
                 n_sg = self._choose_subgoal_with_noise(step, s, self.sg, n_s)
                 # assert abs(n_sg[8]) < 20
@@ -368,7 +374,11 @@ class HiroAgent(Agent):
             self.last_worker_goal = self.worker_goal
             self.last_worker_start_state = self.last_worker_end_state
             self.last_worker_end_state = s
+<<<<<<< HEAD
             self.worker_goal = s[:-1] + self.worker_goal_config.point_representation(sg)
+=======
+            self.worker_goal = s[:-1] + self.worker_goal_config.ideal_state_change(sg)
+>>>>>>> representation-in-config
         else:
             sg = self.worker_goal_config.subgoal_transition(s, sg, n_s)
 
@@ -383,7 +393,11 @@ class HiroAgent(Agent):
             self.last_worker_goal = self.worker_goal
             self.last_worker_start_state = self.last_worker_end_state
             self.last_worker_end_state = s
+<<<<<<< HEAD
             self.worker_goal = s[:-1] + self.worker_goal_config.point_representation(sg)
+=======
+            self.worker_goal = s[:-1] + self.worker_goal_config.ideal_state_change(sg)
+>>>>>>> representation-in-config
         else:
             sg = self.worker_goal_config.subgoal_transition(s, sg, n_s)
 
