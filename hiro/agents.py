@@ -1,14 +1,16 @@
 from hiro.utils import _is_update
 import numpy as np
 import time
-import gymnasium
 from .models import TD3Controller, HigherController, LowerController
-from hiro.buffers import LowReplayBuffer, HighReplayBuffer, ReplayBuffer
+from hiro.buffers import ReplayBuffer, LowReplayBuffer, HighReplayBuffer
 from hiro.worker_goal_config import WorkerGoalConfig
 
 class Agent:
     def __init__(self):
-        pass
+        self.worker_goal = tuple()
+        self.last_worker_goal = tuple()
+        self.last_worker_start_state = None
+        self.last_worker_end_state = None
 
     def set_final_goal(self, fg):
         self.fg = fg
@@ -35,13 +37,11 @@ class Agent:
         self, env, eval_episodes=10, render=False, save_video=False, sleep=-1
     ):
         if save_video:
-            env = gymnasium.wrappers.Monitor(
+            env = RecordVideo(
                 env,
-                directory="video",
-                write_upon_reset=True,
-                force=True,
-                resume=True,
-                mode="evaluation",
+                video_folder="video",
+                episode_trigger=lambda x: True,
+                disable_logger=True,
             )
             render = False
 
@@ -73,9 +73,54 @@ class Agent:
             else:
                 error = np.sqrt(np.sum(np.square(fg - s[:2])))
                 print(
-                    "Goal, Curr: (%02.2f, %02.2f, %02.2f, %02.2f)     Error:%.2f"
-                    % (fg[0], fg[1], s[0], s[1], error)
+                    "Goal, Curr: (%5.2f, %5.2f), (%6.2f, %6.2f)   Error:%5.2f"
+                    % (
+                        fg[0],
+                        fg[1],
+                        s[0],
+                        s[1],
+                        error,
+                    )
                 )
+                if (
+                    len(self.last_worker_goal) > 1
+                    and self.last_worker_end_state is not None
+                    and self.last_worker_start_state is not None
+                ):
+                    subgoal_error = np.sqrt(
+                        np.sum(
+                            np.square(
+                                self.last_worker_goal[:2]
+                                - self.last_worker_end_state[:2]
+                            )
+                        )
+                    )
+                    subgoal_total_error = np.sqrt(
+                        np.sum(
+                            np.square(
+                                self.last_worker_goal
+                                - self.last_worker_start_state[:-1]
+                            )
+                        )
+                    )
+                    subgoal_start_error = np.sqrt(
+                        np.sum(
+                            np.square(
+                                self.last_worker_goal[:2]
+                                - self.last_worker_start_state[:2]
+                            )
+                        )
+                    )
+                    print(
+                        "Last SG, Last State: (%6.2f, %6.2f), (%6.2f, %6.2f)  SG Improvement:%5.2f \n"
+                        % (
+                            self.last_worker_goal[0],
+                            self.last_worker_goal[1],
+                            self.last_worker_end_state[0],
+                            self.last_worker_end_state[1],
+                            subgoal_start_error - subgoal_error,
+                        )
+                    )
                 rewards.append(reward_episode_sum)
                 success += 1 if error <= 5 else 0
                 self.end_episode(e)
@@ -97,6 +142,7 @@ class TD3Agent(Agent):
         batch_size,
         start_training_steps,
     ):
+        super().__init__()
         self.con = TD3Controller(
             state_dim=state_dim,
             goal_dim=goal_dim,
@@ -247,10 +293,17 @@ class HiroAgent(Agent):
         if explore:
             if global_step < self.start_training_steps:
                 n_sg = self.worker_goal_config.sample_goal()
+                self.last_worker_goal = self.worker_goal
+                self.last_worker_start_state = self.last_worker_end_state
+                self.last_worker_end_state = s
+                self.worker_goal = s[:-1] + n_sg
             else:
                 n_sg = self._choose_subgoal_with_noise(step, s, self.sg, n_s)
         else:
             n_sg = self._choose_subgoal(step, s, self.sg, n_s)
+
+        # n_sg = np.array([0.0, 16.0, 0.0, 0.0, 0.0, 0.0]) - s[:-1]  # Hardcoded goal
+        # self.worker_goal = s[:-1] + n_sg
 
         self.n_sg = n_sg
 
@@ -307,6 +360,10 @@ class HiroAgent(Agent):
     def _choose_subgoal_with_noise(self, step, s, sg, n_s):
         if step % self.buffer_freq == 0:  # Should be zero
             sg = self.high_con.policy_with_noise(s, self.fg)
+            self.last_worker_goal = self.worker_goal
+            self.last_worker_start_state = self.last_worker_end_state
+            self.last_worker_end_state = s
+            self.worker_goal = s[:-1] + sg
         else:
             sg = self.subgoal_transition(s, sg, n_s)
 
@@ -318,6 +375,10 @@ class HiroAgent(Agent):
     def _choose_subgoal(self, step, s, sg, n_s):
         if step % self.buffer_freq == 0:
             sg = self.high_con.policy(s, self.fg)
+            self.last_worker_goal = self.worker_goal
+            self.last_worker_start_state = self.last_worker_end_state
+            self.last_worker_end_state = s
+            self.worker_goal = s[:-1] + sg
         else:
             sg = self.subgoal_transition(s, sg, n_s)
 
