@@ -100,7 +100,7 @@ class Agent:
                         np.sum(
                             np.square(
                                 self.last_worker_goal
-                                - self.last_worker_start_state[:-1]
+                                - self.last_worker_start_state
                             )
                         )
                     )
@@ -297,7 +297,7 @@ class HiroAgent(Agent):
                 self.last_worker_goal = self.worker_goal
                 self.last_worker_start_state = self.last_worker_end_state
                 self.last_worker_end_state = s
-                self.worker_goal = s[:-1] + n_sg
+                self.worker_goal = s+ n_sg
             else:
                 n_sg = self._choose_subgoal_with_noise(step, s, self.sg, n_s)
         else:
@@ -364,7 +364,7 @@ class HiroAgent(Agent):
             self.last_worker_goal = self.worker_goal
             self.last_worker_start_state = self.last_worker_end_state
             self.last_worker_end_state = s
-            self.worker_goal = s[:-1] + sg
+            self.worker_goal = s + sg
         else:
             sg = self.subgoal_transition(s, sg, n_s)
 
@@ -379,7 +379,7 @@ class HiroAgent(Agent):
             self.last_worker_goal = self.worker_goal
             self.last_worker_start_state = self.last_worker_end_state
             self.last_worker_end_state = s
-            self.worker_goal = s[:-1] + sg
+            self.worker_goal = s + sg
         else:
             sg = self.subgoal_transition(s, sg, n_s)
 
