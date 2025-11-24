@@ -53,7 +53,7 @@ class Trainer:
 
             while not done:
                 # Take action
-                a, r, n_s, done = self.agent.step(
+                a, r, n_s, done, info = self.agent.step(
                     s, self.env, step, global_step, explore=True
                 )
 
