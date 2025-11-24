@@ -8,6 +8,7 @@ device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 warnings.filterwarnings("error", category=RuntimeWarning)
 
+
 class WorkerGoalConfig(object):
     def __init__(self, observation_box: spaces.Box):
         self.obs_shape = observation_box.shape
@@ -115,9 +116,9 @@ class PointGoalConfig(WorkerGoalConfig):
 
         for c in range(ncands):
             subgoal = candidates[:, c]
-            candidate = (subgoal + states[:, 0, : self.goal_dim()])[
-                :, None
-            ] - states[:, :, : self.goal_dim()]
+            candidate = (subgoal + states[:, 0, : self.goal_dim()])[:, None] - states[
+                :, :, : self.goal_dim()
+            ]
             candidate = candidate.reshape(*goal_shape)
             policy_actions[c] = low_con.policy(observations, candidate)
 
@@ -140,9 +141,7 @@ class EllipsoidGoalConfig(WorkerGoalConfig):
     def sample_goal(self):
         max_radius = 1e5 * self.obs_shape[0]
         max_log = np.log(max_radius)
-        random_radii = 2 * max_log * np.random.sample(
-            self.obs_shape[0]
-        ) - max_log
+        random_radii = 2 * max_log * np.random.sample(self.obs_shape[0]) - max_log
         return np.concatenate((self.random_obs(), random_radii))
 
     def goal_dim(self):
@@ -155,7 +154,9 @@ class EllipsoidGoalConfig(WorkerGoalConfig):
     def goal_scale(self):
         obs_scale = np.maximum(self.obs_high, -self.obs_low)
         max_radius = 1e5 * self.obs_shape[0]
-        res = np.concatenate((obs_scale, np.log(max_radius) * np.ones(self.obs_shape[0])))
+        res = np.concatenate(
+            (obs_scale, np.log(max_radius) * np.ones(self.obs_shape[0]))
+        )
         return res
 
     def worker_reward(self, s, sg, n_s):
@@ -163,8 +164,8 @@ class EllipsoidGoalConfig(WorkerGoalConfig):
         log_radii = sg[sg.shape[0] // 2 :]
         prev_scaled_diffs = self.scaled_difference(abs_sg, log_radii, s)
         scaled_diffs = self.scaled_difference(abs_sg, log_radii, n_s)
-        prev_dist = np.sqrt(np.sum(prev_scaled_diffs ** 2))
-        new_dist = np.sqrt(np.sum(scaled_diffs ** 2))
+        prev_dist = np.sqrt(np.sum(prev_scaled_diffs**2))
+        new_dist = np.sqrt(np.sum(scaled_diffs**2))
         return prev_dist - new_dist
 
     def scaled_difference(self, abs_point_sg, log_radii, s):
@@ -174,25 +175,22 @@ class EllipsoidGoalConfig(WorkerGoalConfig):
         n_sg = sg.copy()
         adj_s = s[:-1]
         adj_n_s = n_s[:-1]
-        n_sg[:adj_s.shape[0]] += adj_s - adj_n_s
+        n_sg[: adj_s.shape[0]] += adj_s - adj_n_s
         return n_sg
 
     def off_policy_corrections(
         self, low_con, batch_size, sgoals, states, actions, candidate_goals=None
     ):
         start_time = time.perf_counter()
-        res = np.array(self.corrected_sgoals(
-            sgoals, states
-        ))
+        res = np.array(self.corrected_sgoals(sgoals, states))
         end_time = time.perf_counter()
         # print(f"Execution time: {end_time - start_time:.2f} seconds")
         return res
 
-    def corrected_sgoals(
-        self, sgoals, states
-    ):
-        return [self.corrected_sgoal(sg, state_seq)
-                for sg, state_seq in zip(sgoals, states)]
+    def corrected_sgoals(self, sgoals, states):
+        return [
+            self.corrected_sgoal(sg, state_seq) for sg, state_seq in zip(sgoals, states)
+        ]
 
     def corrected_sgoal(self, sg, state_seq):
         final_s = state_seq[-1]
@@ -201,7 +199,7 @@ class EllipsoidGoalConfig(WorkerGoalConfig):
         log_radii = sg[sg.shape[0] // 2 :]
         while True:
             scaled_difference = self.scaled_difference(abs_point_sg, log_radii, final_s)
-            if np.sum(scaled_difference ** 2) < 1:
+            if np.sum(scaled_difference**2) < 1:
                 break
             # Pick dimensions that contribute the most to the norm violation.
             # Use absolute value and a sensible threshold of 1/sqrt(d) where d is dimension.
