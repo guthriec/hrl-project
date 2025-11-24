@@ -137,7 +137,6 @@ if __name__ == "__main__":
         "--writer_freq", default=25, type=int, help="Unit = Global Step"
     )
     # Training (Model Saving)
-    # parser.add_argument("--subgoal_dim", default=15, type=int)
     parser.add_argument("--load_episode", default=-1, type=int)
     parser.add_argument(
         "--model_save_freq", default=2000, type=int, help="Unit = Episodes"

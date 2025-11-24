@@ -144,6 +144,7 @@ class TD3Agent(Agent):
         batch_size,
         start_training_steps,
     ):
+        super().__init__()
         self.con = TD3Controller(
             state_dim=state_dim,
             goal_dim=goal_dim,

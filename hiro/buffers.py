@@ -3,6 +3,7 @@ import torch
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
+
 class ReplayBuffer:
     def __init__(self, state_dim, goal_dim, action_dim, buffer_size, batch_size):
         self.buffer_size = buffer_size
@@ -125,4 +126,3 @@ class HighReplayBuffer(ReplayBuffer):
             torch.FloatTensor(self.state_arr[ind]).to(self.device),
             torch.FloatTensor(self.action_arr[ind]).to(self.device),
         )
-

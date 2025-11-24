@@ -234,7 +234,9 @@ class MazeEnv(gym.Env):
                         )
 
         torso = tree.find(".//body[@name='torso']")
-        assert torso is not None, "Could not find a body named 'torso' in the model XML."
+        assert (
+            torso is not None
+        ), "Could not find a body named 'torso' in the model XML."
         geoms = torso.findall(".//geom")
         for geom in geoms:
             if "name" not in geom.attrib:
@@ -299,17 +301,17 @@ class MazeEnv(gym.Env):
         # Normalize Gymnasium step signature.
         self.t += 1
         if isinstance(self.wrapped_env, gym.Env):
-          step_ret = self.wrapped_env.step(action)
-          # Accept both old Gym (4-tuple) and Gymnasium (5-tuple).
-          if isinstance(step_ret, tuple) and len(step_ret) == 4:
-              inner_next_obs, reward, done, info = step_ret
-              terminated, truncated = bool(done), False
-          elif isinstance(step_ret, tuple) and len(step_ret) == 5:
-              inner_next_obs, reward, terminated, truncated, info = step_ret
-          else:
-              raise ValueError(
-                  "Unexpected step return from wrapped_env: %r" % (type(step_ret),)
-              )
+            step_ret = self.wrapped_env.step(action)
+            # Accept both old Gym (4-tuple) and Gymnasium (5-tuple).
+            if isinstance(step_ret, tuple) and len(step_ret) == 4:
+                inner_next_obs, reward, done, info = step_ret
+                terminated, truncated = bool(done), False
+            elif isinstance(step_ret, tuple) and len(step_ret) == 5:
+                inner_next_obs, reward, terminated, truncated, info = step_ret
+            else:
+                raise ValueError(
+                    "Unexpected step return from wrapped_env: %r" % (type(step_ret),)
+                )
         else:
             raise ValueError("wrapped_env is not a Gym environment.")
         next_obs = self._get_obs()
