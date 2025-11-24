@@ -44,28 +44,16 @@ class ReplayBuffer:
 
 class LowReplayBuffer(ReplayBuffer):
     def __init__(
-        self, state_dim, goal_dim, action_dim, buffer_size, batch_size
+        self, state_dim, worker_goal_config, action_dim, buffer_size, batch_size
     ):
         super(LowReplayBuffer, self).__init__(
             state_dim,
-            goal_dim,
+            worker_goal_config.goal_dim(),
             action_dim,
             buffer_size,
             batch_size,
         )
-        self.n_goal = np.zeros((buffer_size, goal_dim))
-
-    # def __init__(
-    #     self, state_dim, worker_goal_config, action_dim, buffer_size, batch_size
-    # ):
-    #     super(LowReplayBuffer, self).__init__(
-    #         state_dim,
-    #         worker_goal_config.goal_dim(),
-    #         action_dim,
-    #         buffer_size,
-    #         batch_size,
-    #     )
-    #     self.n_goal = np.zeros((buffer_size, worker_goal_config.goal_dim()))
+        self.n_goal = np.zeros((buffer_size, worker_goal_config.goal_dim()))
 
     def append(self, state, goal, action, n_state, n_goal, reward, done):
         self.state[self.ptr] = state
@@ -98,7 +86,7 @@ class HighReplayBuffer(ReplayBuffer):
         self,
         state_dim,
         goal_dim,
-        subgoal_dim,
+        worker_goal_config,
         action_dim,
         buffer_size,
         batch_size,
@@ -107,7 +95,7 @@ class HighReplayBuffer(ReplayBuffer):
         super(HighReplayBuffer, self).__init__(
             state_dim, goal_dim, action_dim, buffer_size, batch_size
         )
-        self.action = np.zeros((buffer_size, subgoal_dim))
+        self.action = np.zeros((buffer_size, worker_goal_config.goal_dim()))
         self.state_arr = np.zeros((buffer_size, freq, state_dim))
         self.action_arr = np.zeros((buffer_size, freq, action_dim))
 
