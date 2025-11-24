@@ -3,7 +3,7 @@ import numpy as np
 import time
 from .models import TD3Controller, HigherController, LowerController
 from hiro.buffers import ReplayBuffer, LowReplayBuffer, HighReplayBuffer
-from hiro.worker_goal_config import WorkerGoalConfig
+from hiro.worker_goal_config import PointGoalConfig, WorkerGoalConfig
 
 
 class Agent:
