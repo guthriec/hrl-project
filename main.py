@@ -5,6 +5,7 @@ import datetime
 import copy
 from envs import EnvWithGoal
 from envs.create_maze_env import create_maze_env
+from hiro import worker_goal_config
 from hiro.utils import Logger, _is_update, record_experience_to_csv, listdirs
 from hiro.agents import HiroAgent, TD3Agent
 
@@ -121,6 +122,7 @@ if __name__ == "__main__":
     parser.add_argument("--eval", action="store_true")
     parser.add_argument("--render", action="store_true")
     parser.add_argument("--save_video", action="store_true")
+    parser.add_argument("--ellipsoid_mode", action="store_true")
     parser.add_argument("--sleep", type=float, default=-1)
     parser.add_argument("--eval_episodes", type=float, default=5, help="Unit = Episode")
     parser.add_argument("--env", default="PointMazeEasy", type=str)
@@ -152,7 +154,7 @@ if __name__ == "__main__":
     parser.add_argument("--batch_size", default=100, type=int)
     parser.add_argument("--buffer_freq", default=10, type=int)
     parser.add_argument("--train_freq", default=10, type=int)
-    parser.add_argument("--reward_scaling", default=0.1, type=float)
+    parser.add_argument("--reward_scaling", default=1.0, type=float)
     args = parser.parse_args()
 
     # Select or Generate a name for this experiment
@@ -169,7 +171,10 @@ if __name__ == "__main__":
     print(experiment_name)
 
     # Environment and its attributes
-    env = EnvWithGoal(create_maze_env(args.env, render_mode=("human" if args.render else None)), args.env)
+    env = EnvWithGoal(
+        create_maze_env(args.env, render_mode=("human" if args.render else None)),
+        args.env,
+    )
     goal_dim = 2
     state_dim = env.state_dim
     action_dim = env.action_dim
@@ -189,12 +194,16 @@ if __name__ == "__main__":
             start_training_steps=args.start_training_steps,
         )
     else:
+        goal_config = (
+            worker_goal_config.EllipsoidGoalConfig(env.observation_space)
+            if args.ellipsoid_mode
+            else worker_goal_config.PointGoalConfig(env.observation_space)
+        )
         agent = HiroAgent(
-            observation_box=env.observation_space,
+            worker_goal_config=goal_config,
             state_dim=state_dim,
             action_dim=action_dim,
             goal_dim=goal_dim,
-            # subgoal_dim=args.subgoal_dim,
             scale_low=scale,
             start_training_steps=args.start_training_steps,
             model_path=os.path.join(args.model_path, experiment_name),

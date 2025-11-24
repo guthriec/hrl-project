@@ -39,8 +39,8 @@ class PointEnv(mujoco_env.MujocoEnv, utils.EzPickle):
                 range_str = joint.get("range")
                 assert range_str is not None
                 low, high = map(float, range_str.split())
-                qpos_low.append(low)
-                qpos_high.append(high)
+                qpos_low.append(low - 1)
+                qpos_high.append(high + 1)
             else:
                 # Unlimited joint
                 qpos_low.append(-np.inf)

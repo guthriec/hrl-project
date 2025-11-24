@@ -111,6 +111,9 @@ class TD3Controller(object):
 
         self._initialized = False
         self.total_it = 0
+        self.num_actions = 0
+        self.mean_action = None
+        self.total_action_variance = None
 
     def _initialize_target_networks(self):
         self._update_target_network(self.critic1_target, self.critic1, 1.0)
@@ -218,11 +221,31 @@ class TD3Controller(object):
         states, goals, actions, n_states, rewards, not_done = replay_buffer.sample()
         return self._train(states, goals, actions, rewards, n_states, goals, not_done)
 
-    def policy(self, state, goal, to_numpy=True):
+    def remember_action(self, action):
+        action = action.cpu().data.numpy().squeeze()
+        if self.mean_action is None:
+            self.mean_action = np.zeros_like(action)
+            self.mean_sq_action = np.zeros_like(action)
+
+        self.num_actions += 1
+        first_delta = action - self.mean_action
+        self.mean_action += first_delta / self.num_actions
+        second_delta = action - self.mean_action
+        if self.total_action_variance is None:
+            self.total_action_variance = np.ones_like(action)
+        self.total_action_variance += first_delta * second_delta
+
+    def get_action_variance(self, actions):
+        if self.num_actions < 2 or self.total_action_variance is None:
+            return np.ones(actions.shape[1:])
+        return self.total_action_variance / (self.num_actions - 1) + 1e-4*np.ones_like(actions)
+
+    def policy(self, state, goal, remember=False, to_numpy=True):
         state = get_tensor(state)
         goal = get_tensor(goal)
         action = self.actor(state, goal)
-
+        if remember:
+            self.remember_action(action)
         if to_numpy:
             return action.cpu().data.numpy().squeeze()
 
@@ -232,7 +255,7 @@ class TD3Controller(object):
         state = get_tensor(state)
         goal = get_tensor(goal)
         action = self.actor(state, goal)
-
+        self.remember_action(action)
         action = action + self._sample_exploration_noise(action)
         # TODO: this should use the worker goal box instead of the scale
         action = torch.min(action, self.actor.scale)
@@ -245,9 +268,9 @@ class TD3Controller(object):
 
     def _sample_exploration_noise(self, actions):
         mean = torch.zeros(actions.size()).to(device)
-        var = torch.ones(actions.size()).to(device)
+        var = torch.from_numpy(self.get_action_variance(actions)*self.expl_noise).float().to(device)
         # expl_noise = self.expl_noise - (self.expl_noise/1200) * (self.total_it//10000)
-        return torch.normal(mean, self.expl_noise * var)
+        return torch.normal(mean, var)
 
 
 class HigherController(TD3Controller):
@@ -259,7 +282,7 @@ class HigherController(TD3Controller):
         model_path,
         actor_lr=0.0001,
         critic_lr=0.001,
-        expl_noise=1.0,
+        expl_noise=0.1,
         policy_noise=0.2,
         noise_clip=0.5,
         gamma=0.99,
@@ -284,70 +307,6 @@ class HigherController(TD3Controller):
         self.name = "high"
         self.worker_goal_config = worker_goal_config
 
-    def off_policy_corrections(
-        self, low_con, batch_size, sgoals, states, actions, candidate_goals=8
-    ):
-        first_s = [s[0] for s in states]  # First x
-        last_s = [s[-1] for s in states]  # Last x
-
-        # Shape: (batch_size, 1, subgoal_dim)
-        # diff = 1
-        diff_goal = (np.array(last_s) - np.array(first_s))[
-            :, np.newaxis, : self.worker_goal_config.goal_dim()
-        ]
-
-        # Shape: (batch_size, 1, subgoal_dim)
-        # original = 1
-        # random = candidate_goals
-        original_goal = np.array(sgoals)[:, np.newaxis, :]
-        random_goals = np.random.normal(
-            loc=diff_goal,
-            scale=0.5 * self.scale[None, None, :],
-            size=(batch_size, candidate_goals, original_goal.shape[-1]),
-        )
-        random_goals = random_goals.clip(-self.scale, self.scale)
-
-        # Shape: (batch_size, 10, subgoal_dim)
-        candidates = np.concatenate([original_goal, diff_goal, random_goals], axis=1)
-        # states = np.array(states)[:, :-1, :]
-        actions = np.array(actions)
-        seq_len = len(states[0])
-
-        # For ease
-        new_batch_sz = seq_len * batch_size
-        action_dim = actions[0][0].shape
-        obs_dim = states[0][0].shape
-        ncands = candidates.shape[1]
-
-        true_actions = actions.reshape((new_batch_sz,) + action_dim)
-        observations = states.reshape((new_batch_sz,) + obs_dim)
-        goal_shape = (new_batch_sz, self.worker_goal_config.goal_dim())
-        # observations = get_obs_tensor(observations, sg_corrections=True)
-
-        # batched_candidates = np.tile(candidates, [seq_len, 1, 1])
-        # batched_candidates = batched_candidates.transpose(1, 0, 2)
-
-        policy_actions = np.zeros((ncands, new_batch_sz) + action_dim)
-
-        for c in range(ncands):
-            subgoal = candidates[:, c]
-            candidate = (subgoal + states[:, 0, : self.worker_goal_config.goal_dim()])[
-                :, None
-            ] - states[:, :, : self.worker_goal_config.goal_dim()]
-            candidate = candidate.reshape(*goal_shape)
-            policy_actions[c] = low_con.policy(observations, candidate)
-
-        difference = policy_actions - true_actions
-        difference = np.where(difference != -np.inf, difference, 0)
-        difference = difference.reshape(
-            (ncands, batch_size, seq_len) + action_dim
-        ).transpose(1, 0, 2, 3)
-
-        logprob = -0.5 * np.sum(np.linalg.norm(difference, axis=-1) ** 2, axis=-1)
-        max_indices = np.argmax(logprob, axis=-1)
-
-        return candidates[np.arange(batch_size), max_indices]
-
     def train(self, replay_buffer: HighReplayBuffer, low_con):
         if not self._initialized:
             self._initialize_target_networks()
@@ -356,7 +315,7 @@ class HigherController(TD3Controller):
             replay_buffer.sample()
         )
 
-        actions = self.off_policy_corrections(
+        actions = self.worker_goal_config.off_policy_corrections(
             low_con,
             replay_buffer.batch_size,
             actions.cpu().data.numpy(),

@@ -7,7 +7,8 @@ from hiro.worker_goal_config import WorkerGoalConfig
 
 
 class Agent:
-    def __init__(self):
+    def __init__(self, worker_goal_config):
+        self.worker_goal_config = worker_goal_config
         self.worker_goal = tuple()
         self.last_worker_goal = tuple()
         self.last_worker_start_state = None
@@ -83,18 +84,43 @@ class Agent:
                         error,
                     )
                 )
-                if len(self.last_worker_goal) > 1 and self.last_worker_end_state is not None and self.last_worker_start_state is not None:
-                    subgoal_error = np.sqrt(np.sum(np.square(self.last_worker_goal[:2] - self.last_worker_end_state[:2])))
-                    subgoal_total_error = np.sqrt(np.sum(np.square(self.last_worker_goal - self.last_worker_start_state[:-1])))
-                    subgoal_start_error = np.sqrt(np.sum(np.square(self.last_worker_goal[:2] - self.last_worker_start_state[:2])))
+                if (
+                    len(self.last_worker_goal) > 1
+                    and self.last_worker_end_state is not None
+                    and self.last_worker_start_state is not None
+                ):
+                    subgoal_error = np.sqrt(
+                        np.sum(
+                            np.square(
+                                self.last_worker_goal[:2]
+                                - self.last_worker_end_state[:2]
+                            )
+                        )
+                    )
+                    subgoal_total_error = np.sqrt(
+                        np.sum(
+                            np.square(
+                                self.last_worker_goal
+                                - self.last_worker_start_state[:-1]
+                            )
+                        )
+                    )
+                    subgoal_start_error = np.sqrt(
+                        np.sum(
+                            np.square(
+                                self.last_worker_goal[:2]
+                                - self.last_worker_start_state[:2]
+                            )
+                        )
+                    )
                     print(
-                        "Last SG, Last State: (%6.2f, %6.2f), (%6.2f, %6.2f)  SG Improvement:%5.2f \n"
+                        "Last SG, Last State: (%6.2f, %6.2f), (%6.2f, %6.2f)  SG Improvement:%5.5f \n"
                         % (
                             self.last_worker_goal[0],
                             self.last_worker_goal[1],
                             self.last_worker_end_state[0],
                             self.last_worker_end_state[1],
-                            subgoal_start_error - subgoal_error
+                            subgoal_start_error - subgoal_error,
                         )
                     )
                 rewards.append(reward_episode_sum)
@@ -180,7 +206,6 @@ class TD3Agent(Agent):
 class HiroAgent(Agent):
     def __init__(
         self,
-        observation_box,
         state_dim,
         action_dim,
         goal_dim,
@@ -195,9 +220,9 @@ class HiroAgent(Agent):
         reward_scaling,
         policy_freq_high,
         policy_freq_low,
+        worker_goal_config,
     ):
-        super().__init__()
-        self.worker_goal_config = WorkerGoalConfig(observation_box)
+        super().__init__(worker_goal_config)
 
         self.model_save_freq = model_save_freq
 
@@ -271,21 +296,25 @@ class HiroAgent(Agent):
                 self.last_worker_goal = self.worker_goal
                 self.last_worker_start_state = self.last_worker_end_state
                 self.last_worker_end_state = s
-                self.worker_goal = s[:-1] + n_sg
+                self.worker_goal = s[:-1] + self.worker_goal_config.point_representation(n_sg)
             else:
                 n_sg = self._choose_subgoal_with_noise(step, s, self.sg, n_s)
+                # assert abs(n_sg[8]) < 20
+
         else:
             n_sg = self._choose_subgoal(step, s, self.sg, n_s)
+            # assert abs(n_sg[8]) < 20
 
         # n_sg = np.array([0.0, 16.0, 0.0, 0.0, 0.0, 0.0]) - s[:-1]  # Hardcoded goal
         # self.worker_goal = s[:-1] + n_sg
+        # assert abs(n_sg[8]) < 20
 
         self.n_sg = n_sg
 
         return a, r, n_s, done
 
     def append(self, step, s, a, n_s, r, d):
-        self.sr = self.low_reward(s, self.sg, n_s)
+        self.sr = self.worker_goal_config.worker_reward(s, self.sg, n_s)
 
         # Low Replay Buffer
         self.replay_buffer_low.append(s, self.sg, a, n_s, self.n_sg, self.sr, float(d))
@@ -338,9 +367,9 @@ class HiroAgent(Agent):
             self.last_worker_goal = self.worker_goal
             self.last_worker_start_state = self.last_worker_end_state
             self.last_worker_end_state = s
-            self.worker_goal = s[:-1] + sg
+            self.worker_goal = s[:-1] + self.worker_goal_config.point_representation(sg)
         else:
-            sg = self.subgoal_transition(s, sg, n_s)
+            sg = self.worker_goal_config.subgoal_transition(s, sg, n_s)
 
         return sg
 
@@ -353,26 +382,15 @@ class HiroAgent(Agent):
             self.last_worker_goal = self.worker_goal
             self.last_worker_start_state = self.last_worker_end_state
             self.last_worker_end_state = s
-            self.worker_goal = s[:-1] + sg
+            self.worker_goal = s[:-1] + self.worker_goal_config.point_representation(sg)
         else:
-            sg = self.subgoal_transition(s, sg, n_s)
+            sg = self.worker_goal_config.subgoal_transition(s, sg, n_s)
 
         return sg
 
-    def subgoal_transition(self, s, sg, n_s):
-        return s[: sg.shape[0]] + sg - n_s[: sg.shape[0]]
-
-    # Use potential-based reward
-    def low_reward(self, s, sg, n_s):
-        abs_s = s[: sg.shape[0]] + sg
-        prev_dist = np.sqrt(np.sum((abs_s - s[: sg.shape[0]]) ** 2))
-        new_dist = np.sqrt(np.sum((abs_s - n_s[: sg.shape[0]]) ** 2))
-        if new_dist < 0.01:
-            return 100.0
-        return prev_dist - new_dist
-
     def end_step(self):
         self.episode_subreward += self.sr
+        # assert abs(self.n_sg[8]) < 20
         self.sg = self.n_sg
 
     def end_episode(self, episode, logger=None):
