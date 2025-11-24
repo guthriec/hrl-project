@@ -43,6 +43,9 @@ class WorkerGoalConfig(object):
     ):
         raise NotImplementedError
 
+    def subgoal_transition(self, s, sg, n_s):
+        return s[: sg.shape[0]] + sg - n_s[: sg.shape[0]]
+
 
 class PointGoalConfig(WorkerGoalConfig):
     def __init__(self, observation_box: spaces.Box):
