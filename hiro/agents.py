@@ -300,7 +300,7 @@ class HiroAgent(Agent):
                 self.last_worker_goal = self.worker_goal
                 self.last_worker_start_state = self.last_worker_end_state
                 self.last_worker_end_state = s
-                self.worker_goal = s+ n_sg
+                self.worker_goal = s + n_sg
             else:
                 n_sg = self._choose_subgoal_with_noise(step, s, self.sg, n_s)
         else:

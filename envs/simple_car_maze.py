@@ -6,7 +6,8 @@ import numpy as np
 class CarWrapper(gym.Wrapper):
     def __init__(self, env):
         super().__init__(env)
-        
+        self.t = 0
+
         # --- Car Physics Constants ---
         self.dt = 0.1       # Simulation timestep (approx)
         self.L = 0.2         # Wheelbase length
@@ -90,7 +91,8 @@ class CarWrapper(gym.Wrapper):
         # Structure: [Achieved Goal, Original Obs, Heading]
         obs["observation"] = np.concatenate([
             obs["achieved_goal"], 
-            obs["observation"], 
+            obs["observation"],
+            # np.concatenate([obs["observation"], [self.t * 0.001]]),
             heading
         ])
         return obs
@@ -111,19 +113,19 @@ training_map =  [[1, 1, 1, 1, 1],
 # In the original paper, I believe they only used a single starting point but
 # that makes learning a lot slower. Let's only eval using the single starting point but
 # train with multiple goals.
-def simple_car_maze_training():
+def simple_car_maze_training(render_mode):
     env = gym.make('PointMaze_UMaze-v3', 
                    continuing_task=False, 
-                   #render_mode="human", 
+                   render_mode=render_mode, 
                    maze_map=training_map)
     env = CarWrapper(env)
     return env
 
 # Only 1 starting point
-def simple_car_maze_eval():
+def simple_car_maze_eval(render_mode):
     env = gym.make('PointMaze_UMaze-v3', 
                    continuing_task=False, 
-                   #render_mode="human", 
+                   render_mode=render_mode, 
                    maze_map=eval_map)
     env = CarWrapper(env)
     return env

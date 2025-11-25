@@ -31,7 +31,7 @@ def create_maze_env(env_name=None, render_mode=None):
     use_point = env_name.startswith("Point")
 
     if env_name == "SimpleCarMaze":
-        return simple_car_maze_training()
+        return simple_car_maze_training(render_mode=render_mode)
 
     if env_name.startswith("AntMaze") or env_name.startswith("PointMaze"):
         maze_id = "Maze"
