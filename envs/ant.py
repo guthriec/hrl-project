@@ -15,10 +15,11 @@
 
 """Wrapper for creating the ant environment using Gymnasium's MujocoEnv."""
 
-import math
 import os
 import numpy as np
+import xml.etree.ElementTree as ET
 from gymnasium import utils
+from gymnasium import spaces
 from gymnasium.envs.mujoco import mujoco_env
 
 
@@ -42,9 +43,67 @@ class AntEnv(mujoco_env.MujocoEnv, utils.EzPickle):
         if file_path is None:
             file_path = os.path.join(os.path.dirname(__file__), "assets", self.FILE)
 
-        # Gymnasium's MujocoEnv requires an observation_space argument; we
-        # provide None to let the env infer it from _get_obs during setup.
-        mujoco_env.MujocoEnv.__init__(self, file_path, 5, observation_space=None)
+        # Parse XML to get joint limits
+        tree = ET.parse(file_path)
+        joints = tree.findall(".//joint")
+
+        qpos_low = []
+        qpos_high = []
+        for joint in joints:
+            joint_type = joint.get("type")
+            if joint_type == "free":
+                # Free joint: [x, y, z, qw, qx, qy, qz] - 7 DOF
+                qpos_low.extend([-np.inf] * 7)
+                qpos_high.extend([np.inf] * 7)
+            elif joint.get("limited") == "true" and "range" in joint.attrib:
+                range_str = joint.get("range")
+                assert range_str is not None
+                low, high = map(float, range_str.split())
+                # Convert degrees to radians if needed
+                if tree.find(".//compiler[@angle='degree']") is not None:
+                    low = np.deg2rad(low)
+                    high = np.deg2rad(high)
+                qpos_low.append(low)
+                qpos_high.append(high)
+            else:
+                qpos_low.append(-np.inf)
+                qpos_high.append(np.inf)
+
+        # Determine observation slice based on expose_all_qpos
+        if expose_all_qpos:
+            qpos_slice = slice(0, 15)
+        else:
+            qpos_slice = slice(2, 15)
+
+        obs_qpos_low = qpos_low[qpos_slice]
+        obs_qpos_high = qpos_high[qpos_slice]
+
+        # Velocity limits (14 DOF for ant)
+        qvel_low = [-np.inf] * 14
+        qvel_high = [np.inf] * 14
+
+        obs_low = obs_qpos_low + qvel_low
+        obs_high = obs_qpos_high + qvel_high
+
+        # Add body_coms dimensions if specified
+        if expose_body_coms is not None:
+            obs_low.extend([-np.inf] * (len(expose_body_coms) * 3))
+            obs_high.extend([np.inf] * (len(expose_body_coms) * 3))
+
+        # Add body_comvels dimensions if specified
+        if expose_body_comvels is not None:
+            obs_low.extend([-np.inf] * (len(expose_body_comvels) * 3))
+            obs_high.extend([np.inf] * (len(expose_body_comvels) * 3))
+
+        observation_space = spaces.Box(
+            low=np.array(obs_low, dtype=np.float64),
+            high=np.array(obs_high, dtype=np.float64),
+            dtype=np.float64,
+        )
+
+        mujoco_env.MujocoEnv.__init__(
+            self, file_path, 5, observation_space=observation_space, render_mode="human"
+        )
         utils.EzPickle.__init__(self)
 
     @property

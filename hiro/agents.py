@@ -65,7 +65,7 @@ class Agent:
                 if sleep > 0:
                     time.sleep(sleep)
 
-                a, r, n_s, done = self.step(s, env, step)
+                a, r, n_s, done, info = self.step(s, env, step)
                 reward_episode_sum += r
 
                 s = n_s
@@ -100,7 +100,7 @@ class Agent:
                         np.sum(
                             np.square(
                                 self.last_worker_goal
-                                - self.last_worker_start_state[:-1]
+                                - self.last_worker_start_state
                             )
                         )
                     )
@@ -123,7 +123,10 @@ class Agent:
                         )
                     )
                 rewards.append(reward_episode_sum)
-                success += 1 if error <= 5 else 0
+                if 'success' in info:
+                    success += 1 if info['success'] else 0
+                else:
+                    success += 1 if error <= 5 else 0
                 self.end_episode(e)
 
         env.evaluate = False
@@ -171,10 +174,10 @@ class TD3Agent(Agent):
         else:
             a = self._choose_action(s)
 
-        obs, r, done, _ = env.step(a)
+        obs, r, done, info = env.step(a)
         n_s = obs["observation"]
 
-        return a, r, n_s, done
+        return a, r, n_s, done, info
 
     def append(self, step, s, a, n_s, r, d):
         self.replay_buffer.append(s, self.fg, a, n_s, r, d)
@@ -224,6 +227,7 @@ class HiroAgent(Agent):
     ):
         super().__init__()
         self.worker_goal_config = WorkerGoalConfig(observation_box)
+
         self.model_save_freq = model_save_freq
 
         self.high_con = HigherController(
@@ -285,7 +289,7 @@ class HiroAgent(Agent):
             a = self._choose_action(s, self.sg)
 
         # Take action
-        obs, r, done, _ = env.step(a)
+        obs, r, done, info = env.step(a)
         n_s = obs["observation"]
 
         ## Higher Level Controller
@@ -296,7 +300,7 @@ class HiroAgent(Agent):
                 self.last_worker_goal = self.worker_goal
                 self.last_worker_start_state = self.last_worker_end_state
                 self.last_worker_end_state = s
-                self.worker_goal = s[:-1] + n_sg
+                self.worker_goal = s + n_sg
             else:
                 n_sg = self._choose_subgoal_with_noise(step, s, self.sg, n_s)
         else:
@@ -307,7 +311,7 @@ class HiroAgent(Agent):
 
         self.n_sg = n_sg
 
-        return a, r, n_s, done
+        return a, r, n_s, done, info
 
     def append(self, step, s, a, n_s, r, d):
         self.sr = self.low_reward(s, self.sg, n_s)
@@ -363,7 +367,7 @@ class HiroAgent(Agent):
             self.last_worker_goal = self.worker_goal
             self.last_worker_start_state = self.last_worker_end_state
             self.last_worker_end_state = s
-            self.worker_goal = s[:-1] + sg
+            self.worker_goal = s + sg
         else:
             sg = self.subgoal_transition(s, sg, n_s)
 
@@ -378,7 +382,7 @@ class HiroAgent(Agent):
             self.last_worker_goal = self.worker_goal
             self.last_worker_start_state = self.last_worker_end_state
             self.last_worker_end_state = s
-            self.worker_goal = s[:-1] + sg
+            self.worker_goal = s + sg
         else:
             sg = self.subgoal_transition(s, sg, n_s)
 

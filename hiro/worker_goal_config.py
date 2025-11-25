@@ -14,6 +14,7 @@ class WorkerGoalConfig(object):
         return (self.high - self.low) * np.random.sample(self.high.shape) + self.low
 
     def goal_dim(self):
+        # This is NOT 2. This is the full obervation space.
         return self.shape[0]  # x, y position
 
     def goal_scale(self):

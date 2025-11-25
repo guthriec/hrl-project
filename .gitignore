@@ -6,4 +6,4 @@ test/*
 .venv/
 log/
 experiments.csv
-MUJOCO_LOG.txt
+MUJOCO_LOG.TXT

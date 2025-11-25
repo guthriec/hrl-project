@@ -274,10 +274,14 @@ class MazeEnv(gym.Env):
 
     @property
     def observation_space(self):
-        shape = self._get_obs().shape
-        high = np.inf * np.ones(shape, dtype=np.float32)
-        low = -high
-        return gym.spaces.Box(low=low, high=high, dtype=np.float32)
+        return self.wrapped_env.observation_space
+
+    # @property
+    # def observation_space(self):
+    #     shape = self._get_obs().shape
+    #     high = np.inf * np.ones(shape, dtype=np.float32)
+    #     low = -high
+    #     return gym.spaces.Box(low=low, high=high, dtype=np.float32)
 
     @property
     def action_space(self):
