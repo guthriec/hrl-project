@@ -33,10 +33,18 @@ class WorkerGoalConfig(object):
     def goal_scale(self):
         raise NotImplementedError
 
+    # Returns the ideal difference in state space represented by the given goal.
+    # Used for logging purposes.
+    def ideal_state_change(self, sg):
+        return sg
+
     def off_policy_corrections(
         self, low_con, batch_size, sgoals, states, actions, candidate_goals=8
     ):
         raise NotImplementedError
+
+    def subgoal_transition(self, s, sg, n_s):
+        return s[: sg.shape[0]] + sg - n_s[: sg.shape[0]]
 
 
 class PointGoalConfig(WorkerGoalConfig):

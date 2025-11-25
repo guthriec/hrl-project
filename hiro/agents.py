@@ -300,7 +300,9 @@ class HiroAgent(Agent):
                 self.last_worker_goal = self.worker_goal
                 self.last_worker_start_state = self.last_worker_end_state
                 self.last_worker_end_state = s
-                self.worker_goal = s + n_sg
+                self.worker_goal = s + self.worker_goal_config.ideal_state_change(
+                    n_sg
+                )
             else:
                 n_sg = self._choose_subgoal_with_noise(step, s, self.sg, n_s)
         else:
@@ -367,9 +369,9 @@ class HiroAgent(Agent):
             self.last_worker_goal = self.worker_goal
             self.last_worker_start_state = self.last_worker_end_state
             self.last_worker_end_state = s
-            self.worker_goal = s + sg
+            self.worker_goal = s + self.worker_goal_config.ideal_state_change(sg)
         else:
-            sg = self.subgoal_transition(s, sg, n_s)
+            sg = self.worker_goal_config.subgoal_transition(s, sg, n_s)
 
         return sg
 
@@ -382,14 +384,11 @@ class HiroAgent(Agent):
             self.last_worker_goal = self.worker_goal
             self.last_worker_start_state = self.last_worker_end_state
             self.last_worker_end_state = s
-            self.worker_goal = s + sg
+            self.worker_goal = s + self.worker_goal_config.ideal_state_change(sg)
         else:
-            sg = self.subgoal_transition(s, sg, n_s)
+            sg = self.worker_goal_config.subgoal_transition(s, sg, n_s)
 
         return sg
-
-    def subgoal_transition(self, s, sg, n_s):
-        return s[: sg.shape[0]] + sg - n_s[: sg.shape[0]]
 
     def low_reward(self, s, sg, n_s):
         abs_s = s[: sg.shape[0]] + sg
