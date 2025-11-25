@@ -202,9 +202,9 @@ if __name__ == "__main__":
         )
     else:
         goal_config = (
-            worker_goal_config.EllipsoidGoalConfig(env.observation_space)
+            worker_goal_config.EllipsoidGoalConfig(env.observation_space["observation"])
             if args.ellipsoid_mode
-            else worker_goal_config.PointGoalConfig(env.observation_space)
+            else worker_goal_config.PointGoalConfig(env.observation_space["observation"])
         )
         agent = HiroAgent(
             worker_goal_config=goal_config,
