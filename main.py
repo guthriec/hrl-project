@@ -155,7 +155,7 @@ if __name__ == "__main__":
     parser.add_argument("--batch_size", default=100, type=int)
     parser.add_argument("--buffer_freq", default=10, type=int)
     parser.add_argument("--train_freq", default=10, type=int)
-    parser.add_argument("--reward_scaling", default=0.1, type=float)
+    parser.add_argument("--reward_scaling", default=1.0, type=float)
     args = parser.parse_args()
 
     # Select or Generate a name for this experiment

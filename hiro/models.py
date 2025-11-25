@@ -111,6 +111,9 @@ class TD3Controller(object):
 
         self._initialized = False
         self.total_it = 0
+        self.num_actions = 0
+        self.mean_action = None
+        self.total_action_variance = None
 
     def _initialize_target_networks(self):
         self._update_target_network(self.critic1_target, self.critic1, 1.0)
@@ -218,11 +221,31 @@ class TD3Controller(object):
         states, goals, actions, n_states, rewards, not_done = replay_buffer.sample()
         return self._train(states, goals, actions, rewards, n_states, goals, not_done)
 
-    def policy(self, state, goal, to_numpy=True):
+    def remember_action(self, action):
+        action = action.cpu().data.numpy().squeeze()
+        if self.mean_action is None:
+            self.mean_action = np.zeros_like(action)
+            self.mean_sq_action = np.zeros_like(action)
+
+        self.num_actions += 1
+        first_delta = action - self.mean_action
+        self.mean_action += first_delta / self.num_actions
+        second_delta = action - self.mean_action
+        if self.total_action_variance is None:
+            self.total_action_variance = np.ones_like(action)
+        self.total_action_variance += first_delta * second_delta
+
+    def get_action_variance(self, actions):
+        if self.num_actions < 2 or self.total_action_variance is None:
+            return np.ones(actions.shape[1:])
+        return self.total_action_variance / (self.num_actions - 1) + 1e-4*np.ones_like(actions)
+
+    def policy(self, state, goal, remember=False, to_numpy=True):
         state = get_tensor(state)
         goal = get_tensor(goal)
         action = self.actor(state, goal)
-
+        if remember:
+            self.remember_action(action)
         if to_numpy:
             return action.cpu().data.numpy().squeeze()
 
@@ -232,7 +255,7 @@ class TD3Controller(object):
         state = get_tensor(state)
         goal = get_tensor(goal)
         action = self.actor(state, goal)
-
+        self.remember_action(action)
         action = action + self._sample_exploration_noise(action)
         # TODO: this should use the worker goal box instead of the scale
         action = torch.min(action, self.actor.scale)
@@ -245,9 +268,9 @@ class TD3Controller(object):
 
     def _sample_exploration_noise(self, actions):
         mean = torch.zeros(actions.size()).to(device)
-        var = torch.ones(actions.size()).to(device)
+        var = torch.from_numpy(self.get_action_variance(actions)*self.expl_noise).float().to(device)
         # expl_noise = self.expl_noise - (self.expl_noise/1200) * (self.total_it//10000)
-        return torch.normal(mean, self.expl_noise * var)
+        return torch.normal(mean, var)
 
 
 class HigherController(TD3Controller):
@@ -259,7 +282,7 @@ class HigherController(TD3Controller):
         model_path,
         actor_lr=0.0001,
         critic_lr=0.001,
-        expl_noise=1.0,
+        expl_noise=0.1,
         policy_noise=0.2,
         noise_clip=0.5,
         gamma=0.99,

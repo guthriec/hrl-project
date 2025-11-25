@@ -23,19 +23,26 @@ def get_goal_sample_fn(env_name, evaluate):
         assert False, "Unknown env"
 
 
+def two_norm_diff_or_success(obs, a, n_obs, goal, prefix):
+    n_dist = np.linalg.norm(n_obs[:prefix] - goal)
+    # Encourage small actions
+    return -n_dist - 1e-06*np.linalg.norm(a)
+    # if n_dist < 0.1:
+    #     return 120.0
+    # return np.linalg.norm(obs[:prefix] - goal) - n_dist
+
 def get_reward_fn(env_name):
     if env_name.startswith("AntMaze") or env_name.startswith("PointMaze"):
-        return lambda obs, goal: -np.sum(np.square(obs[:2] - goal)) ** 0.5
+        return lambda obs, a, n_obs, goal: two_norm_diff_or_success(obs, a, n_obs, goal, 2)
     elif env_name == "AntPush":
-        return lambda obs, goal: -np.sum(np.square(obs[:2] - goal)) ** 0.5
+        return lambda obs, a, n_obs, goal: two_norm_diff_or_success(obs, a, n_obs, goal, 2)
     elif env_name == "AntFall":
-        return lambda obs, goal: -np.sum(np.square(obs[:3] - goal)) ** 0.5
+        return lambda obs, a, n_obs, goal: two_norm_diff_or_success(obs, a, n_obs, goal, 3)
     else:
         assert False, "Unknown env"
 
-
 def success_fn(last_reward):
-    return last_reward > -5.0
+    return last_reward > 100.0
 
 
 class EnvWithGoal(object):
@@ -45,10 +52,11 @@ class EnvWithGoal(object):
         self.evaluate = False
         self.reward_fn = get_reward_fn(env_name)
         self.goal = None
-        self.distance_threshold = 0.1
+        self.min_win_reward = 100.0
         self.count = 0
         self.state_dim = self.base_env.observation_space.shape[0] + 1
         self.action_dim = self.base_env.action_space.shape[0]
+        self._last_obs = None  # track previous observation
 
     def seed(self, seed):
         # Gymnasium prefers seeding via reset(seed=...); fall back to old API if available
@@ -61,11 +69,11 @@ class EnvWithGoal(object):
                 pass
 
     def reset(self):
-        # self.viewer_setup()
         self.goal_sample_fn = get_goal_sample_fn(self.env_name, self.evaluate)
         obs, info = self.base_env.reset()
         self.count = 0
         self.goal = self.goal_sample_fn()
+        self._last_obs = obs  # store for next step
         return {
             # add timestep
             "observation": obs.copy(),
@@ -73,19 +81,21 @@ class EnvWithGoal(object):
             "desired_goal": self.goal,
         }
 
-    # TODO: reward shaping via potentials
     def step(self, a):
-        obs, _, done, truncated, info = self.base_env.step(a)
-        reward = self.reward_fn(obs, self.goal)
-        done = done or reward > -self.distance_threshold
+        prev_obs = self._last_obs
+        next_obs_raw, base_reward, terminated, truncated, info = self.base_env.step(a)
+        reward = self.reward_fn(prev_obs, a, next_obs_raw, self.goal)
+        terminated = terminated or reward > self.min_win_reward
         self.count += 1
-        next_obs = {
+        self._last_obs = next_obs_raw
+        wrapped_obs = {
             # add timestep
-            "observation": obs.copy(),
-            "achieved_goal": obs[:2],
+            "observation": next_obs_raw.copy(),
+            "achieved_goal": next_obs_raw[:2],
             "desired_goal": self.goal,
         }
-        return next_obs, reward, done or self.count >= 500, info
+        done = terminated or truncated or self.count >= 1000
+        return wrapped_obs, reward, done, {**info, "terminated": terminated, "truncated": truncated}
 
     def render(self):
         self.base_env.render()
