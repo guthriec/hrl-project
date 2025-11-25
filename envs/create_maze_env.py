@@ -15,6 +15,7 @@
 
 from .ant_maze_env import AntMazeEnv
 from .point_maze_env import PointMazeEnv
+from .simple_car_maze import simple_car_maze_training, simple_car_maze_eval
 
 
 def create_maze_env(env_name=None, render_mode=None):
@@ -28,6 +29,9 @@ def create_maze_env(env_name=None, render_mode=None):
 
     # Determine if using Point or Ant
     use_point = env_name.startswith("Point")
+
+    if env_name == "SimpleCarMaze":
+        return simple_car_maze_training(render_mode=render_mode)
 
     if env_name.startswith("AntMaze") or env_name.startswith("PointMaze"):
         maze_id = "Maze"
@@ -69,3 +73,10 @@ def create_maze_env(env_name=None, render_mode=None):
         return PointMazeEnv(maze_id=maze_id, **kwargs)
     else:
         return AntMazeEnv(maze_id=maze_id, **kwargs)
+
+
+# dirty hack.
+def create_eval_maze_env(env_name=None, render_mode=None):
+    if env_name == "SimpleCarMaze":
+        return simple_car_maze_eval()
+    return create_maze_env(env_name=env_name,render_mode=render_mode)
