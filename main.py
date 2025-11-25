@@ -4,8 +4,12 @@ import numpy as np
 import datetime
 import copy
 from envs import EnvWithGoal
+<<<<<<< HEAD
 from envs.create_maze_env import create_maze_env
 from hiro import worker_goal_config
+=======
+from envs.create_maze_env import create_maze_env, create_eval_maze_env
+>>>>>>> master
 from hiro.utils import Logger, _is_update, record_experience_to_csv, listdirs
 from hiro.agents import HiroAgent, TD3Agent
 
@@ -54,7 +58,7 @@ class Trainer:
 
             while not done:
                 # Take action
-                a, r, n_s, done = self.agent.step(
+                a, r, n_s, done, info = self.agent.step(
                     s, self.env, step, global_step, explore=True
                 )
 
@@ -96,7 +100,7 @@ class Trainer:
         if _is_update(e, args.print_freq):
             agent = copy.deepcopy(self.agent)
             rewards, success_rate = agent.evaluate_policy(
-                self.env,
+                create_eval_maze_env(self.args.env, render_mode=("human" if self.args.render else None)),
                 render=self.args.render,
                 save_video=self.args.save_video,
                 sleep=self.args.sleep,
@@ -170,10 +174,13 @@ if __name__ == "__main__":
     print(experiment_name)
 
     # Environment and its attributes
-    env = EnvWithGoal(
-        create_maze_env(args.env, render_mode=("human" if args.render else None)),
-        args.env,
-    )
+    env, obs_box = None, None
+    if args.env != "SimpleCarMaze":
+        env = EnvWithGoal(create_maze_env(args.env, render_mode=("human" if args.render else None)), args.env)
+        obs_box = env.observation_space
+    else:
+        env = create_maze_env(args.env, render_mode=("human" if args.render else None))
+        obs_box = env.observation_space["observation"]
     goal_dim = 2
     state_dim = env.state_dim
     action_dim = env.action_dim
@@ -199,7 +206,11 @@ if __name__ == "__main__":
             else worker_goal_config.PointGoalConfig(env.observation_space)
         )
         agent = HiroAgent(
+<<<<<<< HEAD
             worker_goal_config=goal_config,
+=======
+            observation_box=obs_box,
+>>>>>>> master
             state_dim=state_dim,
             action_dim=action_dim,
             goal_dim=goal_dim,

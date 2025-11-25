@@ -58,6 +58,7 @@ class PointGoalConfig(WorkerGoalConfig):
         return self.random_obs()
 
     def goal_dim(self):
+        # This will be the full observation space.
         return self.obs_shape[0]
 
     def goal_scale(self):
