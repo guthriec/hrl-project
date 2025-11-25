@@ -7,7 +7,7 @@ from . import create_maze_env
 
 
 def get_goal_sample_fn(env_name, evaluate):
-    if env_name.startswith("AntMaze"):
+    if env_name.startswith("AntMaze") or env_name.startswith("PointMaze"):
         # NOTE: When evaluating (i.e. the metrics shown in the paper,
         # we use the commented out goal sampling function.    The uncommented
         # one is only used for training.
@@ -24,7 +24,7 @@ def get_goal_sample_fn(env_name, evaluate):
 
 
 def get_reward_fn(env_name):
-    if env_name.startswith("AntMaze"):
+    if env_name.startswith("AntMaze") or env_name.startswith("PointMaze"):
         return lambda obs, goal: -np.sum(np.square(obs[:2] - goal)) ** 0.5
     elif env_name == "AntPush":
         return lambda obs, goal: -np.sum(np.square(obs[:2] - goal)) ** 0.5
@@ -68,11 +68,12 @@ class EnvWithGoal(object):
         self.goal = self.goal_sample_fn()
         return {
             # add timestep
-            "observation": np.r_[obs.copy(), self.count],
+            "observation": obs.copy(),
             "achieved_goal": obs[:2],
             "desired_goal": self.goal,
         }
 
+    # TODO: reward shaping via potentials
     def step(self, a):
         obs, _, done, truncated, info = self.base_env.step(a)
         reward = self.reward_fn(obs, self.goal)
@@ -80,7 +81,7 @@ class EnvWithGoal(object):
         self.count += 1
         next_obs = {
             # add timestep
-            "observation": np.r_[obs.copy(), self.count],
+            "observation": obs.copy(),
             "achieved_goal": obs[:2],
             "desired_goal": self.goal,
         }

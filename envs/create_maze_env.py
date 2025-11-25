@@ -14,27 +14,39 @@
 # ==============================================================================
 
 from .ant_maze_env import AntMazeEnv
+from .point_maze_env import PointMazeEnv
+from .simple_car_maze import simple_car_maze_training, simple_car_maze_eval
 
 
-def create_maze_env(env_name=None):
+def create_maze_env(env_name=None, render_mode=None):
     env_name = env_name or ""
     maze_id = None
     easy = bool(env_name and env_name.endswith("Easy"))
     kwargs = {}
-    if env_name.startswith("AntMaze"):
+    kwargs.update(dict(
+        render_mode=render_mode
+    ))
+
+    # Determine if using Point or Ant
+    use_point = env_name.startswith("Point")
+
+    if env_name == "SimpleCarMaze":
+        return simple_car_maze_training(render_mode=render_mode)
+
+    if env_name.startswith("AntMaze") or env_name.startswith("PointMaze"):
         maze_id = "Maze"
         if easy:
             kwargs.update(
                 dict(
-                    maze_size_scaling=2,  # smaller cells -> shorter paths
+                    maze_size_scaling=8,  # smaller cells -> shorter paths
                     maze_height=0.3,  # thinner platforms
                     force_flat=True,  # ignore elevation
                     disable_walls=True,  # open field
                     disable_movable_blocks=True,  # no obstacles
-                    max_episode_steps=200,  # shorter episodes
+                    # max_episode_steps=200,  # shorter episodes
                 )
             )
-    elif env_name.startswith("AntPush"):
+    elif env_name.startswith("AntPush") or env_name.startswith("PointPush"):
         maze_id = "Push"
         if easy:
             kwargs.update(
@@ -44,7 +56,7 @@ def create_maze_env(env_name=None):
                     max_episode_steps=200,
                 )
             )
-    elif env_name.startswith("AntFall"):
+    elif env_name.startswith("AntFall") or env_name.startswith("PointFall"):
         maze_id = "Fall"
         if easy:
             kwargs.update(
@@ -57,4 +69,14 @@ def create_maze_env(env_name=None):
     else:
         raise ValueError("Unknown maze environment %s" % env_name)
 
-    return AntMazeEnv(maze_id=maze_id, **kwargs)
+    if use_point:
+        return PointMazeEnv(maze_id=maze_id, **kwargs)
+    else:
+        return AntMazeEnv(maze_id=maze_id, **kwargs)
+
+
+# dirty hack.
+def create_eval_maze_env(env_name=None, render_mode=None):
+    if env_name == "SimpleCarMaze":
+        return simple_car_maze_eval()
+    return create_maze_env(env_name=env_name,render_mode=render_mode)
