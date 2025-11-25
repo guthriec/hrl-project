@@ -7,7 +7,8 @@ from hiro.worker_goal_config import PointGoalConfig, WorkerGoalConfig
 
 
 class Agent:
-    def __init__(self):
+    def __init__(self, worker_goal_config):
+        self.worker_goal_config = worker_goal_config
         self.worker_goal = tuple()
         self.last_worker_goal = tuple()
         self.last_worker_start_state = None
@@ -113,7 +114,7 @@ class Agent:
                         )
                     )
                     print(
-                        "Last SG, Last State: (%6.2f, %6.2f), (%6.2f, %6.2f)  SG Improvement:%5.2f \n"
+                        "Last SG, Last State: (%6.2f, %6.2f), (%6.2f, %6.2f)  SG Improvement:%5.5f \n"
                         % (
                             self.last_worker_goal[0],
                             self.last_worker_goal[1],
@@ -209,7 +210,6 @@ class TD3Agent(Agent):
 class HiroAgent(Agent):
     def __init__(
         self,
-        observation_box,
         state_dim,
         action_dim,
         goal_dim,
@@ -224,9 +224,9 @@ class HiroAgent(Agent):
         reward_scaling,
         policy_freq_high,
         policy_freq_low,
+        worker_goal_config,
     ):
-        super().__init__()
-        self.worker_goal_config = PointGoalConfig(observation_box)
+        super().__init__(worker_goal_config)
 
         self.model_save_freq = model_save_freq
 
@@ -305,18 +305,22 @@ class HiroAgent(Agent):
                 )
             else:
                 n_sg = self._choose_subgoal_with_noise(step, s, self.sg, n_s)
+                # assert abs(n_sg[8]) < 20
+
         else:
             n_sg = self._choose_subgoal(step, s, self.sg, n_s)
+            # assert abs(n_sg[8]) < 20
 
         # n_sg = np.array([0.0, 16.0, 0.0, 0.0, 0.0, 0.0]) - s[:-1]  # Hardcoded goal
         # self.worker_goal = s[:-1] + n_sg
+        # assert abs(n_sg[8]) < 20
 
         self.n_sg = n_sg
 
         return a, r, n_s, done, info
 
     def append(self, step, s, a, n_s, r, d):
-        self.sr = self.low_reward(s, self.sg, n_s)
+        self.sr = self.worker_goal_config.worker_reward(s, self.sg, n_s)
 
         # Low Replay Buffer
         self.replay_buffer_low.append(s, self.sg, a, n_s, self.n_sg, self.sr, float(d))
@@ -390,12 +394,9 @@ class HiroAgent(Agent):
 
         return sg
 
-    def low_reward(self, s, sg, n_s):
-        abs_s = s[: sg.shape[0]] + sg
-        return -np.sqrt(np.sum((abs_s - n_s[: sg.shape[0]]) ** 2))
-
     def end_step(self):
         self.episode_subreward += self.sr
+        # assert abs(self.n_sg[8]) < 20
         self.sg = self.n_sg
 
     def end_episode(self, episode, logger=None):

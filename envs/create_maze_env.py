@@ -78,5 +78,5 @@ def create_maze_env(env_name=None, render_mode=None):
 # dirty hack.
 def create_eval_maze_env(env_name=None, render_mode=None):
     if env_name == "SimpleCarMaze":
-        return simple_car_maze_eval()
+        return simple_car_maze_eval(render_mode=render_mode)
     return create_maze_env(env_name=env_name,render_mode=render_mode)
