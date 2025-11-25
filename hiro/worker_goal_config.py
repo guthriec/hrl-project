@@ -64,12 +64,16 @@ class PointGoalConfig(WorkerGoalConfig):
     def goal_scale(self):
         return np.maximum(self.obs_high, -self.obs_low)
 
-    # Use potential-based reward
     def worker_reward(self, s, sg, n_s):
-        abs_sg = s[: sg.shape[0]] + sg
-        prev_dist = np.sqrt(np.sum((abs_sg - s[: sg.shape[0]]) ** 2))
-        new_dist = np.sqrt(np.sum((abs_sg - n_s[: sg.shape[0]]) ** 2))
-        return prev_dist - new_dist
+        abs_s = s[: sg.shape[0]] + sg
+        return -np.sqrt(np.sum((abs_s - n_s[: sg.shape[0]]) ** 2))
+
+    # # Use potential-based reward
+    # def worker_reward(self, s, sg, n_s):
+    #     abs_sg = s[: sg.shape[0]] + sg
+    #     prev_dist = np.sqrt(np.sum((abs_sg - s[: sg.shape[0]]) ** 2))
+    #     new_dist = np.sqrt(np.sum((abs_sg - n_s[: sg.shape[0]]) ** 2))
+    #     return prev_dist - new_dist
 
     def off_policy_corrections(
         self, low_con, batch_size, sgoals, states, actions, candidate_goals=8
