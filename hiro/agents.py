@@ -391,9 +391,14 @@ class HiroAgent(Agent):
     def subgoal_transition(self, s, sg, n_s):
         return s[: sg.shape[0]] + sg - n_s[: sg.shape[0]]
 
+    # Use potential-based reward
     def low_reward(self, s, sg, n_s):
         abs_s = s[: sg.shape[0]] + sg
-        return -np.sqrt(np.sum((abs_s - n_s[: sg.shape[0]]) ** 2))
+        prev_dist = np.sqrt(np.sum((abs_s - s[: sg.shape[0]]) ** 2))
+        new_dist = np.sqrt(np.sum((abs_s - n_s[: sg.shape[0]]) ** 2))
+        if new_dist < 0.01:
+            return 100.0
+        return prev_dist - new_dist
 
     def end_step(self):
         self.episode_subreward += self.sr
