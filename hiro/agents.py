@@ -126,6 +126,8 @@ class Agent:
                 if 'success' in info:
                     success += 1 if info['success'] else 0
                 else:
+                    print("uh oh")
+                    exit()
                     success += 1 if error <= 5 else 0
                 self.end_episode(e)
 
@@ -392,13 +394,16 @@ class HiroAgent(Agent):
         return s[: sg.shape[0]] + sg - n_s[: sg.shape[0]]
 
     # Use potential-based reward
+    # def low_reward(self, s, sg, n_s):
+    #     abs_s = s[: sg.shape[0]] + sg
+    #     prev_dist = np.sqrt(np.sum((abs_s - s[: sg.shape[0]]) ** 2))
+    #     new_dist = np.sqrt(np.sum((abs_s - n_s[: sg.shape[0]]) ** 2))
+    #     if new_dist < 0.01:
+    #         return 100.0
+    #     return prev_dist - new_dist
     def low_reward(self, s, sg, n_s):
-        abs_s = s[: sg.shape[0]] + sg
-        prev_dist = np.sqrt(np.sum((abs_s - s[: sg.shape[0]]) ** 2))
-        new_dist = np.sqrt(np.sum((abs_s - n_s[: sg.shape[0]]) ** 2))
-        if new_dist < 0.01:
-            return 100.0
-        return prev_dist - new_dist
+        abs_s = s[:sg.shape[0]] + sg
+        return -np.sqrt(np.sum((abs_s - n_s[:sg.shape[0]])**2))
 
     def end_step(self):
         self.episode_subreward += self.sr
