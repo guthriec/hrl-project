@@ -206,11 +206,7 @@ if __name__ == "__main__":
             else worker_goal_config.PointGoalConfig(env.observation_space)
         )
         agent = HiroAgent(
-<<<<<<< HEAD
             worker_goal_config=goal_config,
-=======
-            observation_box=obs_box,
->>>>>>> master
             state_dim=state_dim,
             action_dim=action_dim,
             goal_dim=goal_dim,
