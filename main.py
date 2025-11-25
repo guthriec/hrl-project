@@ -7,6 +7,7 @@ from envs import EnvWithGoal
 from envs.create_maze_env import create_maze_env, create_eval_maze_env
 from hiro.utils import Logger, _is_update, record_experience_to_csv, listdirs
 from hiro.agents import HiroAgent, TD3Agent
+import time
 
 
 def run_evaluation(args, env, agent):
@@ -41,6 +42,7 @@ class Trainer:
         global_step = 0
 
         for e in np.arange(self.args.num_episode) + 1:
+            start = time.time()
             obs = self.env.reset()
             fg = obs["desired_goal"]
             s = obs["observation"]
@@ -50,8 +52,9 @@ class Trainer:
             episode_reward = 0
 
             self.agent.set_final_goal(fg)
-
+            
             while not done:
+                
                 # Take action
                 a, r, n_s, done, info = self.agent.step(
                     s, self.env, step, global_step, explore=True
@@ -127,7 +130,7 @@ if __name__ == "__main__":
     parser.add_argument("--td3", action="store_true")
 
     # Training
-    parser.add_argument("--num_episode", default=25000, type=int)
+    parser.add_argument("--num_episode", default=4000, type=int)
     parser.add_argument(
         "--start_training_steps", default=2500, type=int, help="Unit = Global Step"
     )

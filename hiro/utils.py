@@ -4,10 +4,11 @@ import numpy as np
 import torch
 from torch.utils.tensorboard import SummaryWriter
 
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-
+#device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+device = torch.device("cpu")
 
 def var(tensor):
+    return tensor
     if torch.cuda.is_available():
         return tensor.cuda()
     else:

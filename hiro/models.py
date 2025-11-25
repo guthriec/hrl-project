@@ -14,8 +14,10 @@ import torch.nn.functional as F
 
 from hiro.buffers import HighReplayBuffer
 from .utils import get_tensor
+from .invertible_net import InvertibleNet
 
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+#device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+device = torch.device("cpu")
 
 print("Using device:", device)
 
@@ -29,14 +31,16 @@ class TD3Actor(nn.Module):
             scale = get_tensor(scale)
         self.scale = nn.Parameter(scale.clone().detach().float(), requires_grad=False)
 
-        self.l1 = nn.Linear(state_dim + goal_dim, 300)
-        self.l2 = nn.Linear(300, 300)
-        self.l3 = nn.Linear(300, action_dim)
+        # self.l1 = nn.Linear(state_dim + goal_dim, 300)
+        # self.l2 = nn.Linear(300, 300)
+        # self.l3 = nn.Linear(300, action_dim)
+        self.invertible_net = InvertibleNet(n_layers=4, goal_dim=goal_dim, state_dim=state_dim, action_dim=action_dim, hidden_dim=300)
 
     def forward(self, state, goal):
-        a = F.relu(self.l1(torch.cat([state, goal], 1)))
-        a = F.relu(self.l2(a))
-        return self.scale * torch.tanh(self.l3(a))
+        # a = F.relu(self.l1(torch.cat([state, goal], 1)))
+        # a = F.relu(self.l2(a))
+        # return self.scale * torch.tanh(self.l3(a))
+        return self.invertible_net.forward(torch.cat([state, goal], 1))
 
 
 class TD3Critic(nn.Module):

@@ -2,8 +2,8 @@ from gymnasium import spaces
 import torch
 import numpy as np
 
-device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-
+# device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+device = torch.device("cpu")
 class WorkerGoalConfig(object):
     def __init__(self, observation_box: spaces.Box):
         self.shape = observation_box.shape
