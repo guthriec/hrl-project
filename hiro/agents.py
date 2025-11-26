@@ -157,10 +157,11 @@ class TD3Agent(Agent):
             model_path=model_path,
         )
 
+        # Actor outputs state_dim + goal_dim dimensions (action + dummy), so buffer stores that
         self.replay_buffer = ReplayBuffer(
             state_dim=state_dim,
             goal_dim=goal_dim,
-            action_dim=action_dim,
+            action_dim=state_dim + goal_dim,  # Store full actor output
             buffer_size=buffer_size,
             batch_size=batch_size,
         )
@@ -170,18 +171,24 @@ class TD3Agent(Agent):
     def step(self, s, env, step, global_step=0, explore=False):
         if explore:
             if global_step < self.start_training_steps:
-                a = env.action_space.sample()
+                a_env = env.action_space.sample()
+                # Pad with N(0,1) to match full dimension
+                dummy_dims = self.con.state_dim + self.con.goal_dim - self.con.action_dim
+                a_full = np.concatenate([a_env, np.random.randn(dummy_dims)])
             else:
-                a = self._choose_action_with_noise(s)
+                a_full = self._choose_action_with_noise(s)
+                a_env = a_full[:self.con.action_dim]
         else:
-            a = self._choose_action(s)
+            a_full = self._choose_action(s)
+            a_env = a_full[:self.con.action_dim]
 
-        obs, r, done, info = env.step(a)
+        obs, r, done, info = env.step(a_env)
         n_s = obs["observation"]
 
-        return a, r, n_s, done, info
+        return a_full, r, n_s, done, info
 
     def append(self, step, s, a, n_s, r, d):
+        # a is now the full action vector
         self.replay_buffer.append(s, self.fg, a, n_s, r, d)
 
     def train(self, global_step):
@@ -249,19 +256,22 @@ class HiroAgent(Agent):
             policy_freq=policy_freq_low,
         )
 
+        # Low controller outputs state_dim + worker_goal_dim dimensions
         self.replay_buffer_low = LowReplayBuffer(
             state_dim=state_dim,
             worker_goal_config=self.worker_goal_config,
-            action_dim=action_dim,
+            action_dim=state_dim + self.worker_goal_config.goal_dim(),  # Store full actor output
             buffer_size=buffer_size,
             batch_size=batch_size,
         )
 
+        # High controller outputs just subgoals (not full vector)
+        # action_arr stores low-level full outputs
         self.replay_buffer_high = HighReplayBuffer(
             state_dim=state_dim,
             goal_dim=goal_dim,
             worker_goal_config=self.worker_goal_config,
-            action_dim=action_dim,
+            action_dim=state_dim + self.worker_goal_config.goal_dim(),  # For action_arr (low-level full vectors)
             buffer_size=buffer_size,
             batch_size=batch_size,
             freq=buffer_freq,
@@ -284,14 +294,19 @@ class HiroAgent(Agent):
         if explore:
             # Take random action for start_training_steps
             if global_step < self.start_training_steps:
-                a = env.action_space.sample()
+                a_env = env.action_space.sample()
+                # Pad with N(0,1) to match full dimension
+                dummy_dims = self.low_con.state_dim + self.low_con.goal_dim - self.low_con.action_dim
+                a_full = np.concatenate([a_env, np.random.randn(dummy_dims)])
             else:
-                a = self._choose_action_with_noise(s, self.sg)
+                a_full = self._choose_action_with_noise(s, self.sg)
+                a_env = a_full[:self.low_con.action_dim]
         else:
-            a = self._choose_action(s, self.sg)
+            a_full = self._choose_action(s, self.sg)
+            a_env = a_full[:self.low_con.action_dim]
 
         # Take action
-        obs, r, done, info = env.step(a)
+        obs, r, done, info = env.step(a_env)
         n_s = obs["observation"]
 
         ## Higher Level Controller
@@ -302,7 +317,7 @@ class HiroAgent(Agent):
                 self.last_worker_goal = self.worker_goal
                 self.last_worker_start_state = self.last_worker_end_state
                 self.last_worker_end_state = s
-                self.worker_goal = s+ n_sg
+                self.worker_goal = s + n_sg
             else:
                 n_sg = self._choose_subgoal_with_noise(step, s, self.sg, n_s)
         else:
@@ -311,9 +326,9 @@ class HiroAgent(Agent):
         # n_sg = np.array([0.0, 16.0, 0.0, 0.0, 0.0, 0.0]) - s[:-1]  # Hardcoded goal
         # self.worker_goal = s[:-1] + n_sg
 
-        self.n_sg = n_sg
+        self.n_sg = n_sg  # n_sg is now just subgoal dimensions (no slicing needed)
 
-        return a, r, n_s, done, info
+        return a_full, r, n_s, done, info
 
     def append(self, step, s, a, n_s, r, d):
         self.sr = self.low_reward(s, self.sg, n_s)
@@ -365,6 +380,7 @@ class HiroAgent(Agent):
 
     def _choose_subgoal_with_noise(self, step, s, sg, n_s):
         if step % self.buffer_freq == 0:  # Should be zero
+            # High controller now returns just subgoal dimensions (non-invertible)
             sg = self.high_con.policy_with_noise(s, self.fg)
             self.last_worker_goal = self.worker_goal
             self.last_worker_start_state = self.last_worker_end_state
@@ -380,6 +396,7 @@ class HiroAgent(Agent):
 
     def _choose_subgoal(self, step, s, sg, n_s):
         if step % self.buffer_freq == 0:
+            # High controller now returns just subgoal dimensions (non-invertible)
             sg = self.high_con.policy(s, self.fg)
             self.last_worker_goal = self.worker_goal
             self.last_worker_start_state = self.last_worker_end_state

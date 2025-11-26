@@ -23,23 +23,47 @@ print("Using device:", device)
 
 
 class TD3Actor(nn.Module):
+    """Non-invertible TD3 Actor - used by high-level controller"""
     def __init__(self, state_dim, goal_dim, action_dim, scale=None):
         super(TD3Actor, self).__init__()
         if scale is None:
-            scale = torch.ones(state_dim)
+            scale = torch.ones(action_dim)
         else:
             scale = get_tensor(scale)
         self.scale = nn.Parameter(scale.clone().detach().float(), requires_grad=False)
 
-        # self.l1 = nn.Linear(state_dim + goal_dim, 300)
-        # self.l2 = nn.Linear(300, 300)
-        # self.l3 = nn.Linear(300, action_dim)
+        self.action_dim = action_dim
+        self.state_dim = state_dim
+        self.goal_dim = goal_dim
+
+        self.l1 = nn.Linear(state_dim + goal_dim, 300)
+        self.l2 = nn.Linear(300, 300)
+        self.l3 = nn.Linear(300, action_dim)
+
+    def forward(self, state, goal):
+        a = F.relu(self.l1(torch.cat([state, goal], 1)))
+        a = F.relu(self.l2(a))
+        return self.scale * torch.tanh(self.l3(a))
+
+
+class InvertibleActor(nn.Module):
+    """Invertible Actor using normalizing flows - used by low-level controller"""
+    def __init__(self, state_dim, goal_dim, action_dim, scale=None):
+        super(InvertibleActor, self).__init__()
+        if scale is None:
+            scale = torch.ones(action_dim)
+        else:
+            scale = get_tensor(scale)
+        self.scale = nn.Parameter(scale.clone().detach().float(), requires_grad=False)
+
+        # Track dimensions for slicing
+        self.action_dim = action_dim
+        self.state_dim = state_dim
+        self.goal_dim = goal_dim
+
         self.invertible_net = InvertibleNet(n_layers=4, goal_dim=goal_dim, state_dim=state_dim, action_dim=action_dim, hidden_dim=300)
 
     def forward(self, state, goal):
-        # a = F.relu(self.l1(torch.cat([state, goal], 1)))
-        # a = F.relu(self.l2(a))
-        # return self.scale * torch.tanh(self.l3(a))
         return self.invertible_net.forward(torch.cat([state, goal], 1))
 
 
@@ -73,6 +97,7 @@ class TD3Controller(object):
         action_dim,
         scale,
         model_path,
+        actor_class=InvertibleActor,  # Default to InvertibleActor for backward compatibility
         actor_lr=0.0001,
         critic_lr=0.001,
         expl_noise=0.1,
@@ -85,6 +110,15 @@ class TD3Controller(object):
         self.name = "td3"
         self.scale = scale
         self.model_path = model_path
+        self.actor_class = actor_class
+
+        # Track dimensions for slicing
+        self.action_dim = action_dim
+        self.state_dim = state_dim
+        self.goal_dim = goal_dim
+
+        # Determine if actor outputs full vector (invertible) or just actions
+        self.is_invertible = (actor_class == InvertibleActor)
 
         # parameters
         self.expl_noise = expl_noise
@@ -94,8 +128,8 @@ class TD3Controller(object):
         self.policy_freq = policy_freq
         self.tau = tau
 
-        self.actor = TD3Actor(state_dim, goal_dim, action_dim, scale=scale).to(device)
-        self.actor_target = TD3Actor(state_dim, goal_dim, action_dim, scale=scale).to(
+        self.actor = actor_class(state_dim, goal_dim, action_dim, scale=scale).to(device)
+        self.actor_target = actor_class(state_dim, goal_dim, action_dim, scale=scale).to(
             device
         )
         self.actor_optimizer = torch.optim.Adam(self.actor.parameters(), lr=actor_lr)
@@ -168,21 +202,40 @@ class TD3Controller(object):
     def _train(self, states, goals, actions, rewards, n_states, n_goals, not_done):
         self.total_it += 1
         with torch.no_grad():
-            noise = (torch.randn_like(actions) * self.policy_noise).clamp(
-                -self.noise_clip, self.noise_clip
-            )
+            n_actions_full = self.actor_target(n_states, n_goals)
 
-            n_actions = self.actor_target(n_states, n_goals) + noise
-            n_actions = torch.min(n_actions, self.actor.scale)
-            n_actions = torch.max(n_actions, -self.actor.scale)
+            if self.is_invertible:
+                # For invertible actor: only add noise to action dimensions
+                noise = (torch.randn_like(n_actions_full[:, :self.action_dim]) * self.policy_noise).clamp(
+                    -self.noise_clip, self.noise_clip
+                )
+                n_actions_full[:, :self.action_dim] = n_actions_full[:, :self.action_dim] + noise
+                n_actions_full[:, :self.action_dim] = torch.min(n_actions_full[:, :self.action_dim], self.actor.scale)
+                n_actions_full[:, :self.action_dim] = torch.max(n_actions_full[:, :self.action_dim], -self.actor.scale)
+                # Slice to get just actions for critic
+                n_actions = n_actions_full[:, :self.action_dim]
+            else:
+                # For non-invertible actor: add noise to all outputs
+                noise = (torch.randn_like(n_actions_full) * self.policy_noise).clamp(
+                    -self.noise_clip, self.noise_clip
+                )
+                n_actions_full = n_actions_full + noise
+                n_actions_full = torch.min(n_actions_full, self.actor.scale)
+                n_actions_full = torch.max(n_actions_full, -self.actor.scale)
+                n_actions = n_actions_full
 
             target_Q1 = self.critic1_target(n_states, n_goals, n_actions)
             target_Q2 = self.critic2_target(n_states, n_goals, n_actions)
             target_Q = torch.min(target_Q1, target_Q2)
             target_Q_detached = (rewards + not_done * self.gamma * target_Q).detach()
 
-        current_Q1 = self.critic1(states, goals, actions)
-        current_Q2 = self.critic2(states, goals, actions)
+        # Slice actions for critic if invertible
+        if self.is_invertible:
+            current_Q1 = self.critic1(states, goals, actions[:, :self.action_dim])
+            current_Q2 = self.critic2(states, goals, actions[:, :self.action_dim])
+        else:
+            current_Q1 = self.critic1(states, goals, actions)
+            current_Q2 = self.critic2(states, goals, actions)
 
         critic1_loss = F.smooth_l1_loss(current_Q1, target_Q_detached)
         critic2_loss = F.smooth_l1_loss(current_Q2, target_Q_detached)
@@ -197,7 +250,12 @@ class TD3Controller(object):
         self.critic2_optimizer.step()
 
         if self.total_it % self.policy_freq == 0:
-            a = self.actor(states, goals)
+            a_full = self.actor(states, goals)
+            # Slice to get just actions for critic if invertible
+            if self.is_invertible:
+                a = a_full[:, :self.action_dim]
+            else:
+                a = a_full
             Q1 = self.critic1(states, goals, a)
             actor_loss = -Q1.mean()  # multiply by neg becuz gradient ascent
 
@@ -225,27 +283,35 @@ class TD3Controller(object):
     def policy(self, state, goal, to_numpy=True):
         state = get_tensor(state)
         goal = get_tensor(goal)
-        action = self.actor(state, goal)
+        action_full = self.actor(state, goal)
 
         if to_numpy:
-            return action.cpu().data.numpy().squeeze()
+            return action_full.cpu().data.numpy().squeeze()
 
-        return action.squeeze()
+        return action_full.squeeze()
 
     def policy_with_noise(self, state, goal, to_numpy=True):
         state = get_tensor(state)
         goal = get_tensor(goal)
-        action = self.actor(state, goal)
+        action_full = self.actor(state, goal)
 
-        action = action + self._sample_exploration_noise(action)
-        # TODO: this should use the worker goal box instead of the scale
-        action = torch.min(action, self.actor.scale)
-        action = torch.max(action, -self.actor.scale)
+        if self.is_invertible:
+            # Add noise and clamp only the action dimensions
+            action_full[:, :self.action_dim] = action_full[:, :self.action_dim] + self._sample_exploration_noise(action_full[:, :self.action_dim])
+            # TODO: this should use the worker goal box instead of the scale
+            action_full[:, :self.action_dim] = torch.min(action_full[:, :self.action_dim], self.actor.scale)
+            action_full[:, :self.action_dim] = torch.max(action_full[:, :self.action_dim], -self.actor.scale)
+        else:
+            # Add noise and clamp all outputs
+            action_full = action_full + self._sample_exploration_noise(action_full)
+            # TODO: this should use the worker goal box instead of the scale
+            action_full = torch.min(action_full, self.actor.scale)
+            action_full = torch.max(action_full, -self.actor.scale)
 
         if to_numpy:
-            return action.cpu().data.numpy().squeeze()
+            return action_full.cpu().data.numpy().squeeze()
 
-        return action.squeeze()
+        return action_full.squeeze()
 
     def _sample_exploration_noise(self, actions):
         mean = torch.zeros(actions.size()).to(device)
@@ -276,14 +342,15 @@ class HigherController(TD3Controller):
             worker_goal_config.goal_dim(),
             worker_goal_config.goal_scale(),
             model_path,
-            actor_lr,
-            critic_lr,
-            expl_noise,
-            policy_noise,
-            noise_clip,
-            gamma,
-            policy_freq,
-            tau,
+            actor_class=TD3Actor,  # Use non-invertible actor for high-level
+            actor_lr=actor_lr,
+            critic_lr=critic_lr,
+            expl_noise=expl_noise,
+            policy_noise=policy_noise,
+            noise_clip=noise_clip,
+            gamma=gamma,
+            policy_freq=policy_freq,
+            tau=tau,
         )
         self.name = "high"
         self.worker_goal_config = worker_goal_config
@@ -319,11 +386,12 @@ class HigherController(TD3Controller):
 
         # For ease
         new_batch_sz = seq_len * batch_size
-        action_dim = actions[0][0].shape
+        action_dim_full = actions[0][0].shape  # Full action vector shape
+        action_dim_env = (low_con.action_dim,)  # Environment action shape
         obs_dim = states[0][0].shape
         ncands = candidates.shape[1]
 
-        true_actions = actions.reshape((new_batch_sz,) + action_dim)
+        true_actions = actions.reshape((new_batch_sz,) + action_dim_full)
         observations = states.reshape((new_batch_sz,) + obs_dim)
         goal_shape = (new_batch_sz, self.worker_goal_config.goal_dim())
         # observations = get_obs_tensor(observations, sg_corrections=True)
@@ -331,7 +399,8 @@ class HigherController(TD3Controller):
         # batched_candidates = np.tile(candidates, [seq_len, 1, 1])
         # batched_candidates = batched_candidates.transpose(1, 0, 2)
 
-        policy_actions = np.zeros((ncands, new_batch_sz) + action_dim)
+        # Only store environment action dimensions for comparison
+        policy_actions = np.zeros((ncands, new_batch_sz) + action_dim_env)
 
         for c in range(ncands):
             subgoal = candidates[:, c]
@@ -339,12 +408,15 @@ class HigherController(TD3Controller):
                 :, None
             ] - states[:, :, : self.worker_goal_config.goal_dim()]
             candidate = candidate.reshape(*goal_shape)
-            policy_actions[c] = low_con.policy(observations, candidate)
+            # Policy returns full vector, slice to get just actions for comparison
+            policy_actions[c] = low_con.policy(observations, candidate)[:, :low_con.action_dim]
 
-        difference = policy_actions - true_actions
+        # Slice true_actions to get just the action dimensions for comparison
+        true_actions_sliced = true_actions[:, :low_con.action_dim]
+        difference = policy_actions - true_actions_sliced
         difference = np.where(difference != -np.inf, difference, 0)
         difference = difference.reshape(
-            (ncands, batch_size, seq_len) + action_dim
+            (ncands, batch_size, seq_len) + action_dim_env
         ).transpose(1, 0, 2, 3)
 
         logprob = -0.5 * np.sum(np.linalg.norm(difference, axis=-1) ** 2, axis=-1)
@@ -395,14 +467,15 @@ class LowerController(TD3Controller):
             action_dim,
             scale,
             model_path,
-            actor_lr,
-            critic_lr,
-            expl_noise,
-            policy_noise,
-            noise_clip,
-            gamma,
-            policy_freq,
-            tau,
+            actor_class=InvertibleActor,  # Use invertible actor for low-level
+            actor_lr=actor_lr,
+            critic_lr=critic_lr,
+            expl_noise=expl_noise,
+            policy_noise=policy_noise,
+            noise_clip=noise_clip,
+            gamma=gamma,
+            policy_freq=policy_freq,
+            tau=tau,
         )
         self.name = "low"
 

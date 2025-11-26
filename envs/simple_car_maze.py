@@ -97,16 +97,16 @@ class CarWrapper(gym.Wrapper):
     
 
 eval_map =  [[1, 1, 1, 1, 1],
-                    [1, 'g', 'r', 0, 1],
+                    [1, 'g', 0, 0, 1],
                     [1, 1, 1, 0, 1],
-                    [1, 0, 0, 0, 1],
+                    [1, 'r', 0, 0, 1],
                     [1, 1, 1, 1, 1]]
 
-# training_map =  [[1, 1, 1, 1, 1],
-#                     [1, 'g', 'r', 'r', 1],
-#                     [1, 1, 1, 'r', 1],
-#                     [1, 'r', 'r', 'r', 1],
-#                     [1, 1, 1, 1, 1]]
+training_map =  [[1, 1, 1, 1, 1],
+                    [1, 'g', 'r', 'r', 1],
+                    [1, 1, 1, 'r', 1],
+                    [1, 'r', 'r', 'r', 1],
+                    [1, 1, 1, 1, 1]]
 
 # eval_map =  [[1, 1, 1, 1, 1],
 #                     [1, 'g', 0, 0, 1],
@@ -131,7 +131,7 @@ def simple_car_maze_training():
     env = gym.make('PointMaze_UMaze-v3', 
                    continuing_task=False, 
                    #render_mode="human", 
-                   maze_map=eval_map)
+                   maze_map=training_map)
     env = CarWrapper(env)
     return env
 

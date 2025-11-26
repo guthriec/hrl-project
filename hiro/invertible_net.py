@@ -100,15 +100,22 @@ class InvertibleNet(nn.Module):
         self.state_dim = state_dim
         self.goal_dim = goal_dim
         self.action_dim = action_dim
-        self.output_dummy_dim = self.state_dim + self.goal_dim - action_dim
+        self.output_dummy_dim = self.goal_dim - action_dim
 
     def forward(self, x):
         for step in self.steps:
             x = step(x)
-        r = torch.tanh(x)[:, :self.action_dim]
-        return r * self.scale
+        # Return full vector (action + dummy dims)
+        r = torch.tanh(x)
+        # Only scale the action dimensions
+        r_scaled = r.clone()
+        r_scaled[:, :self.action_dim] = r[:, :self.action_dim] * self.scale
+        return r_scaled
 
-    def inverse(self, y):
+    def inverse(self, state, action):
+        # given a state and action, we need to sample our latent so we have 
+        # a state + goal dim vector (state + action + latent), then invert that
+        # this is not correct yet
         y = y / self.scale
         y = 0.5 * torch.log((1 + y) / (1 - y))
         for step in reversed(self.steps):
