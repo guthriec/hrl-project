@@ -17,7 +17,7 @@ from .utils import get_tensor
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-print("Using device:", device)
+print("Using device:", device, flush=True)
 
 
 class TD3Actor(nn.Module):
@@ -194,21 +194,26 @@ class TD3Controller(object):
 
         if self.total_it % self.policy_freq == 0:
             a = self.actor(states, goals)
+            # Use both critics (should already be using min, but enforce it)
             Q1 = self.critic1(states, goals, a)
-            actor_loss = -Q1.mean()  # multiply by neg becuz gradient ascent
+            Q2 = self.critic2(states, goals, a)
+            actor_loss = -torch.min(Q1, Q2).mean()  # Use minimum of both critics
 
             self.actor_optimizer.zero_grad()
             actor_loss.backward()
+            # Optional: Add gradient clipping
+            torch.nn.utils.clip_grad_norm_(self.actor.parameters(), max_norm=1.0)
             self.actor_optimizer.step()
-
-            self._update_target_network(self.critic1_target, self.critic1, self.tau)
-            self._update_target_network(self.critic2_target, self.critic2, self.tau)
-            self._update_target_network(self.actor_target, self.actor, self.tau)
 
             return {
                 "actor_loss_" + self.name: actor_loss,
                 "critic_loss_" + self.name: critic_loss,
             }, {"td_error_" + self.name: td_error}
+
+        # Move target updates outside the policy_freq block
+        self._update_target_network(self.critic1_target, self.critic1, self.tau)
+        self._update_target_network(self.critic2_target, self.critic2, self.tau)
+        self._update_target_network(self.actor_target, self.actor, self.tau)
 
         return {"critic_loss_" + self.name: critic_loss}, {
             "td_error_" + self.name: td_error
@@ -245,9 +250,11 @@ class TD3Controller(object):
 
     def _sample_exploration_noise(self, actions):
         mean = torch.zeros(actions.size()).to(device)
-        var = torch.ones(actions.size()).to(device)
+        var = self.actor.scale
+        # var = torch.ones(actions.size()).to(device)
         # expl_noise = self.expl_noise - (self.expl_noise/1200) * (self.total_it//10000)
-        return torch.normal(mean, self.expl_noise * var)
+        res = torch.normal(mean, self.expl_noise * var)
+        return res
 
 
 class HigherController(TD3Controller):
@@ -314,7 +321,7 @@ class LowerController(TD3Controller):
         model_path,
         actor_lr=0.0001,
         critic_lr=0.001,
-        expl_noise=1.0,
+        expl_noise=0.2,
         policy_noise=0.2,
         noise_clip=0.5,
         gamma=0.99,

@@ -82,7 +82,7 @@ class EnvWithGoal(object):
         next_obs = {
             # add timestep
             "observation": obs.copy(),
-            "achieved_goal": obs[:2],
+            # "achieved_goal": obs[:2],
             "desired_goal": self.goal,
         }
         return next_obs, reward, done or self.count >= 500, info
@@ -144,7 +144,8 @@ def run_environment(env_name, episode_length, num_episodes):
         print(
             "Episode {} reward: {}, Success: {}".format(
                 ep + 1, rewards[-1], successes[-1]
-            )
+            ),
+            flush=True
         )
 
     print("Average Reward over {} episodes: {}".format(num_episodes, np.mean(rewards)))

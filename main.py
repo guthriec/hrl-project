@@ -26,7 +26,8 @@ def run_evaluation(args, env, agent):
             std=np.std(rewards),
             median=np.median(rewards),
             success=success_rate,
-        )
+        ),
+        flush=True
     )
 
 
@@ -112,7 +113,8 @@ class Trainer:
                     std=np.std(rewards),
                     median=np.median(rewards),
                     success=success_rate,
-                )
+                ),
+                flush=True
             )
 
 
@@ -131,7 +133,7 @@ if __name__ == "__main__":
     parser.add_argument("--td3", action="store_true")
 
     # Training
-    parser.add_argument("--num_episode", default=25000, type=int)
+    parser.add_argument("--num_episode", default=3000, type=int)
     parser.add_argument(
         "--start_training_steps", default=2500, type=int, help="Unit = Global Step"
     )
@@ -156,6 +158,7 @@ if __name__ == "__main__":
     parser.add_argument("--buffer_freq", default=10, type=int)
     parser.add_argument("--train_freq", default=10, type=int)
     parser.add_argument("--reward_scaling", default=0.1, type=float)
+    parser.add_argument("--expl_noise", default=2.0, type=float)
     args = parser.parse_args()
 
     # Select or Generate a name for this experiment
@@ -199,6 +202,7 @@ if __name__ == "__main__":
             buffer_size=args.buffer_size,
             batch_size=args.batch_size,
             start_training_steps=args.start_training_steps,
+            expl_noise=args.expl_noise,
         )
     else:
         goal_config = (
@@ -222,6 +226,7 @@ if __name__ == "__main__":
             reward_scaling=args.reward_scaling,
             policy_freq_high=args.policy_freq_high,
             policy_freq_low=args.policy_freq_low,
+            expl_noise=args.expl_noise,
         )
 
     # Run training or evaluation

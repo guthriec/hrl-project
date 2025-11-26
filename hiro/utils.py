@@ -28,9 +28,9 @@ class Logger:
     def print(self, name, value, episode=-1, step=-1):
         string = "{} is {}".format(name, value)
         if episode > 0:
-            print("Episode:{}, {}".format(episode, string))
+            print("Episode:{}, {}".format(episode, string), flush=True)
         if step > 0:
-            print("Step:{}, {}".format(step, string))
+            print("Step:{}, {}".format(step, string), flush=True)
 
     def write(self, name, value, index):
         self.writer.add_scalar(name, value, index)
