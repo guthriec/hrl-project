@@ -259,6 +259,35 @@ class TD3Controller(object):
             Q1 = self.critic1(states, goals, a)
             actor_loss = -Q1.mean()  # multiply by neg becuz gradient ascent
 
+            # Add reconstruction and latent losses for invertible actor
+            if self.is_invertible:
+                # Output structure: [action (2) | state (8) | latent (6)]
+                # a_full shape: (batch, state_dim + goal_dim) = (batch, 16)
+
+                # State reconstruction loss: output state should match input state
+                state_start = self.action_dim  # 2
+                state_end = self.action_dim + self.state_dim  # 2 + 8 = 10
+                reconstructed_state = a_full[:, state_start:state_end]
+                state_reconstruction_loss = F.mse_loss(reconstructed_state, states)
+
+                # Latent regularization loss: encourage N(0, 1) distribution
+                latent_start = state_end  # 10
+                latent_vars = a_full[:, latent_start:]  # dims 10:16 (6 dimensions)
+
+                # Compute batch statistics
+                latent_mean = latent_vars.mean(dim=0)  # mean across batch for each latent dim
+                latent_std = latent_vars.std(dim=0)   # std across batch for each latent dim
+
+                # Regularize to N(0, 1)
+                latent_mean_loss = (latent_mean ** 2).mean()  # encourage mean ≈ 0
+                latent_std_loss = ((latent_std - 1.0) ** 2).mean()  # encourage std ≈ 1
+                latent_regularization_loss = latent_mean_loss + latent_std_loss
+
+                # Combine losses (using weights for different loss components)
+                reconstruction_weight = 1.0
+                latent_weight = 0.1
+                actor_loss = actor_loss + reconstruction_weight * state_reconstruction_loss + latent_weight * latent_regularization_loss
+
             self.actor_optimizer.zero_grad()
             actor_loss.backward()
             self.actor_optimizer.step()
@@ -267,10 +296,17 @@ class TD3Controller(object):
             self._update_target_network(self.critic2_target, self.critic2, self.tau)
             self._update_target_network(self.actor_target, self.actor, self.tau)
 
-            return {
+            losses_dict = {
                 "actor_loss_" + self.name: actor_loss,
                 "critic_loss_" + self.name: critic_loss,
-            }, {"td_error_" + self.name: td_error}
+            }
+
+            # Add invertible-specific losses to logging
+            if self.is_invertible:
+                losses_dict["state_recon_loss_" + self.name] = state_reconstruction_loss
+                losses_dict["latent_reg_loss_" + self.name] = latent_regularization_loss
+
+            return losses_dict, {"td_error_" + self.name: td_error}
 
         return {"critic_loss_" + self.name: critic_loss}, {
             "td_error_" + self.name: td_error
