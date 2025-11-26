@@ -4,15 +4,18 @@ import numpy as np
 import torch
 from torch.utils.tensorboard import SummaryWriter
 
-#device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+# Default device - will be set by set_device()
 device = torch.device("cpu")
 
+def set_device(device_name):
+    """Set the global device for tensor operations."""
+    global device
+    device = torch.device(device_name)
+    print(f"Using device: {device}")
+
 def var(tensor):
-    return tensor
-    if torch.cuda.is_available():
-        return tensor.cuda()
-    else:
-        return tensor
+    """Move tensor to the configured device."""
+    return tensor.to(device)
 
 
 def get_tensor(z):

@@ -2,7 +2,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from .utils import get_tensor
-
+import numpy as np
 
 class MLP(nn.Module):
     def __init__(self, in_dim, out_dim, hidden_dim=256, n_hidden=2):
@@ -102,22 +102,60 @@ class InvertibleNet(nn.Module):
         self.action_dim = action_dim
         self.output_dummy_dim = self.goal_dim - action_dim
 
-    def forward(self, x):
+    def forward(self, state, goal):
+        """
+        Forward pass through invertible network
+
+        Args:
+            state: tensor of shape (batch, state_dim)
+            goal: tensor of shape (batch, goal_dim)
+
+        Returns:
+            output: tensor of shape (batch, state_dim + goal_dim)
+                   structure: [action (action_dim) | state (state_dim) | latent (goal_dim - action_dim)]
+        """
+        x = torch.cat([state, goal], dim=1)
         for step in self.steps:
             x = step(x)
-        # Return full vector (action + dummy dims)
-        r = torch.tanh(x)
-        # Only scale the action dimensions
-        r_scaled = r.clone()
-        r_scaled[:, :self.action_dim] = r[:, :self.action_dim] * self.scale
-        return r_scaled
 
-    def inverse(self, state, action):
-        # given a state and action, we need to sample our latent so we have 
-        # a state + goal dim vector (state + action + latent), then invert that
-        # this is not correct yet
-        y = y / self.scale
-        y = 0.5 * torch.log((1 + y) / (1 - y))
-        for step in reversed(self.steps):
+        # Only apply tanh and scaling to action dimensions
+        output = x.clone()
+        output[:, :self.action_dim] = torch.tanh(x[:, :self.action_dim]) * self.scale
+        # State and latent dimensions are returned as-is (no tanh)
+
+        return output
+
+    def inverse(self, output_vector):
+        """
+        Invert the network: given output (action, state, latent), return input (state, goal)
+
+        Args:
+            output_vector: tensor of shape (batch, state_dim + goal_dim)
+                          structure: [action (action_dim) | state (state_dim) | latent (goal_dim - action_dim)]
+
+        Returns:
+            state: tensor of shape (batch, state_dim)
+            goal: tensor of shape (batch, goal_dim)
+        """
+        # Invert tanh and scaling only on action dimensions
+        # Process action part separately to avoid in-place operations
+        y_action = output_vector[:, :self.action_dim] / self.scale
+
+        # Clamp to prevent arctanh from producing inf/nan (arctanh is undefined at ±1)
+        y_action = torch.clamp(y_action, -0.9999, 0.9999)
+
+        # Inverse tanh (arctanh)
+        y_action = 0.5 * torch.log((1 + y_action) / (1 - y_action))
+
+        # Reconstruct full tensor (no in-place operation)
+        y = torch.cat([y_action, output_vector[:, self.action_dim:]], dim=1)
+
+        # Invert through the flow steps in reverse
+        for i, step in enumerate(reversed(self.steps)):
             y = step.inverse(y)
-        return y
+
+        # Split back into state and goal
+        state = y[:, :self.state_dim]
+        goal = y[:, self.state_dim:]
+
+        return state, goal

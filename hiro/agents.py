@@ -149,12 +149,14 @@ class TD3Agent(Agent):
         start_training_steps,
     ):
         super().__init__()
+        from .models import TD3Actor
         self.con = TD3Controller(
             state_dim=state_dim,
             goal_dim=goal_dim,
             action_dim=action_dim,
             scale=scale,
             model_path=model_path,
+            actor_class=TD3Actor,  # Use non-invertible actor for TD3
         )
 
         # Actor outputs state_dim + goal_dim dimensions (action + dummy), so buffer stores that
@@ -233,6 +235,10 @@ class HiroAgent(Agent):
         reward_scaling,
         policy_freq_high,
         policy_freq_low,
+        opc_method="invertible",
+        recon_weight=1.0,
+        latent_weight=1.0,
+        inverse_recon_weight=1.0,
     ):
         super().__init__()
         self.worker_goal_config = WorkerGoalConfig(observation_box)
@@ -244,6 +250,7 @@ class HiroAgent(Agent):
             goal_dim=goal_dim,
             worker_goal_config=self.worker_goal_config,
             model_path=model_path,
+            opc_method=opc_method,
             policy_freq=policy_freq_high,
         )
 
@@ -254,6 +261,9 @@ class HiroAgent(Agent):
             scale=scale_low,
             model_path=model_path,
             policy_freq=policy_freq_low,
+            recon_weight=recon_weight,
+            latent_weight=latent_weight,
+            inverse_recon_weight=inverse_recon_weight,
         )
 
         # Low controller outputs state_dim + worker_goal_dim dimensions
@@ -357,21 +367,54 @@ class HiroAgent(Agent):
         self.buf[6].append(s)
         self.buf[7].append(a)
 
+    def pretrain(self, pretrain_steps):
+        """Pre-train the reconstruction losses of the invertible network."""
+        if pretrain_steps <= 0:
+            return
+
+        print(f"\n=== Pre-training reconstruction for {pretrain_steps} steps ===\n")
+
+        for step in range(pretrain_steps):
+            losses = self.low_con.pretrain_reconstruction(self.replay_buffer_low)
+
+            if (step + 1) % 100 == 0:
+                print(f"Pretrain step {step+1}/{pretrain_steps}: " +
+                      ", ".join([f"{k}={v:.4f}" for k, v in losses.items()]))
+
+        print(f"\n=== Pre-training complete ===\n")
+
     def train(self, global_step):
         losses = {}
         td_errors = {}
 
         if global_step >= self.start_training_steps:
+            if global_step == self.start_training_steps:
+                print(f"\n=== Training started at global_step {global_step} ===\n")
+                self._train_timer_count = 0
+                self._train_low_total = 0.0
+                self._train_high_total = 0.0
+
+            t0 = time.time()
             loss, td_error = self.low_con.train(self.replay_buffer_low)
+            self._train_low_total += time.time() - t0
             losses.update(loss)
             td_errors.update(td_error)
 
             if global_step % self.train_freq == 0:
+                t0 = time.time()
                 loss, td_error = self.high_con.train(
                     self.replay_buffer_high, self.low_con
                 )
+                self._train_high_total += time.time() - t0
                 losses.update(loss)
                 td_errors.update(td_error)
+
+            self._train_timer_count += 1
+            # Print every 1000 training steps
+            if self._train_timer_count % 1000 == 0:
+                print(f"[Agent Train] Avg over last 1000 steps: low={self._train_low_total/1000:.4f}s, high={self._train_high_total/1000*self.train_freq:.4f}s")
+                self._train_low_total = 0.0
+                self._train_high_total = 0.0
 
         return losses, td_errors
 

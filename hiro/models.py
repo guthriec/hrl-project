@@ -11,15 +11,12 @@ import numpy as np
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+import time
 
 from hiro.buffers import HighReplayBuffer
 from .utils import get_tensor
+from . import utils
 from .invertible_net import InvertibleNet
-
-#device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-device = torch.device("cpu")
-
-print("Using device:", device)
 
 
 class TD3Actor(nn.Module):
@@ -64,7 +61,7 @@ class InvertibleActor(nn.Module):
         self.invertible_net = InvertibleNet(n_layers=4, goal_dim=goal_dim, state_dim=state_dim, action_dim=action_dim, hidden_dim=300)
 
     def forward(self, state, goal):
-        return self.invertible_net.forward(torch.cat([state, goal], 1))
+        return self.invertible_net.forward(state, goal)
 
 
 class TD3Critic(nn.Module):
@@ -128,16 +125,16 @@ class TD3Controller(object):
         self.policy_freq = policy_freq
         self.tau = tau
 
-        self.actor = actor_class(state_dim, goal_dim, action_dim, scale=scale).to(device)
+        self.actor = actor_class(state_dim, goal_dim, action_dim, scale=scale).to(utils.device)
         self.actor_target = actor_class(state_dim, goal_dim, action_dim, scale=scale).to(
-            device
+            utils.device
         )
         self.actor_optimizer = torch.optim.Adam(self.actor.parameters(), lr=actor_lr)
 
-        self.critic1 = TD3Critic(state_dim, goal_dim, action_dim).to(device)
-        self.critic2 = TD3Critic(state_dim, goal_dim, action_dim).to(device)
-        self.critic1_target = TD3Critic(state_dim, goal_dim, action_dim).to(device)
-        self.critic2_target = TD3Critic(state_dim, goal_dim, action_dim).to(device)
+        self.critic1 = TD3Critic(state_dim, goal_dim, action_dim).to(utils.device)
+        self.critic2 = TD3Critic(state_dim, goal_dim, action_dim).to(utils.device)
+        self.critic1_target = TD3Critic(state_dim, goal_dim, action_dim).to(utils.device)
+        self.critic2_target = TD3Critic(state_dim, goal_dim, action_dim).to(utils.device)
 
         self.critic1_optimizer = torch.optim.Adam(
             self.critic1.parameters(), lr=critic_lr
@@ -269,6 +266,8 @@ class TD3Controller(object):
                 state_end = self.action_dim + self.state_dim  # 2 + 8 = 10
                 reconstructed_state = a_full[:, state_start:state_end]
                 state_reconstruction_loss = F.mse_loss(reconstructed_state, states)
+                # if self.total_it % 10 == 0:
+                #     print(self.total_it, " ", states[0, :], " ", reconstructed_state[0, :])
 
                 # Latent regularization loss: encourage N(0, 1) distribution
                 latent_start = state_end  # 10
@@ -283,10 +282,27 @@ class TD3Controller(object):
                 latent_std_loss = ((latent_std - 1.0) ** 2).mean()  # encourage std ≈ 1
                 latent_regularization_loss = latent_mean_loss + latent_std_loss
 
-                # Combine losses (using weights for different loss components)
-                reconstruction_weight = 1.0
-                latent_weight = 0.1
-                actor_loss = actor_loss + reconstruction_weight * state_reconstruction_loss + latent_weight * latent_regularization_loss
+                # Inverse reconstruction loss: enforce cycle consistency
+                # Sample latent, construct output, invert, check if state reconstructs
+                latent_sampled = torch.randn_like(latent_vars)  # Sample from N(0,1)
+                # Construct synthetic output: [action, state, latent_sampled]
+                synthetic_output = torch.cat([
+                    a_full[:, :self.action_dim],  # actions from forward pass
+                    states,  # input state (not reconstructed)
+                    latent_sampled  # sampled latent
+                ], dim=1)
+
+                # Invert to get (state, goal)
+                state_inv, goal_inv = self.actor.invertible_net.inverse(synthetic_output)
+
+                # Both state and goal should reconstruct to inputs (cycle consistency)
+                inverse_reconstruction_loss = F.mse_loss(state_inv, states) + F.mse_loss(goal_inv, goals)
+
+                # Combine losses (using weights from LowerController)
+                actor_loss = (actor_loss +
+                             self.recon_weight * state_reconstruction_loss +
+                             self.latent_weight * latent_regularization_loss +
+                             self.inverse_recon_weight * inverse_reconstruction_loss)
 
             self.actor_optimizer.zero_grad()
             actor_loss.backward()
@@ -305,6 +321,7 @@ class TD3Controller(object):
             if self.is_invertible:
                 losses_dict["state_recon_loss_" + self.name] = state_reconstruction_loss
                 losses_dict["latent_reg_loss_" + self.name] = latent_regularization_loss
+                losses_dict["inverse_recon_loss_" + self.name] = inverse_reconstruction_loss
 
             return losses_dict, {"td_error_" + self.name: td_error}
 
@@ -350,8 +367,8 @@ class TD3Controller(object):
         return action_full.squeeze()
 
     def _sample_exploration_noise(self, actions):
-        mean = torch.zeros(actions.size()).to(device)
-        var = torch.ones(actions.size()).to(device)
+        mean = torch.zeros(actions.size()).to(utils.device)
+        var = torch.ones(actions.size()).to(utils.device)
         # expl_noise = self.expl_noise - (self.expl_noise/1200) * (self.total_it//10000)
         return torch.normal(mean, self.expl_noise * var)
 
@@ -363,6 +380,7 @@ class HigherController(TD3Controller):
         goal_dim,
         worker_goal_config,
         model_path,
+        opc_method="invertible",  # "original", "invertible", or "none"
         actor_lr=0.0001,
         critic_lr=0.001,
         expl_noise=1.0,
@@ -390,8 +408,9 @@ class HigherController(TD3Controller):
         )
         self.name = "high"
         self.worker_goal_config = worker_goal_config
+        self.opc_method = opc_method
 
-    def off_policy_corrections(
+    def off_policy_corrections_original(
         self, low_con, batch_size, sgoals, states, actions, candidate_goals=8
     ):
         first_s = [s[0] for s in states]  # First x
@@ -459,6 +478,151 @@ class HigherController(TD3Controller):
         max_indices = np.argmax(logprob, axis=-1)
 
         return candidates[np.arange(batch_size), max_indices]
+    
+    def no_off_policy_corrections(
+        self, low_con, batch_size, sgoals, states, actions, candidate_goals=8
+    ):
+        """
+        Use invertible net inversion to generate candidate subgoals.
+        Vectorized implementation.
+        """
+        original_goal = np.array(sgoals)
+        return original_goal
+    
+
+    def off_policy_corrections(
+        self, low_con, batch_size, sgoals, states, actions, candidate_goals=8
+    ):
+        """
+        Use invertible net inversion to generate candidate subgoals.
+        Vectorized implementation.
+        """
+        # original_goal = np.array(sgoals)
+        # return original_goal
+
+        t_start = time.time()
+
+        states_np = np.array(states)  # (batch_size, seq_len, state_dim)
+        actions_np = np.array(actions)  # (batch_size, seq_len, full_action_dim)
+        seq_len = states_np.shape[1]
+        action_dim = low_con.action_dim
+        # Latent dimension: output is [action | state | latent], total = state_dim + goal_dim
+        # So latent_dim = (state_dim + goal_dim) - action_dim - state_dim = goal_dim - action_dim
+        latent_dim = low_con.goal_dim - action_dim
+
+        # === Generate candidates via inversion (vectorized) ===
+        # Sample latents for all (batch, timestep) pairs
+        latents = np.random.randn(batch_size, seq_len, latent_dim)  # N(0,1)
+
+        # Get actions and states for all pairs
+        actions_env = actions_np[:, :, :action_dim]  # (batch_size, seq_len, action_dim)
+
+        # Construct output vectors: [action, state, latent]
+        # Shape: (batch_size, seq_len, action_dim + state_dim + latent_dim)
+        output_vectors = np.concatenate([actions_env, states_np, latents], axis=-1)
+
+        # Flatten to (batch_size * seq_len, state_dim + goal_dim) for batch inversion
+        output_flat = output_vectors.reshape(-1, low_con.state_dim + low_con.goal_dim)
+
+        t_prep = time.time() - t_start
+        t0 = time.time()
+
+        output_tensor = get_tensor(output_flat)
+
+        # Invert all at once
+        with torch.no_grad():
+            _, goals_inv = low_con.actor.invertible_net.inverse(output_tensor)
+
+        goals_inv_np = goals_inv.cpu().numpy()  # (batch*seq_len, goal_dim)
+
+        t_invert = time.time() - t0
+        t0 = time.time()
+
+        goals_inv_np = goals_inv_np.reshape(batch_size, seq_len, -1)  # (batch, seq_len, goal_dim)
+
+        # Check for nan/inf and clip if needed
+        if np.any(np.isnan(goals_inv_np)) or np.any(np.isinf(goals_inv_np)):
+            print("Warning: NaN or Inf detected in inverted goals, clipping...")
+            goals_inv_np = np.nan_to_num(goals_inv_np, nan=0.0, posinf=10.0, neginf=-10.0)
+
+        # Only use the first worker_goal_config.goal_dim() dimensions for subgoals
+        subgoal_dim = self.worker_goal_config.goal_dim()
+        goals_inv_np = goals_inv_np[:, :, :subgoal_dim]  # (batch, seq_len, subgoal_dim)
+
+        # Convert relative goals to original subgoals (vectorized)
+        # original_subgoal = goal_t + s_t - s_0
+        s_0 = states_np[:, 0:1, :subgoal_dim]  # (batch, 1, subgoal_dim)
+        s_t = states_np[:, :, :subgoal_dim]    # (batch, seq_len, subgoal_dim)
+
+        candidates = goals_inv_np + s_t - s_0  # (batch_size, seq_len, subgoal_dim)
+
+        # === Evaluate candidates (vectorized) ===
+        ncands = seq_len
+
+        # For each candidate, compute relative goals for all timesteps
+        # Shape expansions: candidates (batch, ncands, subgoal_dim), s_0 (batch, 1, subgoal_dim), s_t (batch, seq_len, subgoal_dim)
+        candidates_expanded = candidates[:, :, None, :]  # (batch, ncands, 1, subgoal_dim)
+        s_0_expanded = s_0[:, None, :, :]  # (batch, 1, 1, subgoal_dim)
+        s_t_expanded = s_t[:, None, :, :]  # (batch, 1, seq_len, subgoal_dim)
+
+        # relative_goal = s_0 + subgoal - s_t
+        relative_goals = s_0_expanded + candidates_expanded - s_t_expanded  # (batch, ncands, seq_len, subgoal_dim)
+
+        # Flatten for policy evaluation
+        relative_goals_flat = relative_goals.reshape(batch_size * ncands * seq_len, -1)
+        states_flat = np.tile(states_np, (ncands, 1, 1)).reshape(batch_size * ncands * seq_len, -1)
+
+        t_candidate_prep = time.time() - t0
+        t0 = time.time()
+
+        # Get policy actions
+        policy_out = low_con.policy(states_flat, relative_goals_flat)[:, :action_dim]
+        policy_actions = policy_out.reshape(batch_size, ncands, seq_len, action_dim)
+
+        t_policy_eval = time.time() - t0
+        t0 = time.time()
+
+        # Compare with true actions
+        true_actions = actions_env  # (batch, seq_len, action_dim)
+        true_actions_expanded = true_actions[:, None, :, :]  # (batch, 1, seq_len, action_dim)
+
+        difference = policy_actions - true_actions_expanded  # (batch, ncands, seq_len, action_dim)
+        difference = np.where(difference != -np.inf, difference, 0)
+
+        # Compute log probabilities
+        # Sum over timesteps and action dimensions
+        logprobs = -0.5 * np.sum(np.linalg.norm(difference, axis=-1) ** 2, axis=-1)  # (batch, ncands)
+
+        # Pick best candidate per batch
+        max_indices = np.argmax(logprobs, axis=-1)  # (batch,)
+
+        t_scoring = time.time() - t0
+
+        if not hasattr(self, '_opc_timer_count'):
+            self._opc_timer_count = 0
+            self._opc_prep = 0.0
+            self._opc_invert = 0.0
+            self._opc_cand_prep = 0.0
+            self._opc_policy = 0.0
+            self._opc_score = 0.0
+
+        self._opc_timer_count += 1
+        self._opc_prep += t_prep
+        self._opc_invert += t_invert
+        self._opc_cand_prep += t_candidate_prep
+        self._opc_policy += t_policy_eval
+        self._opc_score += t_scoring
+
+        if self._opc_timer_count % 100 == 0:
+            n = 100
+            print(f"  [OPC breakdown] prep={self._opc_prep/n:.4f}s, invert={self._opc_invert/n:.4f}s, cand_prep={self._opc_cand_prep/n:.4f}s, policy={self._opc_policy/n:.4f}s, score={self._opc_score/n:.4f}s")
+            self._opc_prep = 0.0
+            self._opc_invert = 0.0
+            self._opc_cand_prep = 0.0
+            self._opc_policy = 0.0
+            self._opc_score = 0.0
+
+        return candidates[np.arange(batch_size), max_indices]
 
     def train(self, replay_buffer: HighReplayBuffer, low_con):
         if not self._initialized:
@@ -468,16 +632,58 @@ class HigherController(TD3Controller):
             replay_buffer.sample()
         )
 
-        actions = self.off_policy_corrections(
-            low_con,
-            replay_buffer.batch_size,
-            actions.cpu().data.numpy(),
-            states_arr.cpu().data.numpy(),
-            actions_arr.cpu().data.numpy(),
-        )
+        t0 = time.time()
+        # Select off-policy correction method
+        if self.opc_method == "original":
+            actions = self.off_policy_corrections_original(
+                low_con,
+                replay_buffer.batch_size,
+                actions.cpu().data.numpy(),
+                states_arr.cpu().data.numpy(),
+                actions_arr.cpu().data.numpy(),
+            )
+        elif self.opc_method == "invertible":
+            actions = self.off_policy_corrections(
+                low_con,
+                replay_buffer.batch_size,
+                actions.cpu().data.numpy(),
+                states_arr.cpu().data.numpy(),
+                actions_arr.cpu().data.numpy(),
+            )
+        elif self.opc_method == "none":
+            actions = self.no_off_policy_corrections(
+                low_con,
+                replay_buffer.batch_size,
+                actions.cpu().data.numpy(),
+                states_arr.cpu().data.numpy(),
+                actions_arr.cpu().data.numpy(),
+            )
+        else:
+            raise ValueError(f"Unknown opc_method: {self.opc_method}. Must be 'original', 'invertible', or 'none'")
+        t_opc = time.time() - t0
 
         actions = get_tensor(actions)
-        return self._train(states, goals, actions, rewards, n_states, goals, not_done)
+
+        t0 = time.time()
+        result = self._train(states, goals, actions, rewards, n_states, goals, not_done)
+        t_train = time.time() - t0
+
+        if not hasattr(self, '_timer_count'):
+            self._timer_count = 0
+            self._timer_opc_total = 0.0
+            self._timer_train_total = 0.0
+
+        self._timer_count += 1
+        self._timer_opc_total += t_opc
+        self._timer_train_total += t_train
+
+        # Print every 100 high-level training steps
+        if self._timer_count % 100 == 0:
+            print(f"[High Controller] Avg over last 100: off_policy_corrections={self._timer_opc_total/100:.4f}s, _train={self._timer_train_total/100:.4f}s")
+            self._timer_opc_total = 0.0
+            self._timer_train_total = 0.0
+
+        return result
 
 
 class LowerController(TD3Controller):
@@ -496,6 +702,9 @@ class LowerController(TD3Controller):
         gamma=0.99,
         policy_freq=2,
         tau=0.005,
+        recon_weight=1.0,
+        latent_weight=1.0,
+        inverse_recon_weight=1.0,
     ):
         super(LowerController, self).__init__(
             state_dim,
@@ -514,6 +723,68 @@ class LowerController(TD3Controller):
             tau=tau,
         )
         self.name = "low"
+        self.recon_weight = recon_weight
+        self.latent_weight = latent_weight
+        self.inverse_recon_weight = inverse_recon_weight
+
+    def pretrain_reconstruction(self, replay_buffer):
+        """Pre-train only the reconstruction losses of the invertible network."""
+        if not self._initialized:
+            self._initialize_target_networks()
+
+        states, goals, actions, n_states, n_goals, rewards, not_done = (
+            replay_buffer.sample()
+        )
+
+        # Forward pass through invertible actor
+        a_full = self.actor(states, goals)
+
+        # Compute only reconstruction losses (no RL loss)
+        if self.is_invertible:
+            # State reconstruction loss
+            state_start = self.action_dim
+            state_end = self.action_dim + self.state_dim
+            reconstructed_state = a_full[:, state_start:state_end]
+            state_reconstruction_loss = F.mse_loss(reconstructed_state, states)
+
+            # Latent regularization loss
+            latent_start = state_end
+            latent_vars = a_full[:, latent_start:]
+            latent_mean = latent_vars.mean(dim=0)
+            latent_std = latent_vars.std(dim=0)
+            latent_mean_loss = (latent_mean ** 2).mean()
+            latent_std_loss = ((latent_std - 1.0) ** 2).mean()
+            latent_regularization_loss = latent_mean_loss + latent_std_loss
+
+            # Inverse reconstruction loss (cycle consistency)
+            latent_sampled = torch.randn_like(latent_vars)
+            synthetic_output = torch.cat([
+                a_full[:, :self.action_dim],
+                states,
+                latent_sampled
+            ], dim=1)
+            state_inv, goal_inv = self.actor.invertible_net.inverse(synthetic_output)
+            inverse_reconstruction_loss = F.mse_loss(state_inv, states) + F.mse_loss(goal_inv, goals)
+
+            # Total reconstruction loss
+
+            total_loss = (self.recon_weight * state_reconstruction_loss +
+                         self.latent_weight * latent_regularization_loss +
+                         self.inverse_recon_weight * inverse_reconstruction_loss)
+
+            # Backprop and update
+            self.actor_optimizer.zero_grad()
+            total_loss.backward()
+            self.actor_optimizer.step()
+
+            return {
+                "pretrain_state_recon": state_reconstruction_loss.item(),
+                "pretrain_latent_reg": latent_regularization_loss.item(),
+                "pretrain_inverse_recon": inverse_reconstruction_loss.item(),
+                "pretrain_total": total_loss.item()
+            }
+        else:
+            return {}
 
     def train(self, replay_buffer):
         if not self._initialized:
