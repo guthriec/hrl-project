@@ -524,7 +524,7 @@ class HigherController(TD3Controller):
     ):
         """
         Use invertible net inversion to generate candidate subgoals.
-        Generates candidates using: original goal, latent=0, and sampled latents.
+        Inverts all timesteps in the sequence with latent=0.
         """
         t_start = time.time()
 
@@ -540,32 +540,17 @@ class HigherController(TD3Controller):
         latent_dim = low_con.goal_dim - action_dim
 
         # === Generate candidates via inversion ===
-        # Use first timestep for inversion
-        s_0 = states_np[:, 0, :]  # (batch_size, state_dim)
-        a_0 = actions_np[:, 0, :action_dim]  # (batch_size, action_dim)
+        # Invert at ALL timesteps with latent=0
+        latents = np.zeros((batch_size, seq_len, latent_dim))
 
-        # Generate candidates with different latents:
-        # 1 with latent=0 + (candidate_goals-2) with sampled latents + 1 original goal = candidate_goals total
-        n_sampled = candidate_goals - 2
+        # Get actions and states for all pairs
+        actions_env = actions_np[:, :, :action_dim]  # (batch_size, seq_len, action_dim)
 
-        # Create latent vectors: [zero] + [sampled_1, ..., sampled_n]
-        latents_list = [np.zeros((batch_size, latent_dim))]
-        for _ in range(n_sampled):
-            latents_list.append(np.random.randn(batch_size, latent_dim))
+        # Construct output vectors: [action, state, latent]
+        # Shape: (batch_size, seq_len, action_dim + state_dim + latent_dim)
+        output_vectors = np.concatenate([actions_env, states_np, latents], axis=-1)
 
-        # Stack all latents: (batch_size, n_latent_candidates, latent_dim)
-        latents_stacked = np.stack(latents_list, axis=1)  # (batch, candidate_goals-1, latent_dim)
-        n_latent_candidates = latents_stacked.shape[1]
-
-        # Construct output vectors for all latent candidates: [action, state, latent]
-        # Tile action and state for each latent candidate
-        actions_tiled = np.tile(a_0[:, None, :], (1, n_latent_candidates, 1))  # (batch, n_latent_candidates, action_dim)
-        states_tiled = np.tile(s_0[:, None, :], (1, n_latent_candidates, 1))  # (batch, n_latent_candidates, state_dim)
-
-        output_vectors = np.concatenate([actions_tiled, states_tiled, latents_stacked], axis=-1)
-        # (batch, n_latent_candidates, action_dim + state_dim + latent_dim)
-
-        # Flatten for batch inversion
+        # Flatten to (batch_size * seq_len, state_dim + goal_dim) for batch inversion
         output_flat = output_vectors.reshape(-1, low_con.state_dim + low_con.goal_dim)
 
         t_prep = time.time() - t_start
@@ -577,36 +562,38 @@ class HigherController(TD3Controller):
         with torch.no_grad():
             _, goals_inv = low_con.actor.invertible_net.inverse(output_tensor)
 
-        goals_inv_np = goals_inv.cpu().numpy()  # (batch*n_latent_candidates, goal_dim)
+        goals_inv_np = goals_inv.cpu().numpy()  # (batch*seq_len, goal_dim)
 
         t_invert = time.time() - t0
         t0 = time.time()
 
-        goals_inv_np = goals_inv_np.reshape(batch_size, n_latent_candidates, -1)  # (batch, n_latent_candidates, goal_dim)
-        goals_inv_np = goals_inv_np[:, :, :subgoal_dim]  # Only use subgoal dimensions
+        goals_inv_np = goals_inv_np.reshape(batch_size, seq_len, -1)  # (batch, seq_len, goal_dim)
 
         # Check for nan/inf and filter
         if np.any(np.isnan(goals_inv_np)) or np.any(np.isinf(goals_inv_np)):
             print("Warning: NaN or Inf detected in inverted goals, replacing with zeros...")
             goals_inv_np = np.nan_to_num(goals_inv_np, nan=0.0, posinf=0.0, neginf=0.0)
 
-        # At t=0, inverted relative_goal equals the subgoal (no conversion needed)
-        # relative_goal_0 = s_0 + subgoal - s_0 = subgoal
-        inverted_candidates = goals_inv_np  # (batch, n_latent_candidates, subgoal_dim)
+        # Only use the first subgoal_dim dimensions
+        goals_inv_np = goals_inv_np[:, :, :subgoal_dim]  # (batch, seq_len, subgoal_dim)
 
-        # Filter unrealistic goals: clip to reasonable bounds (3x goal scale)
-        goal_scale = self.worker_goal_config.goal_scale()[:subgoal_dim]
-        #inverted_candidates = np.clip(inverted_candidates, -3 * goal_scale, 3 * goal_scale)
+        # Convert relative goals to absolute subgoals
+        # At timestep t: relative_goal_t = s_0 + subgoal - s_t
+        # So: subgoal = relative_goal_t + s_t - s_0
+        s_0 = states_np[:, 0:1, :subgoal_dim]  # (batch, 1, subgoal_dim)
+        s_t = states_np[:, :, :subgoal_dim]    # (batch, seq_len, subgoal_dim)
+
+        inverted_candidates = goals_inv_np + s_t - s_0  # (batch_size, seq_len, subgoal_dim)
 
         # Add original goal as first candidate
-        # candidates shape: (batch, candidate_goals, subgoal_dim)
+        # candidates shape: (batch, 1 + seq_len, subgoal_dim)
         candidates = np.concatenate([
             original_goals[:, None, :],  # (batch, 1, subgoal_dim)
-            inverted_candidates  # (batch, n_latent_candidates, subgoal_dim)
+            inverted_candidates  # (batch, seq_len, subgoal_dim)
         ], axis=1)
 
         # === Evaluate candidates (vectorized) ===
-        ncands = candidate_goals
+        ncands = 1 + seq_len  # original goal + one per timestep
         s_t = states_np[:, :, :subgoal_dim]  # (batch, seq_len, subgoal_dim)
         s_0_for_scoring = states_np[:, 0:1, :subgoal_dim]  # (batch, 1, subgoal_dim)
 
