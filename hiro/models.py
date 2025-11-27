@@ -47,18 +47,21 @@ class InvertibleActor(nn.Module):
     """Invertible Actor using normalizing flows - used by low-level controller"""
     def __init__(self, state_dim, goal_dim, action_dim, scale=None):
         super(InvertibleActor, self).__init__()
-        if scale is None:
-            scale = torch.ones(action_dim)
-        else:
-            scale = get_tensor(scale)
-        self.scale = nn.Parameter(scale.clone().detach().float(), requires_grad=False)
 
         # Track dimensions for slicing
         self.action_dim = action_dim
         self.state_dim = state_dim
         self.goal_dim = goal_dim
 
-        self.invertible_net = InvertibleNet(n_layers=4, goal_dim=goal_dim, state_dim=state_dim, action_dim=action_dim, hidden_dim=300)
+        # Pass scale directly to InvertibleNet (it will process it)
+        self.invertible_net = InvertibleNet(
+            n_layers=4,
+            goal_dim=goal_dim,
+            state_dim=state_dim,
+            action_dim=action_dim,
+            hidden_dim=300,
+            scale=scale
+        )
 
     def forward(self, state, goal):
         return self.invertible_net.forward(state, goal)
@@ -125,10 +128,9 @@ class TD3Controller(object):
         self.policy_freq = policy_freq
         self.tau = tau
 
+        # Create actor
         self.actor = actor_class(state_dim, goal_dim, action_dim, scale=scale).to(utils.device)
-        self.actor_target = actor_class(state_dim, goal_dim, action_dim, scale=scale).to(
-            utils.device
-        )
+        self.actor_target = actor_class(state_dim, goal_dim, action_dim, scale=scale).to(utils.device)
         self.actor_optimizer = torch.optim.Adam(self.actor.parameters(), lr=actor_lr)
 
         self.critic1 = TD3Critic(state_dim, goal_dim, action_dim).to(utils.device)
@@ -207,8 +209,9 @@ class TD3Controller(object):
                     -self.noise_clip, self.noise_clip
                 )
                 n_actions_full[:, :self.action_dim] = n_actions_full[:, :self.action_dim] + noise
-                n_actions_full[:, :self.action_dim] = torch.min(n_actions_full[:, :self.action_dim], self.actor.scale)
-                n_actions_full[:, :self.action_dim] = torch.max(n_actions_full[:, :self.action_dim], -self.actor.scale)
+                scale_tensor = get_tensor(self.scale)
+                n_actions_full[:, :self.action_dim] = torch.min(n_actions_full[:, :self.action_dim], scale_tensor)
+                n_actions_full[:, :self.action_dim] = torch.max(n_actions_full[:, :self.action_dim], -scale_tensor)
                 # Slice to get just actions for critic
                 n_actions = n_actions_full[:, :self.action_dim]
             else:
@@ -217,8 +220,9 @@ class TD3Controller(object):
                     -self.noise_clip, self.noise_clip
                 )
                 n_actions_full = n_actions_full + noise
-                n_actions_full = torch.min(n_actions_full, self.actor.scale)
-                n_actions_full = torch.max(n_actions_full, -self.actor.scale)
+                scale_tensor = get_tensor(self.scale)
+                n_actions_full = torch.min(n_actions_full, scale_tensor)
+                n_actions_full = torch.max(n_actions_full, -scale_tensor)
                 n_actions = n_actions_full
 
             target_Q1 = self.critic1_target(n_states, n_goals, n_actions)
@@ -281,6 +285,32 @@ class TD3Controller(object):
                 latent_mean_loss = (latent_mean ** 2).mean()  # encourage mean ≈ 0
                 latent_std_loss = ((latent_std - 1.0) ** 2).mean()  # encourage std ≈ 1
                 latent_regularization_loss = latent_mean_loss + latent_std_loss
+
+                # Debug: Check inverse quality every 1000 iterations
+                if self.total_it % 1000 == 0:
+                    with torch.no_grad():
+                        # Test inverse with latent=0
+                        # Use first sample from batch
+                        test_state = states[0:1]  # (1, state_dim)
+                        test_goal = goals[0:1]    # (1, goal_dim)
+                        test_output = a_full[0:1]  # (1, state_dim + goal_dim)
+
+                        # Replace latent with zeros
+                        test_output_zero_latent = test_output.clone()
+                        test_output_zero_latent[:, latent_start:] = 0
+
+                        # Invert to recover state and goal
+                        state_inv, goal_inv = self.actor.invertible_net.inverse(test_output_zero_latent)
+
+                        # Compute errors
+                        state_error = (state_inv - test_state).abs().mean().item()
+                        goal_error = (goal_inv - test_goal).abs().mean().item()
+
+                        print(f"\n[Inverse Quality Check @ iter {self.total_it}]")
+                        print(f"  Original goal: {test_goal[0].cpu().numpy()}")
+                        print(f"  Inverted goal: {goal_inv[0].cpu().numpy()}")
+                        print(f"  Goal error (MAE): {goal_error:.6f}")
+                        print(f"  State error (MAE): {state_error:.6f}\n")
 
                 # Inverse reconstruction loss: enforce cycle consistency
                 # Sample latent from N(0,1) to ensure robustness across the distribution
@@ -348,18 +378,17 @@ class TD3Controller(object):
         goal = get_tensor(goal)
         action_full = self.actor(state, goal)
 
+        scale_tensor = get_tensor(self.scale)
         if self.is_invertible:
             # Add noise and clamp only the action dimensions
             action_full[:, :self.action_dim] = action_full[:, :self.action_dim] + self._sample_exploration_noise(action_full[:, :self.action_dim])
-            # TODO: this should use the worker goal box instead of the scale
-            action_full[:, :self.action_dim] = torch.min(action_full[:, :self.action_dim], self.actor.scale)
-            action_full[:, :self.action_dim] = torch.max(action_full[:, :self.action_dim], -self.actor.scale)
+            action_full[:, :self.action_dim] = torch.min(action_full[:, :self.action_dim], scale_tensor)
+            action_full[:, :self.action_dim] = torch.max(action_full[:, :self.action_dim], -scale_tensor)
         else:
             # Add noise and clamp all outputs
             action_full = action_full + self._sample_exploration_noise(action_full)
-            # TODO: this should use the worker goal box instead of the scale
-            action_full = torch.min(action_full, self.actor.scale)
-            action_full = torch.max(action_full, -self.actor.scale)
+            action_full = torch.min(action_full, scale_tensor)
+            action_full = torch.max(action_full, -scale_tensor)
 
         if to_numpy:
             return action_full.cpu().data.numpy().squeeze()
@@ -495,33 +524,48 @@ class HigherController(TD3Controller):
     ):
         """
         Use invertible net inversion to generate candidate subgoals.
-        Vectorized implementation.
+        Generates candidates using: original goal, latent=0, and sampled latents.
         """
-        # original_goal = np.array(sgoals)
-        # return original_goal
-
         t_start = time.time()
 
         states_np = np.array(states)  # (batch_size, seq_len, state_dim)
         actions_np = np.array(actions)  # (batch_size, seq_len, full_action_dim)
+        original_goals = np.array(sgoals)  # (batch_size, subgoal_dim)
         seq_len = states_np.shape[1]
         action_dim = low_con.action_dim
+        subgoal_dim = self.worker_goal_config.goal_dim()
+
         # Latent dimension: output is [action | state | latent], total = state_dim + goal_dim
         # So latent_dim = (state_dim + goal_dim) - action_dim - state_dim = goal_dim - action_dim
         latent_dim = low_con.goal_dim - action_dim
 
-        # === Generate candidates via inversion (vectorized) ===
-        # Use zero latents (mean of N(0,1)) for deterministic inversion
-        latents = np.zeros((batch_size, seq_len, latent_dim))
+        # === Generate candidates via inversion ===
+        # Use first timestep for inversion
+        s_0 = states_np[:, 0, :]  # (batch_size, state_dim)
+        a_0 = actions_np[:, 0, :action_dim]  # (batch_size, action_dim)
 
-        # Get actions and states for all pairs
-        actions_env = actions_np[:, :, :action_dim]  # (batch_size, seq_len, action_dim)
+        # Generate candidates with different latents:
+        # 1 with latent=0 + (candidate_goals-2) with sampled latents + 1 original goal = candidate_goals total
+        n_sampled = candidate_goals - 2
 
-        # Construct output vectors: [action, state, latent]
-        # Shape: (batch_size, seq_len, action_dim + state_dim + latent_dim)
-        output_vectors = np.concatenate([actions_env, states_np, latents], axis=-1)
+        # Create latent vectors: [zero] + [sampled_1, ..., sampled_n]
+        latents_list = [np.zeros((batch_size, latent_dim))]
+        for _ in range(n_sampled):
+            latents_list.append(np.random.randn(batch_size, latent_dim))
 
-        # Flatten to (batch_size * seq_len, state_dim + goal_dim) for batch inversion
+        # Stack all latents: (batch_size, n_latent_candidates, latent_dim)
+        latents_stacked = np.stack(latents_list, axis=1)  # (batch, candidate_goals-1, latent_dim)
+        n_latent_candidates = latents_stacked.shape[1]
+
+        # Construct output vectors for all latent candidates: [action, state, latent]
+        # Tile action and state for each latent candidate
+        actions_tiled = np.tile(a_0[:, None, :], (1, n_latent_candidates, 1))  # (batch, n_latent_candidates, action_dim)
+        states_tiled = np.tile(s_0[:, None, :], (1, n_latent_candidates, 1))  # (batch, n_latent_candidates, state_dim)
+
+        output_vectors = np.concatenate([actions_tiled, states_tiled, latents_stacked], axis=-1)
+        # (batch, n_latent_candidates, action_dim + state_dim + latent_dim)
+
+        # Flatten for batch inversion
         output_flat = output_vectors.reshape(-1, low_con.state_dim + low_con.goal_dim)
 
         t_prep = time.time() - t_start
@@ -533,36 +577,43 @@ class HigherController(TD3Controller):
         with torch.no_grad():
             _, goals_inv = low_con.actor.invertible_net.inverse(output_tensor)
 
-        goals_inv_np = goals_inv.cpu().numpy()  # (batch*seq_len, goal_dim)
+        goals_inv_np = goals_inv.cpu().numpy()  # (batch*n_latent_candidates, goal_dim)
 
         t_invert = time.time() - t0
         t0 = time.time()
 
-        goals_inv_np = goals_inv_np.reshape(batch_size, seq_len, -1)  # (batch, seq_len, goal_dim)
+        goals_inv_np = goals_inv_np.reshape(batch_size, n_latent_candidates, -1)  # (batch, n_latent_candidates, goal_dim)
+        goals_inv_np = goals_inv_np[:, :, :subgoal_dim]  # Only use subgoal dimensions
 
-        # Check for nan/inf and clip if needed
+        # Check for nan/inf and filter
         if np.any(np.isnan(goals_inv_np)) or np.any(np.isinf(goals_inv_np)):
-            print("Warning: NaN or Inf detected in inverted goals, clipping...")
-            goals_inv_np = np.nan_to_num(goals_inv_np, nan=0.0, posinf=10.0, neginf=-10.0)
+            print("Warning: NaN or Inf detected in inverted goals, replacing with zeros...")
+            goals_inv_np = np.nan_to_num(goals_inv_np, nan=0.0, posinf=0.0, neginf=0.0)
 
-        # Only use the first worker_goal_config.goal_dim() dimensions for subgoals
-        subgoal_dim = self.worker_goal_config.goal_dim()
-        goals_inv_np = goals_inv_np[:, :, :subgoal_dim]  # (batch, seq_len, subgoal_dim)
+        # At t=0, inverted relative_goal equals the subgoal (no conversion needed)
+        # relative_goal_0 = s_0 + subgoal - s_0 = subgoal
+        inverted_candidates = goals_inv_np  # (batch, n_latent_candidates, subgoal_dim)
 
-        # Convert relative goals to original subgoals (vectorized)
-        # original_subgoal = goal_t + s_t - s_0
-        s_0 = states_np[:, 0:1, :subgoal_dim]  # (batch, 1, subgoal_dim)
-        s_t = states_np[:, :, :subgoal_dim]    # (batch, seq_len, subgoal_dim)
+        # Filter unrealistic goals: clip to reasonable bounds (3x goal scale)
+        goal_scale = self.worker_goal_config.goal_scale()[:subgoal_dim]
+        #inverted_candidates = np.clip(inverted_candidates, -3 * goal_scale, 3 * goal_scale)
 
-        candidates = goals_inv_np + s_t - s_0  # (batch_size, seq_len, subgoal_dim)
+        # Add original goal as first candidate
+        # candidates shape: (batch, candidate_goals, subgoal_dim)
+        candidates = np.concatenate([
+            original_goals[:, None, :],  # (batch, 1, subgoal_dim)
+            inverted_candidates  # (batch, n_latent_candidates, subgoal_dim)
+        ], axis=1)
 
         # === Evaluate candidates (vectorized) ===
-        ncands = seq_len
+        ncands = candidate_goals
+        s_t = states_np[:, :, :subgoal_dim]  # (batch, seq_len, subgoal_dim)
+        s_0_for_scoring = states_np[:, 0:1, :subgoal_dim]  # (batch, 1, subgoal_dim)
 
         # For each candidate, compute relative goals for all timesteps
         # Shape expansions: candidates (batch, ncands, subgoal_dim), s_0 (batch, 1, subgoal_dim), s_t (batch, seq_len, subgoal_dim)
         candidates_expanded = candidates[:, :, None, :]  # (batch, ncands, 1, subgoal_dim)
-        s_0_expanded = s_0[:, None, :, :]  # (batch, 1, 1, subgoal_dim)
+        s_0_expanded = s_0_for_scoring[:, None, :, :]  # (batch, 1, 1, subgoal_dim)
         s_t_expanded = s_t[:, None, :, :]  # (batch, 1, seq_len, subgoal_dim)
 
         # relative_goal = s_0 + subgoal - s_t
@@ -583,8 +634,8 @@ class HigherController(TD3Controller):
         t0 = time.time()
 
         # Compare with true actions
-        true_actions = actions_env  # (batch, seq_len, action_dim)
-        true_actions_expanded = true_actions[:, None, :, :]  # (batch, 1, seq_len, action_dim)
+        actions_env = actions_np[:, :, :action_dim]  # (batch, seq_len, action_dim)
+        true_actions_expanded = actions_env[:, None, :, :]  # (batch, 1, seq_len, action_dim)
 
         difference = policy_actions - true_actions_expanded  # (batch, ncands, seq_len, action_dim)
         difference = np.where(difference != -np.inf, difference, 0)
@@ -616,6 +667,9 @@ class HigherController(TD3Controller):
         if self._opc_timer_count % 100 == 0:
             n = 100
             print(f"  [OPC breakdown] prep={self._opc_prep/n:.4f}s, invert={self._opc_invert/n:.4f}s, cand_prep={self._opc_cand_prep/n:.4f}s, policy={self._opc_policy/n:.4f}s, score={self._opc_score/n:.4f}s")
+            print(f"  [OPC candidates] batch[0] original goal: {original_goals[0]}")
+            print(f"  [OPC candidates] batch[0] all candidates:\n{candidates[0]}")
+            print(f"  [OPC candidates] batch[0] selected index: {max_indices[0]}, selected: {candidates[0, max_indices[0]]}")
             self._opc_prep = 0.0
             self._opc_invert = 0.0
             self._opc_cand_prep = 0.0

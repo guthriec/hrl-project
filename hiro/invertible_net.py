@@ -108,7 +108,7 @@ class InvertibleNet(nn.Module):
 
         Args:
             state: tensor of shape (batch, state_dim)
-            goal: tensor of shape (batch, goal_dim)
+            goal: tensor of shape (batch, goal_dim) - relative goals (unbounded)
 
         Returns:
             output: tensor of shape (batch, state_dim + goal_dim)
