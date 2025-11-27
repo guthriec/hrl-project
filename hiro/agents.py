@@ -159,11 +159,11 @@ class TD3Agent(Agent):
             actor_class=TD3Actor,  # Use non-invertible actor for TD3
         )
 
-        # Actor outputs state_dim + goal_dim dimensions (action + dummy), so buffer stores that
+        # TD3Actor only outputs actions (not full vector like invertible actor)
         self.replay_buffer = ReplayBuffer(
             state_dim=state_dim,
             goal_dim=goal_dim,
-            action_dim=state_dim + goal_dim,  # Store full actor output
+            action_dim=action_dim,  # Store just environment actions
             buffer_size=buffer_size,
             batch_size=batch_size,
         )

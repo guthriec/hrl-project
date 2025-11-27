@@ -283,8 +283,8 @@ class TD3Controller(object):
                 latent_regularization_loss = latent_mean_loss + latent_std_loss
 
                 # Inverse reconstruction loss: enforce cycle consistency
-                # Sample latent, construct output, invert, check if state reconstructs
-                latent_sampled = torch.randn_like(latent_vars)  # Sample from N(0,1)
+                # Sample latent from N(0,1) to ensure robustness across the distribution
+                latent_sampled = torch.randn_like(latent_vars)
                 # Construct synthetic output: [action, state, latent_sampled]
                 synthetic_output = torch.cat([
                     a_full[:, :self.action_dim],  # actions from forward pass
@@ -295,8 +295,8 @@ class TD3Controller(object):
                 # Invert to get (state, goal)
                 state_inv, goal_inv = self.actor.invertible_net.inverse(synthetic_output)
 
-                # Both state and goal should reconstruct to inputs (cycle consistency)
-                inverse_reconstruction_loss = F.mse_loss(state_inv, states) + F.mse_loss(goal_inv, goals)
+                # Only goal should reconstruct (state already handled by forward reconstruction)
+                inverse_reconstruction_loss = F.mse_loss(goal_inv, goals)
 
                 # Combine losses (using weights from LowerController)
                 actor_loss = (actor_loss +
@@ -511,8 +511,8 @@ class HigherController(TD3Controller):
         latent_dim = low_con.goal_dim - action_dim
 
         # === Generate candidates via inversion (vectorized) ===
-        # Sample latents for all (batch, timestep) pairs
-        latents = np.random.randn(batch_size, seq_len, latent_dim)  # N(0,1)
+        # Use zero latents (mean of N(0,1)) for deterministic inversion
+        latents = np.zeros((batch_size, seq_len, latent_dim))
 
         # Get actions and states for all pairs
         actions_env = actions_np[:, :, :action_dim]  # (batch_size, seq_len, action_dim)
@@ -747,16 +747,21 @@ class LowerController(TD3Controller):
             reconstructed_state = a_full[:, state_start:state_end]
             state_reconstruction_loss = F.mse_loss(reconstructed_state, states)
 
-            # Latent regularization loss
+            # Latent regularization loss: encourage N(0, 1) distribution
             latent_start = state_end
             latent_vars = a_full[:, latent_start:]
+
+            # Compute batch statistics
             latent_mean = latent_vars.mean(dim=0)
             latent_std = latent_vars.std(dim=0)
+
+            # Regularize to N(0, 1)
             latent_mean_loss = (latent_mean ** 2).mean()
             latent_std_loss = ((latent_std - 1.0) ** 2).mean()
             latent_regularization_loss = latent_mean_loss + latent_std_loss
 
             # Inverse reconstruction loss (cycle consistency)
+            # Sample latent from N(0,1) to ensure robustness across the distribution
             latent_sampled = torch.randn_like(latent_vars)
             synthetic_output = torch.cat([
                 a_full[:, :self.action_dim],
@@ -764,7 +769,8 @@ class LowerController(TD3Controller):
                 latent_sampled
             ], dim=1)
             state_inv, goal_inv = self.actor.invertible_net.inverse(synthetic_output)
-            inverse_reconstruction_loss = F.mse_loss(state_inv, states) + F.mse_loss(goal_inv, goals)
+            # Only goal should reconstruct (state already handled by forward reconstruction)
+            inverse_reconstruction_loss = F.mse_loss(goal_inv, goals)
 
             # Total reconstruction loss
 
