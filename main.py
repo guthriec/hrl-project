@@ -1,3 +1,25 @@
+# python main.py --train --recon_weight 1.0 --latent_weight 1.0 --inverse_recon_weight 1.0 --env=SimpleCarMaze --exp_name hiro_inv_test_1_1_1_old_sample --device=cuda --pretrain_steps=0
+# python main.py --train --recon_weight 0.0 --latent_weight 0.0 --inverse_recon_weight 0.0 --env=SimpleCarMaze --exp_name hiro_orig --device=cuda --pretrain_steps=0 --opc_method=original
+# python main.py --train --recon_weight 1.0 --latent_weight 1.0 --inverse_recon_weight 1.0 --env=SimpleCarMaze --exp_name hiro_orig_with_losses --device=cuda --pretrain_steps=0 --opc_method=original
+# python main.py --train --recon_weight 0.0 --latent_weight 0.0 --inverse_recon_weight 0.0 --env=SimpleCarMaze --exp_name hiro_orig --device=cuda --pretrain_steps=0 --opc_method=none
+# for i in {1..10}; do
+#   python main.py --train --recon_weight 1.0 --latent_weight 1.0 --inverse_recon_weight 1.0 \
+#     --env=SimpleCarMaze --exp_name hiro_inv_test_1_1_1_old_sample_run${i} \
+#     --device=cuda --pretrain_steps=0
+
+#   python main.py --train --recon_weight 0.0 --latent_weight 0.0 --inverse_recon_weight 0.0 \
+#     --env=SimpleCarMaze --exp_name hiro_orig_run${i} \
+#     --device=cuda --pretrain_steps=0 --opc_method=original
+
+#   python main.py --train --recon_weight 1.0 --latent_weight 1.0 --inverse_recon_weight 1.0 \
+#     --env=SimpleCarMaze --exp_name hiro_orig_with_losses_run${i} \
+#     --device=cuda --pretrain_steps=0 --opc_method=original
+
+#   python main.py --train --recon_weight 0.0 --latent_weight 0.0 --inverse_recon_weight 0.0 \
+#     --env=SimpleCarMaze --exp_name hiro_orig_none_run${i} \
+#     --device=cuda --pretrain_steps=0 --opc_method=none
+# done
+
 import os
 import argparse
 import numpy as np
@@ -151,6 +173,7 @@ class Trainer:
             agent = copy.deepcopy(self.agent)
             rewards, success_rate = agent.evaluate_policy(
                 create_eval_maze_env(self.args.env, render_mode=("human" if self.args.render else None)),
+                eval_episodes=int(self.args.eval_episodes),
                 render=self.args.render,
                 save_video=self.args.save_video,
                 sleep=self.args.sleep,
@@ -196,13 +219,13 @@ if __name__ == "__main__":
     parser.add_argument("--render", action="store_true")
     parser.add_argument("--save_video", action="store_true")
     parser.add_argument("--sleep", type=float, default=-1)
-    parser.add_argument("--eval_episodes", type=float, default=5, help="Unit = Episode")
+    parser.add_argument("--eval_episodes", type=float, default=20, help="Unit = Episode")
     parser.add_argument("--env", default="PointMazeEasy", type=str)
     parser.add_argument("--td3", action="store_true")
     parser.add_argument("--device", default="cpu", type=str, help="Device to use: 'cpu', 'cuda', or 'cuda:0', etc.")
 
     # Training
-    parser.add_argument("--num_episode", default=4000, type=int)
+    parser.add_argument("--num_episode", default=2000, type=int)
     parser.add_argument(
         "--start_training_steps", default=2500, type=int, help="Unit = Global Step"
     )
