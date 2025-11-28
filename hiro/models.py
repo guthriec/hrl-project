@@ -289,50 +289,63 @@ class TD3Controller(object):
                 # Debug: Check inverse quality every 1000 iterations
                 if self.total_it % 1000 == 0:
                     with torch.no_grad():
-                        # Test inverse with latent=0
+                        # Test action reconstruction quality
                         # Use first sample from batch
                         test_state = states[0:1]  # (1, state_dim)
-                        test_goal = goals[0:1]    # (1, goal_dim)
-                        test_output = a_full[0:1]  # (1, state_dim + goal_dim)
+                        test_action = actions[0:1, :self.action_dim]  # (1, action_dim)
 
-                        # Replace latent with zeros
-                        test_output_zero_latent = test_output.clone()
-                        test_output_zero_latent[:, latent_start:] = 0
+                        # Construct output with latent=0
+                        latent_dim = self.goal_dim - self.action_dim
+                        latent_zero = torch.zeros(1, latent_dim).to(utils.device)
+                        test_output = torch.cat([test_action, test_state, latent_zero], dim=1)
 
-                        # Invert to recover state and goal
-                        state_inv, goal_inv = self.actor.invertible_net.inverse(test_output_zero_latent)
+                        # Invert to find a goal
+                        state_inv, goal_inv = self.actor.invertible_net.inverse(test_output)
+
+                        # Forward to reconstruct action
+                        output_fwd = self.actor.invertible_net.forward(test_state, goal_inv)
+                        action_recon = output_fwd[:, :self.action_dim]
 
                         # Compute errors
+                        action_error = (action_recon - test_action).abs().mean().item()
                         state_error = (state_inv - test_state).abs().mean().item()
-                        goal_error = (goal_inv - test_goal).abs().mean().item()
 
                         print(f"\n[Inverse Quality Check @ iter {self.total_it}]")
-                        print(f"  Original goal: {test_goal[0].cpu().numpy()}")
-                        print(f"  Inverted goal: {goal_inv[0].cpu().numpy()}")
-                        print(f"  Goal error (MAE): {goal_error:.6f}")
+                        print(f"  Original action: {test_action[0].cpu().numpy()}")
+                        print(f"  Reconstructed action: {action_recon[0].cpu().numpy()}")
+                        print(f"  Action error (MAE): {action_error:.6f}")
                         print(f"  State error (MAE): {state_error:.6f}\n")
 
-                # Inverse reconstruction loss: enforce cycle consistency
-                # Sample latent from N(0,1) to ensure robustness across the distribution
+                # Action reconstruction loss: verify inverse produces goals that explain observed actions
+                # For a given (state, action) pair, invert to find a compatible goal,
+                # then verify that forwarding (state, goal) produces the original action
                 latent_sampled = torch.randn_like(latent_vars)
-                # Construct synthetic output: [action, state, latent_sampled]
+
+                # Get actions from replay buffer (not from forward pass)
+                action_from_buffer = actions[:, :self.action_dim]
+
+                # Construct output vector: [action, state, latent_sampled]
                 synthetic_output = torch.cat([
-                    a_full[:, :self.action_dim],  # actions from forward pass
-                    states,  # input state (not reconstructed)
+                    action_from_buffer,  # observed action from replay buffer
+                    states,  # observed state
                     latent_sampled  # sampled latent
                 ], dim=1)
 
-                # Invert to get (state, goal)
+                # Invert to find a goal that could have produced this action
                 state_inv, goal_inv = self.actor.invertible_net.inverse(synthetic_output)
 
-                # Only goal should reconstruct (state already handled by forward reconstruction)
-                inverse_reconstruction_loss = F.mse_loss(goal_inv, goals)
+                # Forward to verify: (state, goal_inv) should produce action_from_buffer
+                output_fwd = self.actor.invertible_net.forward(states, goal_inv)
+                action_recon = output_fwd[:, :self.action_dim]
+
+                # Loss: reconstructed action should match observed action
+                action_reconstruction_loss = F.mse_loss(action_recon, action_from_buffer)
 
                 # Combine losses (using weights from LowerController)
                 actor_loss = (actor_loss +
                              self.recon_weight * state_reconstruction_loss +
                              self.latent_weight * latent_regularization_loss +
-                             self.inverse_recon_weight * inverse_reconstruction_loss)
+                             self.inverse_recon_weight * action_reconstruction_loss)
 
             self.actor_optimizer.zero_grad()
             actor_loss.backward()
@@ -351,7 +364,7 @@ class TD3Controller(object):
             if self.is_invertible:
                 losses_dict["state_recon_loss_" + self.name] = state_reconstruction_loss
                 losses_dict["latent_reg_loss_" + self.name] = latent_regularization_loss
-                losses_dict["inverse_recon_loss_" + self.name] = inverse_reconstruction_loss
+                losses_dict["action_recon_loss_" + self.name] = action_reconstruction_loss
 
             return losses_dict, {"td_error_" + self.name: td_error}
 
@@ -801,23 +814,35 @@ class LowerController(TD3Controller):
             latent_std_loss = ((latent_std - 1.0) ** 2).mean()
             latent_regularization_loss = latent_mean_loss + latent_std_loss
 
-            # Inverse reconstruction loss (cycle consistency)
-            # Sample latent from N(0,1) to ensure robustness across the distribution
+            # Action reconstruction loss
+            # Sample latent from N(0,1)
             latent_sampled = torch.randn_like(latent_vars)
+
+            # Get actions from replay buffer
+            action_from_buffer = actions[:, :self.action_dim]
+
+            # Construct output vector: [action, state, latent_sampled]
             synthetic_output = torch.cat([
-                a_full[:, :self.action_dim],
+                action_from_buffer,
                 states,
                 latent_sampled
             ], dim=1)
+
+            # Invert to find a goal that could have produced this action
             state_inv, goal_inv = self.actor.invertible_net.inverse(synthetic_output)
-            # Only goal should reconstruct (state already handled by forward reconstruction)
-            inverse_reconstruction_loss = F.mse_loss(goal_inv, goals)
+
+            # Forward to verify: (state, goal_inv) should produce action_from_buffer
+            output_fwd = self.actor.invertible_net.forward(states, goal_inv)
+            action_recon = output_fwd[:, :self.action_dim]
+
+            # Loss: reconstructed action should match observed action
+            action_reconstruction_loss = F.mse_loss(action_recon, action_from_buffer)
 
             # Total reconstruction loss
 
             total_loss = (self.recon_weight * state_reconstruction_loss +
                          self.latent_weight * latent_regularization_loss +
-                         self.inverse_recon_weight * inverse_reconstruction_loss)
+                         self.inverse_recon_weight * action_reconstruction_loss)
 
             # Backprop and update
             self.actor_optimizer.zero_grad()
@@ -827,7 +852,7 @@ class LowerController(TD3Controller):
             return {
                 "pretrain_state_recon": state_reconstruction_loss.item(),
                 "pretrain_latent_reg": latent_regularization_loss.item(),
-                "pretrain_inverse_recon": inverse_reconstruction_loss.item(),
+                "pretrain_action_recon": action_reconstruction_loss.item(),
                 "pretrain_total": total_loss.item()
             }
         else:

@@ -19,6 +19,9 @@
 #     --env=SimpleCarMaze --exp_name hiro_orig_none_run${i} \
 #     --device=cuda --pretrain_steps=0 --opc_method=none
 # done
+# for i in {1..10}; do
+#   python main.py --train --recon_weight 1.0 --latent_weight 1.0 --inverse_recon_weight 1.0 --env=SimpleCarMaze --exp_name hiro_inv_test_1_1_1_action_reconstruct_loss_run${i} --device=cuda --pretrain_steps=0
+# done
 
 import os
 import argparse
