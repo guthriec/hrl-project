@@ -69,17 +69,13 @@ class PointGoalConfig(WorkerGoalConfig):
 
     def worker_reward(self, s, sg, n_s):
         abs_s = s[: sg.shape[0]] + sg
-        return -np.sqrt(np.sum((abs_s - n_s[: sg.shape[0]]) ** 2))
+        prev_dist = np.sqrt(np.sum((abs_s - s[: sg.shape[0]]) ** 2))
+        next_dist = np.sqrt(np.sum((abs_s - n_s[: sg.shape[0]]) ** 2))
+        res = prev_dist - 0.99*next_dist
+        return res
     
     def improvement(self, start, end, abs_goal, subgoal):
         return np.linalg.norm(start-abs_goal) - np.linalg.norm(end - abs_goal)
-
-    # # Use potential-based reward
-    # def worker_reward(self, s, sg, n_s):
-    #     abs_sg = s[: sg.shape[0]] + sg
-    #     prev_dist = np.sqrt(np.sum((abs_sg - s[: sg.shape[0]]) ** 2))
-    #     new_dist = np.sqrt(np.sum((abs_sg - n_s[: sg.shape[0]]) ** 2))
-    #     return prev_dist - new_dist
 
     def off_policy_corrections(
         self, low_con, batch_size, sgoals, states, actions, candidate_goals=8
@@ -152,7 +148,7 @@ class PointGoalConfig(WorkerGoalConfig):
 class EllipsoidGoalConfig(WorkerGoalConfig):
     def __init__(self, observation_box: spaces.Box):
         super(EllipsoidGoalConfig, self).__init__(observation_box)
-        self.max_radius = 1.5 # () * self.obs_shape[0]
+        self.max_radius = 4.0 # () * self.obs_shape[0]
         self.max_log = np.log(self.max_radius)
 
     def sample_goal(self):
@@ -180,10 +176,14 @@ class EllipsoidGoalConfig(WorkerGoalConfig):
         scaled_diffs = self.scaled_difference(abs_sg, log_radii, n_s)
         prev_dist = np.sqrt(np.sum(prev_scaled_diffs**2))
         new_dist = np.sqrt(np.sum(scaled_diffs**2))
-        return prev_dist-new_dist
+        res = prev_dist-0.99*new_dist
+        assert abs(res) < 50
+        return res
 
     def scaled_difference(self, abs_point_sg, log_radii, s):
-        return (s[: abs_point_sg.shape[0]] - abs_point_sg) / np.exp(log_radii + self.max_log/2)
+        # Ensure exponent argument is >= 0 to keep denominator >= 1
+        exp_arg = np.maximum(log_radii, 0)
+        return (s[: abs_point_sg.shape[0]] - abs_point_sg) / np.exp(exp_arg)
 
     def subgoal_transition(self, s, sg, n_s):
         n_sg = sg.copy()
@@ -229,13 +229,15 @@ class EllipsoidGoalConfig(WorkerGoalConfig):
             mask = np.abs(scaled_difference) > thresh
             if np.any(mask):
                 # Bump all offending radii at once (vectorized)
-                log_radii[mask] += 0.3
+                log_radii[mask] += 0.5
             else:
                 # If nothing exceeds the per-dim threshold, bump the worst offender
                 idx = int(np.argmax(np.abs(scaled_difference)))
-                log_radii[idx] += 0.3
+                log_radii[idx] += 0.5
         # Kinda hacky but there needs to be some pressure for stricter goals.
         log_radii -= 0.01
+        log_radii = np.maximum(log_radii, -self.max_log)  # Ensure log_radii is not less than -self.max_log
+        assert np.all(log_radii >= -self.max_log), f"log_radii min {log_radii.min()} < {-self.max_log}"
         if should_print:
             print("Adjusted log radii: ", log_radii, flush=True)
 

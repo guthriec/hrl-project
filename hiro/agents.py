@@ -1,6 +1,7 @@
 from hiro.utils import _is_update
 import numpy as np
 import time
+import copy
 from .models import TD3Controller, HigherController, LowerController
 from hiro.buffers import ReplayBuffer, LowReplayBuffer, HighReplayBuffer
 from hiro.worker_goal_config import PointGoalConfig, WorkerGoalConfig
@@ -10,11 +11,31 @@ class Agent:
     def __init__(self, worker_goal_config):
         self.worker_goal_config = worker_goal_config
         self.worker_goal = tuple()
+        self.logger = None
         self.last_worker_goal = tuple()
         self.last_worker_start_state = None
         self.last_worker_end_state = None
         self.last_subgoal = None
         self.worker_subgoal = None
+
+    def __deepcopy__(self, memo):
+        cls = self.__class__
+        result = cls.__new__(cls)
+        memo[id(self)] = result
+        for k, v in self.__dict__.items():
+            if k == 'logger':
+                setattr(result, k, None)  # Exclude logger from deep copy
+            else:
+                setattr(result, k, copy.deepcopy(v, memo))
+        return result
+
+    def set_logger(self, logger):
+        self.logger = logger
+        # Propagate to controllers if present
+        if hasattr(self, "low_con") and self.low_con is not None:
+            self.low_con.logger = logger
+        if hasattr(self, "high_con") and self.high_con is not None:
+            self.high_con.logger = logger
 
     def set_final_goal(self, fg):
         # print("Final goal: ", fg)
@@ -38,8 +59,63 @@ class Agent:
     def end_episode(self, episode, logger=None):
         raise NotImplementedError
 
+    def _update_worker_goals(self, s, sg, global_step):
+        self.last_worker_goal = self.worker_goal
+        self.last_subgoal = self.worker_subgoal
+        self.last_worker_start_state = self.last_worker_end_state
+        self.last_worker_end_state = s
+        self.worker_goal = s + self.worker_goal_config.ideal_state_change(sg)
+        # print("New worker goal: ", self.worker_goal)
+        self.worker_subgoal = sg
+        self._log_worker_goals(to_console=False, global_step=global_step)
+    
+    def _log_worker_goals(self, to_console, global_step):
+        if (
+            len(self.last_worker_goal) > 1
+            and self.last_worker_end_state is not None
+            and self.last_worker_start_state is not None
+        ):
+            subgoal_error = np.sqrt(
+                np.sum(
+                    np.square(
+                        self.last_worker_goal[:2]
+                        - self.last_worker_end_state[:2]
+                    )
+                )
+            )
+            subgoal_total_improvement = self.worker_goal_config.improvement(
+                self.last_worker_start_state,
+                self.last_worker_end_state,
+                self.last_worker_goal,
+                self.last_subgoal
+            )
+            subgoal_start_error = np.sqrt(
+                np.sum(
+                    np.square(
+                        self.last_worker_goal[:2]
+                        - self.last_worker_start_state[:2]
+                    )
+                )
+            )
+            if not to_console:
+                if self.logger:
+                    # log
+                    self.logger.write("reward/Subgoal Improvement", subgoal_total_improvement, global_step)
+                return
+            print(
+                "Last SG, Last State: (%6.2f, %6.2f), (%6.2f, %6.2f)  SG Improvement:%5.5f \n"
+                % (
+                    self.last_worker_goal[0],
+                    self.last_worker_goal[1],
+                    self.last_worker_end_state[0],
+                    self.last_worker_end_state[1],
+                    subgoal_total_improvement,
+                ),
+                flush=True
+            )
+
     def evaluate_policy(
-        self, env, eval_episodes=10, render=False, save_video=False, sleep=-1
+        self, env, eval_episodes=50, render=False, save_video=False, sleep=-1
     ):
         if save_video:
             env = RecordVideo(
@@ -88,44 +164,7 @@ class Agent:
                     ),
                     flush=True
                 )
-                if (
-                    len(self.last_worker_goal) > 1
-                    and self.last_worker_end_state is not None
-                    and self.last_worker_start_state is not None
-                ):
-                    subgoal_error = np.sqrt(
-                        np.sum(
-                            np.square(
-                                self.last_worker_goal[:2]
-                                - self.last_worker_end_state[:2]
-                            )
-                        )
-                    )
-                    subgoal_total_improvement = self.worker_goal_config.improvement(
-                        self.last_worker_start_state,
-                        self.last_worker_end_state,
-                        self.last_worker_goal,
-                        self.last_subgoal
-                    )
-                    subgoal_start_error = np.sqrt(
-                        np.sum(
-                            np.square(
-                                self.last_worker_goal[:2]
-                                - self.last_worker_start_state[:2]
-                            )
-                        )
-                    )
-                    print(
-                        "Last SG, Last State: (%6.2f, %6.2f), (%6.2f, %6.2f)  SG Improvement:%5.5f \n"
-                        % (
-                            self.last_worker_goal[0],
-                            self.last_worker_goal[1],
-                            self.last_worker_end_state[0],
-                            self.last_worker_end_state[1],
-                            subgoal_total_improvement,
-                        ),
-                        flush=True
-                    )
+                self._log_worker_goals(to_console=True, global_step=step)
                 rewards.append(reward_episode_sum)
                 if "success" in info:
                     success += 1 if info["success"] else 0
@@ -175,7 +214,7 @@ class TD3Agent(Agent):
         if explore:
             if global_step < self.start_training_steps:
                 a = env.action_space.sample()
-            elif True: # global_step < 500_000:
+            elif True: #global_step < 300_000:
                 a = self._choose_action_with_noise(s)
             else:
                 a = self._choose_action(s)
@@ -306,19 +345,13 @@ class HiroAgent(Agent):
         if explore:
             if global_step < self.start_training_steps:
                 n_sg = self.worker_goal_config.sample_goal()
-                self.last_worker_goal = self.worker_goal
-                self.last_subgoal = self.worker_subgoal
-                self.last_worker_start_state = self.last_worker_end_state
-                self.last_worker_end_state = s
-                self.worker_goal = s + self.worker_goal_config.ideal_state_change(n_sg)
-                # print("New worker goal: ", self.worker_goal)
-                self.worker_subgoal = n_sg
+                self._update_worker_goals(s, n_sg, global_step)
             else:
-                n_sg = self._choose_subgoal_with_noise(step, s, self.sg, n_s)
+                n_sg = self._choose_subgoal_with_noise(step, s, self.sg, n_s, global_step)
                 # assert abs(n_sg[8]) < 20
 
         else:
-            n_sg = self._choose_subgoal(step, s, self.sg, n_s)
+            n_sg = self._choose_subgoal(step, s, self.sg, n_s, global_step)
             # assert abs(n_sg[8]) < 20
 
         # n_sg = np.array([0.0, 16.0, 0.0, 0.0, 0.0, 0.0]) - s[:-1]  # Hardcoded goal
@@ -331,7 +364,10 @@ class HiroAgent(Agent):
 
     def append(self, step, s, a, n_s, r, d):
         self.sr = self.worker_goal_config.worker_reward(s, self.sg, n_s)
-
+        assert(np.all(self.sg[s.size:] > -2*np.log(8.0)))
+        if self.sr < -10:
+            print("Tiny reward, what happened?")
+        
         # Low Replay Buffer
         self.replay_buffer_low.append(s, self.sg, a, n_s, self.n_sg, self.sr, float(d))
 
@@ -377,14 +413,10 @@ class HiroAgent(Agent):
     def _choose_action_with_noise(self, s, sg):
         return self.low_con.policy_with_noise(s, sg)
 
-    def _choose_subgoal_with_noise(self, step, s, sg, n_s):
+    def _choose_subgoal_with_noise(self, step, s, sg, n_s, global_step):
         if step % self.buffer_freq == 0:  # Should be zero
             sg = self.high_con.policy_with_noise(s, self.fg)
-            self.last_worker_goal = self.worker_goal
-            self.last_subgoal = self.worker_subgoal
-            self.last_worker_start_state = self.last_worker_end_state
-            self.last_worker_end_state = s
-            self.worker_goal = s + self.worker_goal_config.ideal_state_change(sg)
+            self._update_worker_goals(s, sg, global_step)
             # print("New worker goal: ", self.worker_goal)
             self.worker_subgoal = sg
         else:
@@ -395,16 +427,10 @@ class HiroAgent(Agent):
     def _choose_action(self, s, sg):
         return self.low_con.policy(s, sg)
 
-    def _choose_subgoal(self, step, s, sg, n_s):
+    def _choose_subgoal(self, step, s, sg, n_s, global_step):
         if step % self.buffer_freq == 0:
             sg = self.high_con.policy(s, self.fg)
-            self.last_worker_goal = self.worker_goal
-            self.last_subgoal = self.worker_subgoal
-            self.last_worker_start_state = self.last_worker_end_state
-            self.last_worker_end_state = s
-            self.worker_goal = s + self.worker_goal_config.ideal_state_change(sg)
-            # print("New worker goal: ", self.worker_goal)
-            self.worker_subgoal = sg
+            self._update_worker_goals(s, sg, global_step)
         else:
             sg = self.worker_goal_config.subgoal_transition(s, sg, n_s)
 
@@ -416,6 +442,8 @@ class HiroAgent(Agent):
         self.sg = self.n_sg
 
     def end_episode(self, episode, logger=None):
+        if self.episode_subreward < -30:
+            print("Tiny reward, what happened?")
         if logger:
             # log
             logger.write("reward/Intrinsic Reward", self.episode_subreward, episode)

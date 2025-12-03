@@ -77,11 +77,16 @@ class CarWrapper(gym.Wrapper):
         # 5. Custom Reward & Obs Construction
         obs = self._get_obs(obs)
 
-        distance = np.linalg.norm(obs["achieved_goal"] - obs["desired_goal"])
-        if terminated and "success" in info and info["success"]:
-            reward = 1000
-        else:
-            reward = self.prev_distance - distance  # Positive if getting closer
+        distance = np.linalg.norm(obs["observation"][:2] - obs["desired_goal"])
+        assert(np.array_equal(obs["observation"][:2], obs["achieved_goal"]))
+        is_success = "success" in info and info["success"]
+        is_success = is_success or distance < 0.5
+        # if terminated and is_success:
+        #     reward = 200
+        #     info["success"] = True
+        # else:
+        #     reward = self.prev_distance - 0.99*distance  # Positive if getting closer
+        reward = -distance
         self.prev_distance = distance
 
         return obs, reward, terminated or truncated, info

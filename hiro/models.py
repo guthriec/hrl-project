@@ -11,6 +11,7 @@ import numpy as np
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+import copy
 
 from hiro.buffers import HighReplayBuffer
 from .utils import get_tensor
@@ -18,6 +19,19 @@ from .utils import get_tensor
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 print("Using device:", device, flush=True)
+
+
+def _orthogonal_init(module, gain_hidden=nn.init.calculate_gain("relu"), gain_out=1.0):
+    if isinstance(module, nn.Linear):
+        # Choose gain based on whether it's an output layer by size heuristic
+        is_output = (
+            module.out_features == 1
+            or module.out_features == 300
+            and module.in_features != 300
+        )
+        gain = gain_out if is_output else gain_hidden
+        nn.init.orthogonal_(module.weight, gain=gain)
+        nn.init.zeros_(module.bias)
 
 
 class TD3Actor(nn.Module):
@@ -32,6 +46,12 @@ class TD3Actor(nn.Module):
         self.l1 = nn.Linear(state_dim + goal_dim, 300)
         self.l2 = nn.Linear(300, 300)
         self.l3 = nn.Linear(300, action_dim)
+        # Orthogonal init: ReLU gain for hidden, smaller gain for tanh output
+        self.apply(
+            lambda m: _orthogonal_init(
+                m, gain_hidden=nn.init.calculate_gain("relu"), gain_out=0.01
+            )
+        )
 
     def forward(self, state, goal):
         a = F.relu(self.l1(torch.cat([state, goal], 1)))
@@ -50,6 +70,12 @@ class TD3Critic(nn.Module):
         self.l4 = nn.Linear(state_dim + goal_dim + action_dim, 300)
         self.l5 = nn.Linear(300, 300)
         self.l6 = nn.Linear(300, 1)
+        # Orthogonal init: ReLU gain for hidden, linear output uses gain 1.0
+        self.apply(
+            lambda m: _orthogonal_init(
+                m, gain_hidden=nn.init.calculate_gain("relu"), gain_out=1.0
+            )
+        )
 
     def forward(self, state, goal, action):
         sa = torch.cat([state, goal, action], 1)
@@ -70,14 +96,16 @@ class TD3Controller(object):
         scale,
         model_path,
         actor_lr=0.0001,
-        critic_lr=0.001,
+        critic_lr=0.0005,
         expl_noise=0.1,
         policy_noise=0.2,
         noise_clip=0.5,
         gamma=0.99,
         policy_freq=2,
         tau=0.005,
+        expl_noise_decay=-1,
     ):
+        print("Initializing with critic LR: ", critic_lr, " actor LR: ", actor_lr)
         self.name = "td3"
         self.scale = scale
         self.model_path = model_path
@@ -111,6 +139,9 @@ class TD3Controller(object):
 
         self._initialized = False
         self.total_it = 0
+        self.logger = None  # optional external logger
+        self.critic_grad_clip = 1.0  # max L2 norm for critic gradients
+        self.expl_noise_decay = expl_noise_decay
 
     def _initialize_target_networks(self):
         self._update_target_network(self.critic1_target, self.critic1, 1.0)
@@ -161,8 +192,29 @@ class TD3Controller(object):
             torch.load(os.path.join(model_path, self.name + "_critic2.h5"))
         )
 
-    def _train(self, states, goals, actions, rewards, n_states, n_goals, not_done):
+    def _train(
+        self,
+        states,
+        goals,
+        actions,
+        rewards,
+        n_states,
+        n_goals,
+        not_done,
+        p_indices,
+        buffer,
+    ):
         self.total_it += 1
+
+        # Log norms of states and goals
+        if self.logger is not None:
+            states_norm = states.norm(2, dim=1).mean().item()
+            goals_norm = goals.norm(2, dim=1).mean().item()
+            max_reward = rewards.max().item()
+            self.logger.write(f"norm/goals_{self.name}", goals_norm, self.total_it)
+            # Log max reward
+            self.logger.write(f"norm/max_reward_{self.name}", max_reward, self.total_it)
+
         with torch.no_grad():
             noise = (torch.randn_like(actions) * self.policy_noise).clamp(
                 -self.noise_clip, self.noise_clip
@@ -184,36 +236,55 @@ class TD3Controller(object):
         critic2_loss = F.smooth_l1_loss(current_Q2, target_Q_detached)
         critic_loss = critic1_loss + critic2_loss
 
-        td_error = (target_Q_detached - current_Q1).mean().cpu().data.numpy()
+        all_td_errors = target_Q_detached - current_Q1
+        td_error = all_td_errors.mean().cpu().data.numpy()
+
+        buffer.update_priorities(
+            p_indices, torch.abs(all_td_errors).cpu().data.numpy().flatten()
+        )
 
         self.critic1_optimizer.zero_grad()
         self.critic2_optimizer.zero_grad()
         critic_loss.backward()
+        # Log critic grad norm (L2 over grads that exist)
+        if self.logger is not None:
+            total_sq = 0.0
+            for p in list(self.critic1.parameters()) + list(self.critic2.parameters()):
+                if p.grad is not None:
+                    g = p.grad.detach()
+                    total_sq += float(g.norm(2).item() ** 2)
+            grad_norm = total_sq**0.5
+            # Use controller's iteration counter as step
+            self.logger.write(f"grad/critic_norm_{self.name}", grad_norm, self.total_it)
+        # Clip critic gradients before stepping
+        # torch.nn.utils.clip_grad_norm_(
+        #     self.critic1.parameters(), max_norm=self.critic_grad_clip
+        # )
+        # torch.nn.utils.clip_grad_norm_(
+        #     self.critic2.parameters(), max_norm=self.critic_grad_clip
+        # )
         self.critic1_optimizer.step()
         self.critic2_optimizer.step()
 
         if self.total_it % self.policy_freq == 0:
             a = self.actor(states, goals)
-            # Use both critics (should already be using min, but enforce it)
             Q1 = self.critic1(states, goals, a)
-            Q2 = self.critic2(states, goals, a)
-            actor_loss = -torch.min(Q1, Q2).mean()  # Use minimum of both critics
+            actor_loss = -Q1.mean()
 
             self.actor_optimizer.zero_grad()
             actor_loss.backward()
-            # Optional: Add gradient clipping
-            torch.nn.utils.clip_grad_norm_(self.actor.parameters(), max_norm=1.0)
+            # # Optional: Add gradient clipping
+            # torch.nn.utils.clip_grad_norm_(self.actor.parameters(), max_norm=1.0)
             self.actor_optimizer.step()
+
+            self._update_target_network(self.critic1_target, self.critic1, self.tau)
+            self._update_target_network(self.critic2_target, self.critic2, self.tau)
+            self._update_target_network(self.actor_target, self.actor, self.tau)
 
             return {
                 "actor_loss_" + self.name: actor_loss,
                 "critic_loss_" + self.name: critic_loss,
             }, {"td_error_" + self.name: td_error}
-
-        # Move target updates outside the policy_freq block
-        self._update_target_network(self.critic1_target, self.critic1, self.tau)
-        self._update_target_network(self.critic2_target, self.critic2, self.tau)
-        self._update_target_network(self.actor_target, self.actor, self.tau)
 
         return {"critic_loss_" + self.name: critic_loss}, {
             "td_error_" + self.name: td_error
@@ -221,6 +292,10 @@ class TD3Controller(object):
 
     def train(self, replay_buffer, iterations=1):
         states, goals, actions, n_states, rewards, not_done = replay_buffer.sample()
+        # Assert no reward is larger than 100
+        assert (
+            rewards.max().item() <= 100
+        ), f"Reward exceeds 100: {rewards.max().item()}"
         return self._train(states, goals, actions, rewards, n_states, goals, not_done)
 
     def policy(self, state, goal, to_numpy=True):
@@ -252,9 +327,27 @@ class TD3Controller(object):
         mean = torch.zeros(actions.size()).to(device)
         var = self.actor.scale
         # var = torch.ones(actions.size()).to(device)
-        # expl_noise = self.expl_noise - (self.expl_noise/1200) * (self.total_it//10000)
-        res = torch.normal(mean, self.expl_noise * var)
+        expl_noise = self.expl_noise
+        if self.expl_noise_decay > 0:
+            expl_noise = max(
+                1e-8,
+                expl_noise
+                - (self.expl_noise / (400 * self.expl_noise_decay))
+                * (self.total_it // 1000),
+            )
+        res = torch.normal(mean, expl_noise * var)
         return res
+
+    def __deepcopy__(self, memo):
+        cls = self.__class__
+        result = cls.__new__(cls)
+        memo[id(self)] = result
+        for k, v in self.__dict__.items():
+            if k == "logger":
+                setattr(result, k, None)  # ignore logger in deep copy
+            else:
+                setattr(result, k, copy.deepcopy(v, memo))
+        return result
 
 
 class HigherController(TD3Controller):
@@ -264,14 +357,15 @@ class HigherController(TD3Controller):
         goal_dim,
         worker_goal_config,
         model_path,
-        actor_lr=0.0001,
-        critic_lr=0.001,
-        expl_noise=1.0,
-        policy_noise=0.2,
+        actor_lr=0.01,
+        critic_lr=0.2,
+        expl_noise=2.0,
+        policy_noise=1.0,
         noise_clip=0.5,
         gamma=0.99,
         policy_freq=2,
         tau=0.005,
+        expl_noise_decay=5.0,
     ):
         super(HigherController, self).__init__(
             state_dim,
@@ -295,9 +389,21 @@ class HigherController(TD3Controller):
         if not self._initialized:
             self._initialize_target_networks()
 
-        states, goals, actions, n_states, rewards, not_done, states_arr, actions_arr = (
-            replay_buffer.sample()
-        )
+        (
+            states,
+            goals,
+            actions,
+            n_states,
+            rewards,
+            not_done,
+            states_arr,
+            actions_arr,
+            p_indices,
+            p_weights,
+        ) = replay_buffer.sample()
+
+        # if (rewards.max().item() >= 100):
+        #     print("Revisiting success!")
 
         actions = self.worker_goal_config.off_policy_corrections(
             low_con,
@@ -308,7 +414,17 @@ class HigherController(TD3Controller):
         )
 
         actions = get_tensor(actions)
-        return self._train(states, goals, actions, rewards, n_states, goals, not_done)
+        return self._train(
+            states,
+            goals,
+            actions,
+            rewards,
+            n_states,
+            goals,
+            not_done,
+            p_indices,
+            replay_buffer,
+        )
 
 
 class LowerController(TD3Controller):
@@ -319,14 +435,15 @@ class LowerController(TD3Controller):
         action_dim,
         scale,
         model_path,
-        actor_lr=0.0001,
-        critic_lr=0.001,
-        expl_noise=0.2,
+        actor_lr=0.0005,
+        critic_lr=0.0002,
+        expl_noise=0.5,
         policy_noise=0.2,
         noise_clip=0.5,
         gamma=0.99,
         policy_freq=2,
         tau=0.005,
+        expl_noise_decay=1.0,
     ):
         super(LowerController, self).__init__(
             state_dim,
@@ -342,6 +459,7 @@ class LowerController(TD3Controller):
             gamma,
             policy_freq,
             tau,
+            expl_noise_decay,
         )
         self.name = "low"
 
@@ -349,10 +467,26 @@ class LowerController(TD3Controller):
         if not self._initialized:
             self._initialize_target_networks()
 
-        states, sgoals, actions, n_states, n_sgoals, rewards, not_done = (
-            replay_buffer.sample()
-        )
+        (
+            states,
+            sgoals,
+            actions,
+            n_states,
+            n_sgoals,
+            rewards,
+            not_done,
+            p_indices,
+            p_weights,
+        ) = replay_buffer.sample()
 
         return self._train(
-            states, sgoals, actions, rewards, n_states, n_sgoals, not_done
+            states,
+            sgoals,
+            actions,
+            rewards,
+            n_states,
+            n_sgoals,
+            not_done,
+            p_indices,
+            replay_buffer,
         )

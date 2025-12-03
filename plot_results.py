@@ -6,21 +6,23 @@ from pathlib import Path
 
 # Define experiment groups
 experiments = {
-    'Invertible OPC + Losses': 'hiro_inv_test_1_1_1_old_sample_run',
-    'Original HIRO': 'hiro_orig_run',
-    'Original HIRO + Losses': 'hiro_orig_with_losses_run',
-    'No OPC': 'hiro_orig_none_run',
+    'Ellipsoid with max radius 16': 'gc-16.0-12',
+    'Ellipsoid with max radius 8': 'gc-8.0-12',
+    'Ellipsoid with max radius 4': 'gc-4.0-12',
+    'Ellipsoid with max radius 2': 'gc-2.0-12',
+    'Ellipsoid with max radius 1': 'gc-1.0-12',
+    'No OPC': 'no-correction-12',
 }
 
 log_dir = Path('log')
-num_runs = 10
+num_runs = 2
 
 def load_experiment_data(exp_prefix, num_runs):
     """Load and aggregate data from multiple runs of the same experiment."""
     all_runs = []
 
     for i in range(1, num_runs + 1):
-        exp_name = f"{exp_prefix}{i}"
+        exp_name = f"{exp_prefix}-{i}"
         csv_path = log_dir / exp_name / 'eval_metrics.csv'
 
         if csv_path.exists():
@@ -76,23 +78,24 @@ for name, prefix in experiments.items():
         print(f"  Loaded {data['num_runs']} runs")
 
 # Create plots
-fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 5))
+# fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(14, 5))
+fig, ax2 = plt.subplots(1, 1, figsize=(10, 6))
 
 # Plot 1: Success Rate
-for name, data in results.items():
-    episodes = data['episodes']
-    mean = data['success_mean']
-    std = data['success_std']
-
-    ax1.plot(episodes, mean, label=name, linewidth=2)
-    ax1.fill_between(episodes, mean - std, mean + std, alpha=0.2)
-
-ax1.set_xlabel('Episode', fontsize=12)
-ax1.set_ylabel('Success Rate', fontsize=12)
-ax1.set_title('Evaluation Success Rate', fontsize=14, fontweight='bold')
-ax1.legend(fontsize=10)
-ax1.grid(True, alpha=0.3)
-ax1.set_ylim([0, 1])
+# for name, data in results.items():
+#     episodes = data['episodes']
+#     mean = data['success_mean']
+#     std = data['success_std']
+#
+#     ax1.plot(episodes, mean, label=name, linewidth=2)
+#     ax1.fill_between(episodes, mean - std, mean + std, alpha=0.2)
+#
+# ax1.set_xlabel('Episode', fontsize=12)
+# ax1.set_ylabel('Success Rate', fontsize=12)
+# ax1.set_title('Evaluation Success Rate', fontsize=14, fontweight='bold')
+# ax1.legend(fontsize=10)
+# ax1.grid(True, alpha=0.3)
+# ax1.set_ylim([0, 1])
 
 # Plot 2: Reward
 for name, data in results.items():

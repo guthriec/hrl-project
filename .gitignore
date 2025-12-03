@@ -7,3 +7,4 @@ test/*
 log/
 experiments.csv
 MUJOCO_LOG.TXT
+out/

@@ -8,7 +8,7 @@ from hiro import worker_goal_config
 from envs.create_maze_env import create_maze_env, create_eval_maze_env
 from hiro.utils import Logger, _is_update, record_experience_to_csv, listdirs
 from hiro.agents import HiroAgent, TD3Agent
-
+import csv
 
 def run_evaluation(args, env, agent):
     agent.load(args.load_episode)
@@ -38,6 +38,11 @@ class Trainer:
         self.agent = agent
         log_path = os.path.join(args.log_path, experiment_name)
         self.logger = Logger(log_path=log_path)
+        # Initialize CSV logging for eval metrics
+        self.eval_csv_path = os.path.join(log_path, 'eval_metrics.csv')
+        with open(self.eval_csv_path, 'w', newline='') as f:
+            writer = csv.DictWriter(f, fieldnames=['episode', 'success_rate', 'reward_mean', 'reward_std', 'reward_median'])
+            writer.writeheader()
 
     def train(self):
         global_step = 0
@@ -51,6 +56,7 @@ class Trainer:
             step = 0
             episode_reward = 0
 
+            self.agent.set_logger(self.logger)
             self.agent.set_final_goal(fg)
 
             while not done:
@@ -104,7 +110,27 @@ class Trainer:
                 save_video=self.args.save_video,
                 sleep=self.args.sleep,
             )
+            
+            # Log evaluation metrics to TensorBoard
+            reward_mean = np.mean(rewards)
+            reward_std = np.std(rewards)
+            reward_median = np.median(rewards)
+
+            self.logger.write("eval/Reward_Mean", reward_mean, e)
+            self.logger.write("eval/Reward_Std", reward_std, e)
+            self.logger.write("eval/Reward_Median", reward_median, e)
+
             self.logger.write("Success Rate", success_rate, e)
+            # Log evaluation metrics to CSV
+            with open(self.eval_csv_path, 'a', newline='') as f:
+                writer = csv.DictWriter(f, fieldnames=['episode', 'success_rate', 'reward_mean', 'reward_std', 'reward_median'])
+                writer.writerow({
+                    'episode': e,
+                    'success_rate': success_rate,
+                    'reward_mean': reward_mean,
+                    'reward_std': reward_std,
+                    'reward_median': reward_median
+                })
 
             print(
                 "episode:{episode:05d}, mean:{mean:.2f}, std:{std:.2f}, median:{median:.2f}, success:{success:.2f}".format(
@@ -157,8 +183,8 @@ if __name__ == "__main__":
     parser.add_argument("--batch_size", default=100, type=int)
     parser.add_argument("--buffer_freq", default=10, type=int)
     parser.add_argument("--train_freq", default=10, type=int)
-    parser.add_argument("--reward_scaling", default=0.1, type=float)
-    parser.add_argument("--expl_noise", default=2.0, type=float)
+    parser.add_argument("--reward_scaling", default=1.0, type=float)
+    parser.add_argument("--expl_noise", default=0.2, type=float)
     args = parser.parse_args()
 
     # Select or Generate a name for this experiment
