@@ -1,0 +1,18 @@
+Using device: cpu
+no-correction-fin5
+Goal, Curr: (-1.15,  0.79), (  1.40,   0.73)   Error: 2.55
+Last SG, Last State: ( -0.60,  -1.36), (  1.40,   0.68)  SG Improvement:-0.00113 
+
+Goal, Curr: (-1.24,  0.93), (  1.40,   1.40)   Error: 2.68
+Last SG, Last State: ( -0.60,  -0.60), (  1.40,   1.40)  SG Improvement:0.00000 
+
+Goal, Curr: (-0.93,  1.07), (  1.40,   0.85)   Error: 2.34
+Last SG, Last State: ( -0.60,  -1.24), (  1.40,   0.81)  SG Improvement:-0.03380 
+
+Goal, Curr: (-1.07,  1.22), (  1.40,   0.80)   Error: 2.50
+Last SG, Last State: ( -0.60,  -1.30), (  1.40,   0.75)  SG Improvement:-0.02062 
+
+Goal, Curr: (-1.18,  0.87), (  1.40,   0.63)   Error: 2.59
+Last SG, Last State: ( -0.60,  -1.46), (  1.40,   0.58)  SG Improvement:-0.02967 
+
+mean:7.23,             std:0.96,             median:7.26,             success:0.00

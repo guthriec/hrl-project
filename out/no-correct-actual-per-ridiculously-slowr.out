@@ -1,0 +1,4 @@
+Using device: cpu
+no-correct-actual-per-ridiculously-slowr
+Initializing with critic LR:  0.05  actor LR:  0.0001
+Initializing with critic LR:  0.001  actor LR:  0.0005

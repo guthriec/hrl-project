@@ -1,0 +1,3931 @@
+Using device: cpu
+gc-1.0-tg10-neg-goals
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Goal, Curr: (-1.19,  1.19), (  0.01,  -0.60)   Error: 2.16
+Last SG, Last State: (  0.81,   0.43), ( -0.00,  -0.60)  SG Improvement:0.10372 
+
+Goal, Curr: (-0.99,  1.22), (  0.01,  -0.60)   Error: 2.08
+Last SG, Last State: (  0.89,   0.35), (  0.02,  -0.60)  SG Improvement:0.08197 
+
+Goal, Curr: (-1.06,  0.99), ( -0.01,  -0.60)   Error: 1.90
+Last SG, Last State: (  0.94,   0.26), (  0.01,  -0.60)  SG Improvement:0.06592 
+
+Goal, Curr: (-0.83,  0.84), (  0.00,  -0.60)   Error: 1.67
+Last SG, Last State: (  0.81,   0.08), (  0.01,  -0.60)  SG Improvement:0.10395 
+
+Goal, Curr: (-1.01,  1.09), ( -0.01,  -0.60)   Error: 1.97
+Last SG, Last State: (  0.95,   0.29), (  0.01,  -0.60)  SG Improvement:0.06511 
+
+Goal, Curr: (-0.77,  0.78), ( -0.01,  -0.60)   Error: 1.57
+Last SG, Last State: (  0.85,   0.00), (  0.01,  -0.60)  SG Improvement:0.06629 
+
+Goal, Curr: (-0.83,  1.20), ( -0.00,  -0.60)   Error: 1.98
+Last SG, Last State: (  0.92,   0.26), (  0.02,  -0.60)  SG Improvement:0.07668 
+
+Goal, Curr: (-1.22,  0.79), (  0.01,  -0.60)   Error: 1.85
+Last SG, Last State: (  0.87,   0.24), (  0.02,  -0.60)  SG Improvement:0.09337 
+
+Goal, Curr: (-0.84,  1.10), (  0.01,  -0.60)   Error: 1.90
+Last SG, Last State: (  0.83,   0.22), (  0.02,  -0.60)  SG Improvement:0.09932 
+
+Goal, Curr: (-1.21,  1.07), ( -0.03,  -0.60)   Error: 2.05
+Last SG, Last State: (  0.99,   0.37), (  0.00,  -0.60)  SG Improvement:0.05951 
+
+episode:00100, mean:0.16, std:0.16, median:0.16, success:0.00
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Goal, Curr: (-1.21,  0.92), (  0.22,  -0.60)   Error: 2.09
+Last SG, Last State: (  1.22,   0.32), (  0.19,  -0.60)  SG Improvement:-0.18363 
+
+Goal, Curr: (-1.00,  1.09), (  0.20,  -0.60)   Error: 2.08
+Last SG, Last State: (  1.19,   0.31), (  0.18,  -0.60)  SG Improvement:-0.23142 
+
+Goal, Curr: (-1.09,  0.92), (  0.28,  -0.60)   Error: 2.05
+Last SG, Last State: (  1.23,   0.36), (  0.21,  -0.60)  SG Improvement:0.17990 
+
+Goal, Curr: (-0.91,  0.78), (  0.05,  -0.60)   Error: 1.68
+Last SG, Last State: (  1.02,   0.12), (  0.01,  -0.60)  SG Improvement:-0.19048 
+
+Goal, Curr: (-1.12,  0.79), (  0.21,  -0.60)   Error: 1.92
+Last SG, Last State: (  1.19,   0.22), (  0.17,  -0.60)  SG Improvement:-0.15244 
+
+Goal, Curr: (-1.22,  0.97), (  0.24,  -0.60)   Error: 2.14
+Last SG, Last State: (  1.24,   0.35), (  0.21,  -0.60)  SG Improvement:-0.15845 
+
+Goal, Curr: (-0.98,  1.01), (  0.22,  -0.60)   Error: 2.01
+Last SG, Last State: (  1.20,   0.27), (  0.19,  -0.60)  SG Improvement:-0.13853 
+
+Goal, Curr: (-1.24,  1.06), (  0.31,  -0.60)   Error: 2.28
+Last SG, Last State: (  1.27,   0.50), (  0.24,  -0.60)  SG Improvement:0.21316 
+
+Goal, Curr: (-0.89,  1.03), (  0.16,  -0.60)   Error: 1.94
+Last SG, Last State: (  1.01,   0.40), (  0.05,  -0.60)  SG Improvement:0.28920 
+
+Goal, Curr: (-0.90,  1.22), (  0.21,  -0.60)   Error: 2.13
+Last SG, Last State: (  1.20,   0.31), (  0.19,  -0.60)  SG Improvement:-0.25956 
+
+episode:00200, mean:0.02, std:0.24, median:-0.04, success:0.00
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Goal, Curr: (-1.08,  0.92), (  0.60,  -0.36)   Error: 2.12
+Last SG, Last State: (  1.37,  -0.66), (  0.60,  -0.61)  SG Improvement:-1.94802 
+
+Goal, Curr: (-0.94,  0.78), (  1.40,  -0.04)   Error: 2.48
+Last SG, Last State: (  0.90,   0.41), (  0.99,  -0.34)  SG Improvement:-3.60220 
+
+Goal, Curr: (-0.91,  0.77), ( -0.73,  -1.10)   Error: 1.88
+Last SG, Last State: ( -1.38,   0.44), ( -0.36,  -1.40)  SG Improvement:0.17500 
+
+Goal, Curr: (-0.98,  0.94), (  0.60,  -0.35)   Error: 2.04
+Last SG, Last State: (  1.34,  -0.65), (  0.58,  -0.62)  SG Improvement:-1.89019 
+
+Goal, Curr: (-1.04,  1.10), (  0.94,   0.21)   Error: 2.16
+Last SG, Last State: ( -0.91,   1.41), (  0.69,   0.25)  SG Improvement:-0.55486 
+
+Goal, Curr: (-0.99,  0.90), (  1.40,   0.06)   Error: 2.53
+Last SG, Last State: (  0.77,   0.44), (  1.28,   0.03)  SG Improvement:-3.72762 
+
+Goal, Curr: (-0.80,  1.12), ( -0.01,  -1.13)   Error: 2.38
+Last SG, Last State: (  1.57,  -0.39), (  0.40,  -0.86)  SG Improvement:0.56290 
+
+Goal, Curr: (-1.07,  1.21), (  1.26,   1.15)   Error: 2.33
+Last SG, Last State: ( -0.30,   1.92), (  1.16,   0.99)  SG Improvement:-0.41659 
+
+Goal, Curr: (-0.88,  0.90), (  0.56,  -1.01)   Error: 2.39
+Last SG, Last State: ( -1.11,   0.56), (  0.60,  -0.41)  SG Improvement:0.25456 
+
+Goal, Curr: (-1.18,  1.13), (  0.46,  -0.72)   Error: 2.48
+Last SG, Last State: ( -1.48,   0.43), (  0.06,  -0.98)  SG Improvement:-1.70701 
+
+episode:00300, mean:-0.29, std:0.24, median:-0.25, success:0.00
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Goal, Curr: (-0.80,  0.91), ( -1.23,  -1.40)   Error: 2.34
+Last SG, Last State: ( -2.48,   0.59), ( -0.69,  -1.40)  SG Improvement:-0.34620 
+
+Goal, Curr: (-1.15,  1.13), ( -0.62,  -1.40)   Error: 2.58
+Last SG, Last State: ( -3.01,   0.76), ( -0.76,  -1.40)  SG Improvement:-0.81265 
+
+Goal, Curr: (-0.81,  1.09), ( -0.79,  -1.40)   Error: 2.49
+Last SG, Last State: ( -3.02,   0.79), ( -0.86,  -1.40)  SG Improvement:-0.68166 
+
+Goal, Curr: (-0.78,  0.77), ( -0.76,  -1.40)   Error: 2.17
+Last SG, Last State: ( -2.25,   0.41), ( -0.40,  -1.40)  SG Improvement:0.25842 
+
+Goal, Curr: (-0.83,  0.84), ( -1.24,  -1.40)   Error: 2.28
+Last SG, Last State: ( -3.14,   0.60), ( -1.40,  -1.35)  SG Improvement:0.16467 
+
+Goal, Curr: (-1.02,  1.18), ( -1.04,  -1.34)   Error: 2.51
+Last SG, Last State: ( -3.37,   0.60), ( -1.40,  -1.14)  SG Improvement:-0.21704 
+
+Goal, Curr: (-1.12,  1.14), ( -0.57,  -1.40)   Error: 2.60
+Last SG, Last State: ( -2.92,   0.84), ( -0.65,  -1.40)  SG Improvement:-0.71524 
+
+Goal, Curr: (-1.11,  0.97), ( -1.40,  -1.21)   Error: 2.20
+Last SG, Last State: ( -2.45,   0.60), ( -0.98,  -1.40)  SG Improvement:-0.05066 
+
+Goal, Curr: (-1.06,  0.80), ( -1.40,  -1.16)   Error: 1.99
+Last SG, Last State: ( -2.82,   0.60), ( -1.24,  -1.40)  SG Improvement:-0.05260 
+
+Goal, Curr: (-1.10,  1.08), ( -1.38,  -1.40)   Error: 2.50
+Last SG, Last State: ( -3.19,   0.60), ( -1.40,  -1.37)  SG Improvement:-0.06928 
+
+episode:00400, mean:-0.31, std:0.22, median:-0.24, success:0.00
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Goal, Curr: (-1.24,  0.80), ( -1.10,  -1.31)   Error: 2.12
+Last SG, Last State: (  0.68,  -3.22), ( -1.12,  -1.23)  SG Improvement:-1.30342 
+
+Goal, Curr: (-1.22,  0.79), ( -1.20,  -1.14)   Error: 1.94
+Last SG, Last State: ( -2.63,   0.59), ( -1.40,  -1.26)  SG Improvement:0.77675 
+
+Goal, Curr: (-0.89,  1.07), ( -1.40,  -1.40)   Error: 2.52
+Last SG, Last State: ( -2.82,   0.40), ( -1.40,  -1.40)  SG Improvement:0.09776 
+
+Goal, Curr: (-1.06,  0.84), ( -1.31,  -1.31)   Error: 2.17
+Last SG, Last State: ( -0.29,  -2.35), ( -1.40,  -1.35)  SG Improvement:-2.62026 
+
+Goal, Curr: (-1.17,  1.16), ( -1.33,  -1.29)   Error: 2.45
+Last SG, Last State: (  0.32,  -3.20), ( -1.40,  -1.31)  SG Improvement:0.01316 
+
+Goal, Curr: (-1.22,  0.88), ( -1.28,  -1.14)   Error: 2.03
+Last SG, Last State: (  0.37,  -3.01), ( -1.28,  -1.14)  SG Improvement:0.06433 
+
+Goal, Curr: (-1.17,  0.78), ( -1.27,  -1.24)   Error: 2.02
+Last SG, Last State: ( -0.53,   0.52), ( -1.27,  -1.28)  SG Improvement:-1.37276 
+
+Goal, Curr: (-1.10,  1.24), ( -1.30,  -1.24)   Error: 2.49
+Last SG, Last State: ( -0.70,   0.59), ( -1.31,  -1.27)  SG Improvement:-1.19837 
+
+Goal, Curr: (-0.95,  1.09), ( -1.39,  -1.39)   Error: 2.51
+Last SG, Last State: ( -2.74,   0.64), ( -1.40,  -1.24)  SG Improvement:-1.29584 
+
+Goal, Curr: (-0.88,  1.06), ( -1.34,  -1.37)   Error: 2.48
+Last SG, Last State: (  0.40,  -3.12), ( -1.35,  -1.28)  SG Improvement:-2.08306 
+
+episode:00500, mean:-0.32, std:0.20, median:-0.35, success:0.00
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Goal, Curr: (-0.90,  0.94), ( -1.00,  -1.05)   Error: 1.99
+Last SG, Last State: (  0.53,  -2.74), ( -1.30,  -1.40)  SG Improvement:-1.05495 
+
+Goal, Curr: (-1.13,  1.09), ( -0.54,  -0.97)   Error: 2.14
+Last SG, Last State: ( -0.27,   0.41), ( -0.75,  -0.68)  SG Improvement:-0.78061 
+
+Goal, Curr: (-1.00,  1.25), ( -0.85,  -1.13)   Error: 2.38
+Last SG, Last State: (  0.65,  -0.03), ( -0.84,  -1.20)  SG Improvement:-2.05435 
+
+Goal, Curr: (-0.87,  0.76), ( -1.05,  -0.83)   Error: 1.60
+Last SG, Last State: ( -1.34,   0.48), ( -0.59,  -0.60)  SG Improvement:-0.84781 
+
+Goal, Curr: (-0.80,  0.93), ( -1.00,  -1.42)   Error: 2.35
+Last SG, Last State: ( -1.84,  -1.46), ( -0.91,  -1.27)  SG Improvement:-1.87581 
+
+Goal, Curr: (-0.96,  0.78), ( -1.38,  -1.40)   Error: 2.22
+Last SG, Last State: ( -0.23,   0.23), ( -1.11,  -1.21)  SG Improvement:-1.56061 
+
+Goal, Curr: (-1.16,  0.93), ( -0.88,  -0.79)   Error: 1.74
+Last SG, Last State: (  0.35,  -0.33), ( -1.13,  -1.33)  SG Improvement:-0.91190 
+
+Goal, Curr: (-1.11,  0.99), ( -1.11,  -1.31)   Error: 2.30
+Last SG, Last State: ( -0.09,   0.16), ( -1.15,  -1.34)  SG Improvement:0.47419 
+
+Goal, Curr: (-0.92,  0.78), ( -0.80,  -1.05)   Error: 1.84
+Last SG, Last State: (  0.11,  -0.65), ( -0.88,  -1.01)  SG Improvement:-0.53080 
+
+Goal, Curr: (-0.76,  1.10), ( -0.73,  -0.69)   Error: 1.79
+Last SG, Last State: ( -1.90,  -1.26), ( -0.82,  -0.66)  SG Improvement:-1.29759 
+
+episode:00600, mean:-0.13, std:0.34, median:0.02, success:0.00
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Goal, Curr: (-1.03,  1.15), ( -0.53,  -0.85)   Error: 2.05
+Last SG, Last State: ( -1.62,  -1.73), ( -0.42,  -0.76)  SG Improvement:-1.26203 
+
+Goal, Curr: (-1.03,  0.94), ( -0.73,  -1.22)   Error: 2.18
+Last SG, Last State: (  1.52,   0.02), ( -0.52,  -0.71)  SG Improvement:-1.92290 
+
+Goal, Curr: (-1.01,  0.93), ( -0.71,  -1.20)   Error: 2.14
+Last SG, Last State: (  0.80,  -0.26), ( -0.99,  -1.31)  SG Improvement:-0.12637 
+
+Goal, Curr: (-0.99,  0.93), ( -0.81,  -1.41)   Error: 2.34
+Last SG, Last State: (  0.24,  -0.56), ( -0.94,  -0.90)  SG Improvement:-1.35727 
+
+Goal, Curr: (-0.94,  1.15), (  0.23,  -0.60)   Error: 2.11
+Last SG, Last State: ( -1.00,  -1.06), ( -0.12,  -0.60)  SG Improvement:-2.01673 
+
+Goal, Curr: (-1.20,  1.12), ( -0.72,  -1.40)   Error: 2.57
+Last SG, Last State: (  0.38,  -0.40), ( -1.08,  -1.02)  SG Improvement:-1.00076 
+
+Goal, Curr: (-0.85,  1.08), ( -0.67,  -1.40)   Error: 2.49
+Last SG, Last State: (  1.18,  -0.67), ( -0.51,  -1.24)  SG Improvement:-2.10541 
+
+Goal, Curr: (-1.00,  0.85), ( -0.49,  -1.37)   Error: 2.28
+Last SG, Last State: (  1.31,  -0.81), ( -0.72,  -1.30)  SG Improvement:-1.47700 
+
+Goal, Curr: (-1.01,  0.91), (  0.72,  -0.73)   Error: 2.38
+Last SG, Last State: ( -0.49,  -0.92), (  0.60,  -0.25)  SG Improvement:-2.45549 
+
+Goal, Curr: (-1.20,  1.15), ( -0.83,  -1.01)   Error: 2.19
+Last SG, Last State: (  0.70,  -0.29), ( -0.60,  -1.14)  SG Improvement:-2.42300 
+
+episode:00700, mean:-0.24, std:0.26, median:-0.31, success:0.00
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Goal, Curr: (-1.12,  1.19), (  1.02,  -0.49)   Error: 2.72
+Last SG, Last State: (  2.95,  -0.56), (  1.28,  -0.99)  SG Improvement:-1.44655 
+
+Goal, Curr: (-1.06,  1.07), (  0.84,   0.75)   Error: 1.93
+Last SG, Last State: ( -0.81,   0.15), (  1.04,   0.56)  SG Improvement:-1.81192 
+
+Goal, Curr: (-1.21,  1.14), (  0.78,   0.72)   Error: 2.04
+Last SG, Last State: ( -0.12,   0.06), (  0.60,   0.17)  SG Improvement:-0.69628 
+
+Goal, Curr: (-1.25,  0.86), (  0.79,   0.47)   Error: 2.08
+Last SG, Last State: ( -0.29,  -0.96), (  0.60,  -0.08)  SG Improvement:-0.17112 
+
+Goal, Curr: (-0.76,  0.80), (  0.55,   0.65)   Error: 1.32
+Last SG, Last State: (  0.16,  -0.20), (  0.91,   0.38)  SG Improvement:-1.30131 
+
+Goal, Curr: (-1.01,  0.98), (  1.06,  -0.90)   Error: 2.80
+Last SG, Last State: (  2.68,  -0.82), (  1.37,  -1.27)  SG Improvement:-0.94839 
+
+Goal, Curr: (-0.96,  0.91), (  0.60,  -0.33)   Error: 1.99
+Last SG, Last State: ( -0.49,  -2.08), (  0.95,  -0.63)  SG Improvement:-0.99477 
+
+Goal, Curr: (-0.82,  1.12), (  0.60,  -0.33)   Error: 2.02
+Last SG, Last State: ( -0.51,  -2.07), (  0.96,  -0.63)  SG Improvement:-1.02122 
+
+Goal, Curr: (-1.05,  1.09), (  0.95,  -0.61)   Error: 2.63
+Last SG, Last State: (  2.59,  -0.57), (  0.99,  -1.15)  SG Improvement:-1.20290 
+
+Goal, Curr: (-1.23,  0.85), (  0.61,   0.06)   Error: 2.00
+Last SG, Last State: (  1.47,   0.00), (  0.60,  -0.42)  SG Improvement:-1.67289 
+
+episode:00800, mean:-0.09, std:0.40, median:0.06, success:0.00
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Goal, Curr: (-0.87,  1.08), ( -0.26,  -0.60)   Error: 1.79
+Last SG, Last State: (  0.40,  -0.85), (  0.24,  -0.81)  SG Improvement:-3.40409 
+
+Goal, Curr: (-0.82,  1.10), (  0.74,  -1.16)   Error: 2.74
+Last SG, Last State: (  0.70,   0.11), (  0.39,  -0.67)  SG Improvement:-0.87506 
+
+Goal, Curr: (-1.13,  0.87), (  0.44,  -1.14)   Error: 2.56
+Last SG, Last State: (  0.64,   0.46), (  0.11,  -0.65)  SG Improvement:-0.10703 
+
+Goal, Curr: (-1.08,  1.19), ( -0.04,  -0.97)   Error: 2.39
+Last SG, Last State: (  2.08,  -1.13), (  0.22,  -1.40)  SG Improvement:-2.11333 
+
+Goal, Curr: (-1.24,  1.07), (  0.62,  -1.40)   Error: 3.10
+Last SG, Last State: (  0.94,  -0.28), (  0.39,  -1.07)  SG Improvement:-0.02153 
+
+Goal, Curr: (-0.90,  1.12), ( -1.01,  -0.87)   Error: 1.99
+Last SG, Last State: (  1.40,  -0.85), ( -1.05,  -1.36)  SG Improvement:-1.53155 
+
+Goal, Curr: (-0.83,  0.92), ( -0.10,  -0.88)   Error: 1.93
+Last SG, Last State: (  2.13,  -1.50), ( -0.18,  -1.39)  SG Improvement:-1.88222 
+
+Goal, Curr: (-1.08,  0.87), ( -1.12,  -0.88)   Error: 1.76
+Last SG, Last State: (  1.36,  -0.70), ( -1.15,  -1.37)  SG Improvement:-1.30666 
+
+Goal, Curr: (-0.92,  0.86), ( -0.27,  -0.75)   Error: 1.73
+Last SG, Last State: (  0.68,  -0.21), (  0.21,  -1.06)  SG Improvement:-2.77392 
+
+Goal, Curr: (-0.84,  0.97), ( -0.41,  -1.40)   Error: 2.41
+Last SG, Last State: ( -0.65,  -0.02), ( -0.73,  -0.96)  SG Improvement:-0.97196 
+
+episode:00900, mean:-0.20, std:0.36, median:-0.09, success:0.00
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Goal, Curr: (-0.88,  1.01), ( -0.73,  -1.37)   Error: 2.38
+Last SG, Last State: (  1.16,  -1.12), ( -0.78,  -1.35)  SG Improvement:0.03229 
+
+Goal, Curr: (-1.08,  1.15), ( -0.59,  -1.40)   Error: 2.60
+Last SG, Last State: (  1.47,  -0.31), ( -0.59,  -1.40)  SG Improvement:-1.27373 
+
+Goal, Curr: (-1.18,  1.06), ( -0.26,  -1.41)   Error: 2.63
+Last SG, Last State: (  1.76,  -0.84), ( -0.19,  -1.40)  SG Improvement:-0.14246 
+
+Goal, Curr: (-0.79,  1.23), ( -0.70,  -1.36)   Error: 2.60
+Last SG, Last State: (  1.26,  -0.83), ( -0.71,  -1.37)  SG Improvement:0.02036 
+
+Goal, Curr: (-0.82,  0.87), ( -0.48,  -1.37)   Error: 2.26
+Last SG, Last State: (  1.49,  -0.71), ( -0.48,  -1.35)  SG Improvement:0.01654 
+
+Goal, Curr: (-1.21,  0.82), ( -0.55,  -1.40)   Error: 2.32
+Last SG, Last State: (  1.51,  -0.52), ( -0.49,  -1.39)  SG Improvement:-0.02660 
+
+Goal, Curr: (-1.06,  0.93), ( -0.60,  -1.31)   Error: 2.28
+Last SG, Last State: (  1.09,  -0.59), ( -0.71,  -1.21)  SG Improvement:-1.25782 
+
+Goal, Curr: (-0.84,  0.88), ( -0.50,  -1.38)   Error: 2.29
+Last SG, Last State: (  1.50,  -0.69), ( -0.48,  -1.36)  SG Improvement:0.00941 
+
+Goal, Curr: (-0.94,  0.89), ( -0.40,  -1.38)   Error: 2.33
+Last SG, Last State: (  1.58,  -0.68), ( -0.39,  -1.36)  SG Improvement:0.01110 
+
+Goal, Curr: (-1.02,  0.89), ( -0.68,  -1.37)   Error: 2.29
+Last SG, Last State: (  1.23,  -1.01), ( -0.70,  -1.37)  SG Improvement:0.02989 
+
+episode:01000, mean:-0.33, std:0.16, median:-0.28, success:0.00
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Goal, Curr: (-1.16,  0.78), ( -1.12,  -1.40)   Error: 2.19
+Last SG, Last State: ( -1.90,   0.66), ( -1.00,  -1.41)  SG Improvement:-0.64646 
+
+Goal, Curr: (-1.19,  0.93), ( -1.21,  -1.32)   Error: 2.25
+Last SG, Last State: (  0.82,  -1.30), ( -1.23,  -1.39)  SG Improvement:-0.74553 
+
+Goal, Curr: (-0.98,  1.18), ( -0.78,  -0.77)   Error: 1.96
+Last SG, Last State: (  1.20,  -1.30), ( -0.78,  -0.77)  SG Improvement:0.00030 
+
+Goal, Curr: (-0.90,  1.25), ( -1.35,  -1.13)   Error: 2.42
+Last SG, Last State: ( -3.04,   0.97), ( -1.37,  -1.07)  SG Improvement:0.00726 
+
+Goal, Curr: (-0.98,  1.08), ( -1.13,  -1.35)   Error: 2.44
+Last SG, Last State: ( -1.50,  -0.05), ( -1.13,  -1.37)  SG Improvement:-1.37874 
+
+Goal, Curr: (-1.08,  1.06), ( -1.33,  -1.30)   Error: 2.37
+Last SG, Last State: (  0.63,  -0.06), ( -1.34,  -1.40)  SG Improvement:-0.87987 
+
+Goal, Curr: (-0.86,  1.00), ( -1.28,  -1.37)   Error: 2.41
+Last SG, Last State: ( -2.42,   0.66), ( -1.20,  -1.40)  SG Improvement:-1.21821 
+
+Goal, Curr: (-1.20,  1.23), ( -0.73,  -1.32)   Error: 2.60
+Last SG, Last State: ( -1.01,   0.29), ( -0.82,  -1.33)  SG Improvement:-2.57776 
+
+Goal, Curr: (-0.93,  1.11), ( -0.89,  -1.32)   Error: 2.43
+Last SG, Last State: ( -1.87,   0.81), ( -0.93,  -1.23)  SG Improvement:-0.12753 
+
+Goal, Curr: (-0.89,  1.02), ( -1.05,  -1.22)   Error: 2.25
+Last SG, Last State: ( -2.49,   0.91), ( -1.03,  -1.13)  SG Improvement:-0.09734 
+
+episode:01100, mean:-0.24, std:0.14, median:-0.22, success:0.00
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Goal, Curr: (-1.21,  1.12), ( -0.74,  -1.37)   Error: 2.53
+Last SG, Last State: (  1.28,  -2.32), ( -0.55,  -1.24)  SG Improvement:-1.87868 
+
+Goal, Curr: (-0.80,  0.88), ( -0.82,  -1.32)   Error: 2.20
+Last SG, Last State: (  1.14,  -2.22), ( -0.80,  -1.31)  SG Improvement:-2.70239 
+
+Goal, Curr: (-0.90,  1.13), ( -1.04,  -1.17)   Error: 2.31
+Last SG, Last State: (  0.77,  -1.99), ( -0.94,  -1.31)  SG Improvement:-0.23115 
+
+Goal, Curr: (-0.97,  1.09), ( -1.32,  -1.41)   Error: 2.52
+Last SG, Last State: ( -2.37,   0.74), ( -1.07,  -1.33)  SG Improvement:-1.08215 
+
+Goal, Curr: (-0.82,  1.13), ( -1.26,  -1.31)   Error: 2.48
+Last SG, Last State: ( -0.58,   0.63), ( -1.38,  -1.40)  SG Improvement:-1.33835 
+
+Goal, Curr: (-1.12,  1.13), ( -0.68,  -1.32)   Error: 2.49
+Last SG, Last State: (  1.28,  -1.98), ( -0.67,  -1.34)  SG Improvement:-2.25272 
+
+Goal, Curr: (-1.05,  0.80), ( -0.84,  -1.40)   Error: 2.20
+Last SG, Last State: ( -1.82,   0.67), ( -0.73,  -1.35)  SG Improvement:-0.98613 
+
+Goal, Curr: (-0.94,  1.10), ( -0.95,  -1.31)   Error: 2.42
+Last SG, Last State: (  0.14,   0.63), ( -1.12,  -1.41)  SG Improvement:-1.22076 
+
+Goal, Curr: (-1.02,  0.83), ( -1.12,  -1.37)   Error: 2.20
+Last SG, Last State: (  0.71,  -0.90), ( -1.09,  -1.31)  SG Improvement:-2.23930 
+
+Goal, Curr: (-1.10,  0.95), ( -1.19,  -1.32)   Error: 2.28
+Last SG, Last State: (  0.03,   0.04), ( -1.22,  -1.31)  SG Improvement:-1.05477 
+
+episode:01200, mean:-0.32, std:0.19, median:-0.30, success:0.00
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Goal, Curr: (-1.15,  1.00), ( -1.40,  -1.34)   Error: 2.36
+Last SG, Last State: ( -0.79,  -0.45), ( -1.36,  -1.23)  SG Improvement:-0.21478 
+
+Goal, Curr: (-1.25,  0.79), ( -1.33,  -1.20)   Error: 1.99
+Last SG, Last State: ( -1.83,   0.66), ( -1.40,  -1.33)  SG Improvement:-0.57544 
+
+Goal, Curr: (-0.99,  0.99), ( -1.39,  -1.30)   Error: 2.32
+Last SG, Last State: ( -1.86,  -0.70), ( -1.34,  -1.19)  SG Improvement:-0.09507 
+
+Goal, Curr: (-0.83,  1.20), ( -1.40,  -1.27)   Error: 2.54
+Last SG, Last State: ( -2.13,   0.65), ( -1.40,  -1.33)  SG Improvement:-0.53685 
+
+Goal, Curr: (-1.02,  0.82), ( -0.76,  -1.40)   Error: 2.23
+Last SG, Last State: (  1.09,  -2.25), ( -0.81,  -1.40)  SG Improvement:0.00462 
+
+Goal, Curr: (-0.95,  0.88), ( -1.35,  -1.29)   Error: 2.21
+Last SG, Last State: ( -1.69,  -0.82), ( -1.33,  -1.16)  SG Improvement:-0.10588 
+
+Goal, Curr: (-0.91,  0.82), ( -1.40,  -1.33)   Error: 2.20
+Last SG, Last State: ( -0.02,  -0.43), ( -1.41,  -1.29)  SG Improvement:-0.13863 
+
+Goal, Curr: (-1.04,  1.12), ( -1.40,  -1.32)   Error: 2.47
+Last SG, Last State: ( -3.00,   0.83), ( -1.41,  -1.30)  SG Improvement:-0.26808 
+
+Goal, Curr: (-1.02,  1.23), ( -1.40,  -1.40)   Error: 2.66
+Last SG, Last State: ( -0.24,  -0.62), ( -1.39,  -1.26)  SG Improvement:-0.18672 
+
+Goal, Curr: (-0.89,  1.07), ( -1.40,  -1.37)   Error: 2.50
+Last SG, Last State: ( -1.03,  -0.64), ( -1.39,  -1.23)  SG Improvement:-0.20304 
+
+episode:01300, mean:-0.32, std:0.12, median:-0.31, success:0.00
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Goal, Curr: (-0.94,  1.17), ( -0.86,  -1.40)   Error: 2.57
+Last SG, Last State: (  0.63,  -1.67), ( -1.33,  -1.40)  SG Improvement:-0.59127 
+
+Goal, Curr: (-1.16,  1.06), ( -1.34,  -0.60)   Error: 1.67
+Last SG, Last State: ( -2.19,   1.24), ( -0.94,  -0.60)  SG Improvement:0.36150 
+
+Goal, Curr: (-1.23,  1.16), ( -0.10,  -0.60)   Error: 2.09
+Last SG, Last State: (  0.35,  -0.06), ( -0.27,  -0.60)  SG Improvement:0.17747 
+
+Goal, Curr: (-0.88,  1.17), ( -1.40,  -0.60)   Error: 1.84
+Last SG, Last State: ( -2.15,   1.08), ( -1.08,  -0.64)  SG Improvement:0.37180 
+
+Goal, Curr: (-1.23,  1.12), ( -0.41,  -1.40)   Error: 2.65
+Last SG, Last State: ( -1.37,  -1.25), ( -0.39,  -1.40)  SG Improvement:0.00599 
+
+Goal, Curr: (-0.92,  1.09), ( -1.40,  -0.60)   Error: 1.76
+Last SG, Last State: ( -2.29,   1.05), ( -1.17,  -0.66)  SG Improvement:0.36630 
+
+Goal, Curr: (-1.18,  0.90), ( -0.36,  -0.60)   Error: 1.72
+Last SG, Last State: ( -0.27,   0.96), ( -0.36,  -0.65)  SG Improvement:0.35285 
+
+Goal, Curr: (-0.83,  0.82), ( -0.26,  -0.93)   Error: 1.84
+Last SG, Last State: (  1.38,   0.32), (  0.26,  -1.22)  SG Improvement:-0.31787 
+
+Goal, Curr: (-1.24,  0.84), (  0.55,  -1.40)   Error: 2.86
+Last SG, Last State: ( -0.44,  -1.27), (  0.40,  -1.40)  SG Improvement:0.13890 
+
+Goal, Curr: (-0.96,  1.04), (  0.13,  -1.36)   Error: 2.64
+Last SG, Last State: ( -0.11,  -1.47), (  0.69,  -1.40)  SG Improvement:-1.05381 
+
+episode:01400, mean:-0.17, std:0.44, median:-0.01, success:0.00
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Goal, Curr: (-0.94,  1.13), (  0.03,  -1.35)   Error: 2.66
+Last SG, Last State: (  2.05,  -0.23), (  0.02,  -1.34)  SG Improvement:-2.89358 
+
+Goal, Curr: (-0.90,  1.16), ( -1.40,  -1.10)   Error: 2.32
+Last SG, Last State: ( -0.89,   0.82), ( -1.07,  -0.93)  SG Improvement:-0.99275 
+
+Goal, Curr: (-1.02,  0.96), ( -0.98,  -0.91)   Error: 1.87
+Last SG, Last State: ( -1.84,   0.85), ( -0.50,  -0.84)  SG Improvement:-1.70430 
+
+Goal, Curr: (-1.16,  0.97), ( -0.98,  -0.67)   Error: 1.65
+Last SG, Last State: (  1.47,  -1.04), ( -0.99,  -0.97)  SG Improvement:-3.53070 
+
+Goal, Curr: (-0.99,  1.11), (  0.03,  -1.10)   Error: 2.43
+Last SG, Last State: (  0.23,   0.71), (  0.13,  -1.13)  SG Improvement:-0.24317 
+
+Goal, Curr: (-0.81,  0.94), ( -1.40,  -1.29)   Error: 2.31
+Last SG, Last State: ( -2.38,   0.12), ( -1.24,  -1.11)  SG Improvement:-1.46402 
+
+Goal, Curr: (-1.20,  0.83), ( -1.40,  -0.59)   Error: 1.43
+Last SG, Last State: (  0.67,  -1.13), ( -1.40,  -0.87)  SG Improvement:-1.31458 
+
+Goal, Curr: (-1.02,  0.94), ( -0.48,  -0.81)   Error: 1.83
+Last SG, Last State: (  0.14,   0.00), ( -0.42,  -1.14)  SG Improvement:-1.17509 
+
+Goal, Curr: (-0.83,  1.17), ( -1.26,  -0.88)   Error: 2.10
+Last SG, Last State: ( -0.38,   0.59), ( -1.10,  -0.95)  SG Improvement:-0.65585 
+
+Goal, Curr: (-0.99,  0.90), ( -1.26,  -1.03)   Error: 1.95
+Last SG, Last State: ( -2.45,  -0.42), ( -1.40,  -1.11)  SG Improvement:0.34550 
+
+episode:01500, mean:-0.03, std:0.41, median:-0.09, success:0.00
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Goal, Curr: (-1.11,  0.88), ( -1.38,  -1.02)   Error: 1.92
+Last SG, Last State: ( -2.35,   0.53), ( -1.41,  -1.10)  SG Improvement:-0.22745 
+
+Goal, Curr: (-0.80,  1.00), ( -0.84,  -0.69)   Error: 1.69
+Last SG, Last State: ( -3.18,   1.19), ( -1.35,  -0.60)  SG Improvement:0.22827 
+
+Goal, Curr: (-1.08,  1.21), ( -1.37,  -0.94)   Error: 2.17
+Last SG, Last State: (  1.04,  -1.39), ( -1.41,  -1.02)  SG Improvement:-2.70725 
+
+Goal, Curr: (-0.75,  0.99), ( -1.25,  -0.86)   Error: 1.92
+Last SG, Last State: ( -3.31,   1.13), ( -1.39,  -0.65)  SG Improvement:-0.96133 
+
+Goal, Curr: (-0.94,  1.14), ( -1.40,  -0.72)   Error: 1.91
+Last SG, Last State: (  0.66,  -1.58), ( -1.29,  -0.67)  SG Improvement:-0.48399 
+
+Goal, Curr: (-0.99,  1.05), ( -1.38,  -1.10)   Error: 2.19
+Last SG, Last State: ( -2.44,  -0.11), ( -1.38,  -1.08)  SG Improvement:-0.47076 
+
+Goal, Curr: (-1.20,  0.91), ( -1.32,  -1.08)   Error: 1.99
+Last SG, Last State: ( -0.63,   0.68), ( -1.26,  -1.08)  SG Improvement:-0.73927 
+
+Goal, Curr: (-1.10,  0.88), ( -1.32,  -0.97)   Error: 1.87
+Last SG, Last State: ( -0.80,   0.95), ( -1.20,  -0.86)  SG Improvement:-0.90464 
+
+Goal, Curr: (-1.06,  1.19), ( -1.40,  -1.40)   Error: 2.61
+Last SG, Last State: ( -2.21,  -0.79), ( -1.40,  -1.40)  SG Improvement:0.11920 
+
+Goal, Curr: (-0.93,  0.92), ( -1.26,  -1.28)   Error: 2.23
+Last SG, Last State: ( -2.06,   0.79), ( -1.40,  -1.07)  SG Improvement:-2.69831 
+
+episode:01600, mean:-0.01, std:0.18, median:-0.07, success:0.00
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Goal, Curr: (-1.08,  0.90), ( -0.36,  -0.64)   Error: 1.71
+Last SG, Last State: ( -0.75,  -0.90), ( -0.59,  -0.65)  SG Improvement:-1.37554 
+
+Goal, Curr: (-0.96,  1.18), ( -0.05,  -0.76)   Error: 2.14
+Last SG, Last State: ( -1.00,  -1.67), ( -0.06,  -0.60)  SG Improvement:-0.47155 
+
+Goal, Curr: (-0.98,  0.87), ( -1.12,  -0.64)   Error: 1.51
+Last SG, Last State: ( -2.12,  -0.08), ( -1.13,  -0.61)  SG Improvement:0.67717 
+
+Goal, Curr: (-1.06,  1.16), ( -0.56,  -0.60)   Error: 1.83
+Last SG, Last State: ( -1.65,   0.04), ( -0.80,  -0.72)  SG Improvement:-1.62339 
+
+Goal, Curr: (-1.06,  0.88), ( -0.56,  -0.60)   Error: 1.56
+Last SG, Last State: (  1.18,   0.11), ( -0.56,  -0.60)  SG Improvement:-0.04119 
+
+Goal, Curr: (-0.85,  0.77), ( -1.05,  -0.60)   Error: 1.39
+Last SG, Last State: ( -1.94,   0.07), ( -1.17,  -0.62)  SG Improvement:-2.91355 
+
+Goal, Curr: (-1.16,  1.21), ( -1.14,  -0.75)   Error: 1.96
+Last SG, Last State: ( -0.59,  -0.44), ( -1.18,  -0.82)  SG Improvement:-0.27117 
+
+Goal, Curr: (-1.03,  0.91), ( -0.71,  -0.60)   Error: 1.54
+Last SG, Last State: ( -2.62,   1.11), ( -0.87,  -0.64)  SG Improvement:-1.10788 
+
+Goal, Curr: (-0.88,  0.90), ( -0.55,  -0.66)   Error: 1.59
+Last SG, Last State: (  0.56,  -0.32), ( -0.52,  -0.60)  SG Improvement:-1.77676 
+
+Goal, Curr: (-0.95,  0.83), ( -1.19,  -0.78)   Error: 1.63
+Last SG, Last State: (  0.76,   0.24), ( -1.11,  -0.91)  SG Improvement:-1.39917 
+
+episode:01700, mean:0.35, std:0.21, median:0.44, success:0.00
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Goal, Curr: (-0.76,  1.02), ( -0.63,  -0.60)   Error: 1.62
+Last SG, Last State: ( -1.67,  -0.71), ( -0.99,  -0.73)  SG Improvement:-2.03668 
+
+Goal, Curr: (-1.18,  0.84), ( -0.08,  -0.60)   Error: 1.81
+Last SG, Last State: ( -0.91,  -0.12), ( -0.05,  -0.79)  SG Improvement:-0.87300 
+
+Goal, Curr: (-0.83,  0.95), ( -0.19,  -0.61)   Error: 1.69
+Last SG, Last State: (  1.11,   0.38), ( -0.70,  -0.85)  SG Improvement:-0.81863 
+
+Goal, Curr: (-0.93,  1.10), ( -0.79,  -1.08)   Error: 2.18
+Last SG, Last State: (  0.94,   0.13), ( -0.92,  -1.07)  SG Improvement:0.05562 
+
+Goal, Curr: (-1.16,  0.90), (  0.08,  -0.71)   Error: 2.04
+Last SG, Last State: (  1.23,   0.60), ( -0.50,  -0.74)  SG Improvement:-0.63692 
+
+Goal, Curr: (-1.24,  1.04), ( -1.15,  -0.69)   Error: 1.74
+Last SG, Last State: (  0.29,  -0.18), ( -1.04,  -0.60)  SG Improvement:-1.93936 
+
+Goal, Curr: (-1.16,  0.97), ( -0.66,  -0.66)   Error: 1.70
+Last SG, Last State: ( -1.03,  -1.27), ( -0.62,  -0.60)  SG Improvement:-0.99595 
+
+Goal, Curr: (-0.83,  1.18), (  0.05,  -0.79)   Error: 2.16
+Last SG, Last State: (  0.30,  -0.13), (  0.17,  -0.66)  SG Improvement:-2.72949 
+
+Goal, Curr: (-1.22,  0.85), ( -1.35,  -0.68)   Error: 1.53
+Last SG, Last State: ( -1.71,  -1.15), ( -1.39,  -0.69)  SG Improvement:-0.33481 
+
+Goal, Curr: (-0.84,  1.03), ( -1.03,  -0.88)   Error: 1.93
+Last SG, Last State: (  0.89,   0.09), ( -0.82,  -0.66)  SG Improvement:-0.74455 
+
+episode:01800, mean:0.20, std:0.25, median:0.18, success:0.00
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Goal, Curr: (-1.09,  1.15), ( -1.28,  -0.60)   Error: 1.76
+Last SG, Last State: (  0.53,   0.25), ( -1.28,  -0.59)  SG Improvement:-0.05402 
+
+Goal, Curr: (-0.92,  0.78), ( -1.40,  -0.69)   Error: 1.55
+Last SG, Last State: ( -0.94,  -0.25), ( -0.93,  -0.60)  SG Improvement:-0.41082 
+
+Goal, Curr: (-0.99,  0.77), ( -1.04,  -0.60)   Error: 1.37
+Last SG, Last State: ( -1.74,  -1.61), ( -0.84,  -0.60)  SG Improvement:-0.10005 
+
+Goal, Curr: (-0.76,  0.97), ( -1.40,  -0.67)   Error: 1.76
+Last SG, Last State: ( -1.72,  -0.83), ( -0.87,  -0.60)  SG Improvement:-0.81824 
+
+Goal, Curr: (-0.90,  1.12), ( -1.34,  -0.60)   Error: 1.78
+Last SG, Last State: (  0.49,   0.24), ( -1.35,  -0.60)  SG Improvement:0.02323 
+
+Goal, Curr: (-1.07,  0.87), ( -1.31,  -0.60)   Error: 1.48
+Last SG, Last State: (  0.52,   0.30), ( -1.31,  -0.60)  SG Improvement:-0.03436 
+
+Goal, Curr: (-0.86,  1.18), ( -1.32,  -0.60)   Error: 1.84
+Last SG, Last State: (  0.50,   0.23), ( -1.32,  -0.60)  SG Improvement:0.00080 
+
+Goal, Curr: (-0.93,  1.19), ( -1.10,  -0.71)   Error: 1.91
+Last SG, Last State: ( -1.33,  -0.79), ( -0.57,  -0.60)  SG Improvement:-0.92415 
+
+Goal, Curr: (-0.99,  1.25), ( -1.35,  -0.60)   Error: 1.89
+Last SG, Last State: ( -2.44,  -0.20), ( -1.36,  -0.60)  SG Improvement:-1.50105 
+
+Goal, Curr: (-0.89,  0.79), ( -1.34,  -0.60)   Error: 1.46
+Last SG, Last State: ( -2.13,  -0.12), ( -1.33,  -0.60)  SG Improvement:-1.99139 
+
+episode:01900, mean:0.37, std:0.12, median:0.43, success:0.00
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Goal, Curr: (-0.75,  1.03), ( -0.53,  -0.60)   Error: 1.64
+Last SG, Last State: ( -1.85,  -0.67), ( -0.85,  -0.60)  SG Improvement:-1.33367 
+
+Goal, Curr: (-1.18,  0.89), ( -0.28,  -0.60)   Error: 1.74
+Last SG, Last State: ( -1.36,  -1.62), ( -0.43,  -0.60)  SG Improvement:-0.26967 
+
+Goal, Curr: (-1.10,  0.78), ( -0.17,  -0.60)   Error: 1.66
+Last SG, Last State: ( -1.21,  -1.77), ( -0.32,  -0.60)  SG Improvement:-0.45096 
+
+Goal, Curr: (-0.83,  0.78), ( -1.33,  -0.60)   Error: 1.47
+Last SG, Last State: ( -0.40,  -0.17), ( -1.40,  -0.60)  SG Improvement:-0.37664 
+
+Goal, Curr: (-0.75,  1.05), ( -0.40,  -0.60)   Error: 1.69
+Last SG, Last State: ( -1.48,  -0.59), ( -0.43,  -0.60)  SG Improvement:0.13292 
+
+Goal, Curr: (-1.14,  0.80), (  0.24,  -0.60)   Error: 1.97
+Last SG, Last State: ( -0.93,  -1.63), (  0.02,  -0.60)  SG Improvement:-0.41764 
+
+Goal, Curr: (-1.09,  0.93), ( -0.08,  -0.60)   Error: 1.83
+Last SG, Last State: ( -1.20,  -1.63), ( -0.25,  -0.60)  SG Improvement:-0.31958 
+
+Goal, Curr: (-1.07,  0.98), ( -0.03,  -0.60)   Error: 1.89
+Last SG, Last State: ( -1.18,  -1.55), ( -0.20,  -0.60)  SG Improvement:-0.29804 
+
+Goal, Curr: (-0.90,  0.92), (  0.11,  -0.60)   Error: 1.82
+Last SG, Last State: ( -1.13,  -1.68), ( -0.09,  -0.60)  SG Improvement:-0.47917 
+
+Goal, Curr: (-0.91,  1.24), ( -0.04,  -0.60)   Error: 2.03
+Last SG, Last State: ( -1.17,  -0.17), ( -0.08,  -0.60)  SG Improvement:0.39366 
+
+episode:02000, mean:0.22, std:0.25, median:0.17, success:0.00
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Goal, Curr: (-1.23,  1.23), (  1.40,  -0.79)   Error: 3.32
+Last SG, Last State: (  1.91,   0.48), (  1.28,  -1.21)  SG Improvement:-1.56001 
+
+Goal, Curr: (-0.80,  1.22), (  1.40,  -1.10)   Error: 3.20
+Last SG, Last State: (  1.26,  -2.24), (  1.40,  -0.78)  SG Improvement:-1.67922 
+
+Goal, Curr: (-1.13,  1.17), (  1.40,  -1.13)   Error: 3.41
+Last SG, Last State: (  0.96,   1.27), (  1.39,  -0.56)  SG Improvement:-0.58393 
+
+Goal, Curr: (-0.82,  1.20), (  1.40,  -0.31)   Error: 2.68
+Last SG, Last State: (  1.36,   0.45), (  1.18,  -0.82)  SG Improvement:-2.10247 
+
+Goal, Curr: (-1.12,  1.14), (  1.40,  -0.41)   Error: 2.96
+Last SG, Last State: (  1.81,  -0.12), (  1.40,   0.00)  SG Improvement:0.09869 
+
+Goal, Curr: (-1.16,  0.76), (  1.40,  -1.05)   Error: 3.14
+Last SG, Last State: (  1.16,  -2.15), (  1.30,  -1.37)  SG Improvement:-2.77812 
+
+Goal, Curr: (-1.17,  1.25), (  1.40,  -1.31)   Error: 3.63
+Last SG, Last State: (  1.09,  -1.93), (  1.39,  -1.40)  SG Improvement:0.82674 
+
+Goal, Curr: (-0.75,  0.97), (  1.31,  -1.27)   Error: 3.05
+Last SG, Last State: (  1.22,  -0.62), (  1.40,  -1.10)  SG Improvement:-0.49388 
+
+Goal, Curr: (-0.80,  0.76), (  1.39,  -0.95)   Error: 2.78
+Last SG, Last State: (  1.26,  -1.43), (  1.18,  -1.40)  SG Improvement:-0.49491 
+
+Goal, Curr: (-0.98,  0.78), (  1.40,  -0.36)   Error: 2.64
+Last SG, Last State: (  1.35,  -1.05), (  1.40,  -0.41)  SG Improvement:-0.32047 
+
+episode:02100, mean:-1.03, std:0.27, median:-1.03, success:0.00
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Goal, Curr: (-1.19,  0.84), (  1.23,  -1.35)   Error: 3.27
+Last SG, Last State: (  0.88,  -3.11), (  1.40,  -1.12)  SG Improvement:-1.46127 
+
+Goal, Curr: (-1.02,  0.78), (  1.27,  -1.28)   Error: 3.08
+Last SG, Last State: (  0.82,  -3.16), (  1.31,  -1.32)  SG Improvement:-0.08536 
+
+Goal, Curr: (-0.81,  0.92), (  1.19,  -1.30)   Error: 2.99
+Last SG, Last State: (  0.46,  -1.79), (  1.00,  -1.24)  SG Improvement:0.08318 
+
+Goal, Curr: (-1.01,  0.88), (  1.01,  -1.29)   Error: 2.96
+Last SG, Last State: (  0.14,  -2.01), (  0.91,  -1.27)  SG Improvement:-0.32118 
+
+Goal, Curr: (-1.22,  1.20), (  1.06,  -1.37)   Error: 3.44
+Last SG, Last State: (  0.55,  -1.90), (  0.75,  -1.33)  SG Improvement:-1.59808 
+
+Goal, Curr: (-0.82,  0.83), (  0.88,  -1.33)   Error: 2.75
+Last SG, Last State: ( -0.07,  -0.93), (  0.95,  -1.36)  SG Improvement:-1.32949 
+
+Goal, Curr: (-0.99,  0.79), (  1.00,  -1.29)   Error: 2.88
+Last SG, Last State: (  0.66,  -2.87), (  0.93,  -1.13)  SG Improvement:-2.06420 
+
+Goal, Curr: (-1.05,  0.95), (  0.90,  -1.31)   Error: 2.99
+Last SG, Last State: (  1.05,  -2.33), (  0.67,  -1.29)  SG Improvement:-1.36784 
+
+Goal, Curr: (-1.07,  0.85), (  1.37,  -1.25)   Error: 3.22
+Last SG, Last State: (  0.88,  -2.12), (  1.19,  -1.29)  SG Improvement:-0.26189 
+
+Goal, Curr: (-0.86,  0.81), (  1.14,  -1.29)   Error: 2.90
+Last SG, Last State: (  0.51,  -2.08), (  1.02,  -1.28)  SG Improvement:-0.01857 
+
+episode:02200, mean:-1.18, std:0.23, median:-1.07, success:0.00
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Goal, Curr: (-1.17,  0.79), (  1.13,  -1.20)   Error: 3.04
+Last SG, Last State: (  1.08,  -1.84), (  1.04,  -1.16)  SG Improvement:-0.59396 
+
+Goal, Curr: (-0.88,  1.14), (  0.68,  -1.40)   Error: 2.98
+Last SG, Last State: ( -0.75,   0.41), (  0.58,  -1.38)  SG Improvement:0.25118 
+
+Goal, Curr: (-0.94,  0.96), (  0.79,  -1.29)   Error: 2.83
+Last SG, Last State: (  1.01,  -2.03), (  0.33,  -1.40)  SG Improvement:0.43228 
+
+Goal, Curr: (-0.94,  0.91), (  0.73,  -1.34)   Error: 2.80
+Last SG, Last State: (  1.30,  -1.79), (  0.53,  -1.40)  SG Improvement:0.37851 
+
+Goal, Curr: (-1.07,  1.03), (  1.14,  -1.38)   Error: 3.27
+Last SG, Last State: (  2.32,  -0.61), (  0.98,  -1.28)  SG Improvement:-0.02673 
+
+Goal, Curr: (-1.05,  0.80), (  0.49,  -1.32)   Error: 2.61
+Last SG, Last State: ( -0.86,   0.34), (  0.31,  -1.40)  SG Improvement:0.06299 
+
+Goal, Curr: (-1.06,  0.78), ( -0.33,  -1.39)   Error: 2.29
+Last SG, Last State: (  1.21,  -1.46), ( -0.53,  -1.26)  SG Improvement:0.10534 
+
+Goal, Curr: (-0.79,  0.80), (  0.09,  -1.26)   Error: 2.24
+Last SG, Last State: (  1.34,  -0.52), (  0.00,  -1.33)  SG Improvement:-0.34255 
+
+Goal, Curr: (-1.01,  0.98), ( -0.23,  -1.40)   Error: 2.50
+Last SG, Last State: ( -0.68,  -1.92), ( -0.49,  -1.31)  SG Improvement:-1.12703 
+
+Goal, Curr: (-0.98,  1.08), (  0.75,  -1.32)   Error: 2.95
+Last SG, Last State: ( -1.05,   0.27), (  0.57,  -1.38)  SG Improvement:-1.49606 
+
+episode:02300, mean:-0.83, std:0.29, median:-0.81, success:0.00
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Goal, Curr: (-0.89,  1.14), (  1.35,  -1.40)   Error: 3.38
+Last SG, Last State: (  0.14,  -0.58), (  1.40,  -1.39)  SG Improvement:-1.39356 
+
+Goal, Curr: (-0.95,  1.01), (  1.37,  -1.40)   Error: 3.35
+Last SG, Last State: (  0.03,  -1.09), (  1.32,  -1.33)  SG Improvement:-1.87343 
+
+Goal, Curr: (-0.93,  1.19), (  1.34,  -1.40)   Error: 3.44
+Last SG, Last State: (  0.78,   0.16), (  1.23,  -1.40)  SG Improvement:-0.17763 
+
+Goal, Curr: (-0.98,  0.92), (  1.33,  -1.35)   Error: 3.24
+Last SG, Last State: (  2.95,  -1.05), (  1.40,  -1.40)  SG Improvement:-0.52831 
+
+Goal, Curr: (-0.92,  0.88), (  1.36,  -1.40)   Error: 3.23
+Last SG, Last State: (  0.93,   0.25), (  1.29,  -1.41)  SG Improvement:-0.09004 
+
+Goal, Curr: (-0.89,  1.16), (  1.40,  -1.38)   Error: 3.41
+Last SG, Last State: (  0.85,  -2.46), (  1.32,  -1.40)  SG Improvement:0.43073 
+
+Goal, Curr: (-0.90,  0.86), (  1.27,  -1.32)   Error: 3.07
+Last SG, Last State: (  1.05,   0.23), (  1.13,  -1.38)  SG Improvement:0.02894 
+
+Goal, Curr: (-1.00,  1.06), (  1.28,  -1.37)   Error: 3.33
+Last SG, Last State: (  0.13,  -1.12), (  1.34,  -1.33)  SG Improvement:-0.83025 
+
+Goal, Curr: (-1.21,  1.02), (  1.38,  -1.33)   Error: 3.50
+Last SG, Last State: (  0.29,  -0.58), (  1.40,  -1.40)  SG Improvement:-0.84944 
+
+Goal, Curr: (-1.05,  0.85), (  1.33,  -1.40)   Error: 3.28
+Last SG, Last State: (  0.46,   0.36), (  1.33,  -1.35)  SG Improvement:-0.69743 
+
+episode:02400, mean:-1.26, std:0.15, median:-1.24, success:0.00
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Goal, Curr: (-0.90,  0.86), (  1.04,  -1.40)   Error: 2.97
+Last SG, Last State: ( -0.15,  -0.30), (  0.99,  -1.40)  SG Improvement:-0.09861 
+
+Goal, Curr: (-0.84,  1.13), (  1.40,  -1.40)   Error: 3.38
+Last SG, Last State: (  0.24,  -0.37), (  1.35,  -1.40)  SG Improvement:-0.12578 
+
+Goal, Curr: (-0.91,  1.00), (  1.34,  -1.40)   Error: 3.28
+Last SG, Last State: (  0.15,  -0.33), (  1.26,  -1.40)  SG Improvement:-0.12515 
+
+Goal, Curr: (-1.16,  1.03), (  1.40,  -1.40)   Error: 3.53
+Last SG, Last State: (  0.34,  -0.34), (  1.40,  -1.40)  SG Improvement:-0.53449 
+
+Goal, Curr: (-0.92,  0.86), (  0.87,  -1.40)   Error: 2.88
+Last SG, Last State: ( -0.33,  -0.28), (  0.81,  -1.40)  SG Improvement:-0.03627 
+
+Goal, Curr: (-0.96,  0.97), (  1.37,  -1.40)   Error: 3.32
+Last SG, Last State: (  0.26,  -0.29), (  1.32,  -1.40)  SG Improvement:-0.12042 
+
+Goal, Curr: (-0.86,  1.12), (  1.39,  -1.40)   Error: 3.38
+Last SG, Last State: (  0.10,  -0.41), (  1.28,  -1.40)  SG Improvement:-0.12453 
+
+Goal, Curr: (-0.89,  1.03), (  1.33,  -1.40)   Error: 3.29
+Last SG, Last State: (  0.11,  -0.35), (  1.24,  -1.40)  SG Improvement:-0.12078 
+
+Goal, Curr: (-1.02,  0.99), (  1.30,  -1.40)   Error: 3.33
+Last SG, Last State: ( -0.03,  -0.39), (  1.16,  -1.40)  SG Improvement:-0.11641 
+
+Goal, Curr: (-0.94,  1.03), (  1.38,  -1.40)   Error: 3.36
+Last SG, Last State: (  0.11,  -0.38), (  1.26,  -1.40)  SG Improvement:-0.12235 
+
+episode:02500, mean:-1.29, std:0.10, median:-1.26, success:0.00
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Goal, Curr: (-0.80,  1.00), ( -0.78,  -1.40)   Error: 2.40
+Last SG, Last State: ( -1.93,  -1.29), ( -0.81,  -1.40)  SG Improvement:-0.01538 
+
+Goal, Curr: (-0.77,  0.77), ( -0.71,  -1.40)   Error: 2.17
+Last SG, Last State: ( -2.01,  -1.22), ( -0.78,  -1.40)  SG Improvement:-0.02634 
+
+Goal, Curr: (-0.83,  1.16), ( -0.92,  -1.40)   Error: 2.57
+Last SG, Last State: ( -1.97,  -1.41), ( -0.94,  -1.40)  SG Improvement:-0.01123 
+
+Goal, Curr: (-1.11,  0.77), ( -0.62,  -1.40)   Error: 2.23
+Last SG, Last State: ( -1.79,  -1.25), ( -0.70,  -1.40)  SG Improvement:-0.02457 
+
+Goal, Curr: (-1.20,  1.23), ( -0.53,  -1.40)   Error: 2.71
+Last SG, Last State: ( -1.61,  -1.37), ( -0.58,  -1.40)  SG Improvement:-0.01321 
+
+Goal, Curr: (-1.12,  1.15), (  0.19,  -1.40)   Error: 2.86
+Last SG, Last State: ( -1.19,  -0.66), (  0.15,  -1.40)  SG Improvement:-0.02962 
+
+Goal, Curr: (-1.13,  1.11), ( -0.78,  -1.40)   Error: 2.53
+Last SG, Last State: ( -1.73,  -1.41), ( -0.81,  -1.40)  SG Improvement:-0.01344 
+
+Goal, Curr: (-0.87,  1.14), ( -0.86,  -1.40)   Error: 2.54
+Last SG, Last State: ( -1.90,  -1.40), ( -0.88,  -1.40)  SG Improvement:-0.01027 
+
+Goal, Curr: (-1.10,  0.86), ( -0.69,  -1.40)   Error: 2.30
+Last SG, Last State: ( -1.79,  -1.27), ( -0.75,  -1.40)  SG Improvement:-0.01956 
+
+Goal, Curr: (-0.96,  0.88), ( -0.29,  -1.40)   Error: 2.37
+Last SG, Last State: ( -1.76,  -1.21), ( -0.38,  -1.40)  SG Improvement:-0.03875 
+
+episode:02600, mean:-0.47, std:0.14, median:-0.47, success:0.00
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Goal, Curr: (-1.10,  1.12), ( -1.40,  -1.37)   Error: 2.52
+Last SG, Last State: ( -2.23,   0.16), ( -1.36,  -0.90)  SG Improvement:-1.42796 
+
+Goal, Curr: (-0.86,  1.15), ( -1.32,  -1.40)   Error: 2.59
+Last SG, Last State: ( -2.30,  -1.41), ( -1.33,  -1.40)  SG Improvement:-0.11945 
+
+Goal, Curr: (-1.25,  0.98), ( -1.40,  -1.20)   Error: 2.19
+Last SG, Last State: ( -1.37,   0.26), ( -1.40,  -1.02)  SG Improvement:-0.18463 
+
+Goal, Curr: (-0.99,  1.12), ( -1.40,  -1.28)   Error: 2.44
+Last SG, Last State: (  0.46,  -0.59), ( -1.37,  -0.97)  SG Improvement:-1.39846 
+
+Goal, Curr: (-1.01,  0.89), ( -1.40,  -0.60)   Error: 1.54
+Last SG, Last State: ( -2.33,  -1.08), ( -1.32,  -0.80)  SG Improvement:-0.53884 
+
+Goal, Curr: (-1.21,  1.07), ( -1.40,  -1.40)   Error: 2.47
+Last SG, Last State: ( -1.39,  -0.30), ( -1.40,  -1.38)  SG Improvement:-0.20404 
+
+Goal, Curr: (-1.15,  0.91), ( -1.40,  -1.06)   Error: 1.98
+Last SG, Last State: ( -1.06,  -0.12), ( -1.40,  -0.86)  SG Improvement:-0.15950 
+
+Goal, Curr: (-1.21,  0.79), ( -0.88,  -0.98)   Error: 1.80
+Last SG, Last State: ( -1.80,  -2.07), ( -0.76,  -0.92)  SG Improvement:-0.15796 
+
+Goal, Curr: (-1.23,  1.19), ( -1.40,  -1.40)   Error: 2.60
+Last SG, Last State: ( -1.74,  -0.21), ( -1.40,  -1.40)  SG Improvement:-0.40701 
+
+Goal, Curr: (-0.88,  0.88), ( -1.40,  -1.40)   Error: 2.34
+Last SG, Last State: ( -1.69,   0.87), ( -1.40,  -1.35)  SG Improvement:-0.28130 
+
+episode:02700, mean:-0.21, std:0.16, median:-0.22, success:0.00
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Goal, Curr: (-0.91,  0.97), ( -1.04,  -0.60)   Error: 1.58
+Last SG, Last State: ( -1.74,   0.10), ( -1.31,  -0.71)  SG Improvement:-0.27854 
+
+Goal, Curr: (-0.76,  0.90), ( -1.40,  -0.60)   Error: 1.64
+Last SG, Last State: ( -0.86,   0.54), ( -1.27,  -0.60)  SG Improvement:0.55612 
+
+Goal, Curr: (-0.89,  0.89), ( -1.23,  -0.60)   Error: 1.53
+Last SG, Last State: ( -2.02,   1.17), ( -1.34,  -0.77)  SG Improvement:-0.87868 
+
+Goal, Curr: (-0.91,  0.89), ( -1.28,  -0.60)   Error: 1.53
+Last SG, Last State: ( -1.56,  -0.57), ( -1.35,  -0.60)  SG Improvement:-1.00353 
+
+Goal, Curr: (-1.13,  1.10), ( -1.40,  -0.87)   Error: 2.00
+Last SG, Last State: ( -1.32,  -0.55), ( -1.40,  -0.80)  SG Improvement:-0.56046 
+
+Goal, Curr: (-1.21,  0.83), ( -0.85,  -0.63)   Error: 1.50
+Last SG, Last State: ( -0.21,   0.09), ( -0.95,  -0.65)  SG Improvement:0.13671 
+
+Goal, Curr: (-0.92,  1.10), ( -1.29,  -0.83)   Error: 1.97
+Last SG, Last State: ( -2.11,   0.37), ( -1.29,  -0.95)  SG Improvement:-1.17686 
+
+Goal, Curr: (-0.76,  1.09), ( -1.14,  -0.67)   Error: 1.79
+Last SG, Last State: ( -1.75,  -0.55), ( -1.13,  -0.60)  SG Improvement:-0.06412 
+
+Goal, Curr: (-0.99,  1.23), ( -1.40,  -0.60)   Error: 1.87
+Last SG, Last State: ( -1.72,  -0.31), ( -1.34,  -0.60)  SG Improvement:-0.03387 
+
+Goal, Curr: (-1.09,  1.15), ( -0.95,  -1.05)   Error: 2.21
+Last SG, Last State: ( -2.00,   0.15), ( -1.34,  -1.28)  SG Improvement:-0.54482 
+
+episode:02800, mean:0.27, std:0.19, median:0.26, success:0.00
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Goal, Curr: (-1.09,  1.01), ( -0.88,  -0.60)   Error: 1.62
+Last SG, Last State: ( -1.49,   0.56), ( -0.55,  -1.02)  SG Improvement:-1.18965 
+
+Goal, Curr: (-0.96,  0.81), ( -1.41,  -0.60)   Error: 1.48
+Last SG, Last State: ( -2.27,  -1.49), ( -1.30,  -0.65)  SG Improvement:-0.16942 
+
+Goal, Curr: (-1.24,  0.86), ( -0.83,  -0.60)   Error: 1.52
+Last SG, Last State: ( -1.49,  -0.95), ( -0.89,  -0.60)  SG Improvement:-0.05350 
+
+Goal, Curr: (-1.00,  1.11), ( -0.87,  -0.60)   Error: 1.72
+Last SG, Last State: ( -1.56,  -0.88), ( -0.89,  -0.60)  SG Improvement:-0.01332 
+
+Goal, Curr: (-0.96,  0.94), ( -0.62,  -0.61)   Error: 1.58
+Last SG, Last State: ( -1.38,  -0.45), ( -0.61,  -0.60)  SG Improvement:-0.04113 
+
+Goal, Curr: (-0.99,  0.89), ( -1.40,  -0.60)   Error: 1.55
+Last SG, Last State: ( -1.58,   0.41), ( -1.37,  -0.60)  SG Improvement:0.24339 
+
+Goal, Curr: (-1.18,  1.09), ( -0.74,  -0.60)   Error: 1.75
+Last SG, Last State: ( -1.42,  -0.79), ( -0.75,  -0.60)  SG Improvement:-0.01417 
+
+Goal, Curr: (-1.13,  1.18), ( -0.64,  -0.60)   Error: 1.85
+Last SG, Last State: ( -2.33,  -1.88), ( -0.66,  -0.60)  SG Improvement:-0.82255 
+
+Goal, Curr: (-0.87,  1.08), ( -1.39,  -0.60)   Error: 1.76
+Last SG, Last State: ( -1.92,  -0.65), ( -1.34,  -0.60)  SG Improvement:-0.03034 
+
+Goal, Curr: (-1.11,  0.98), ( -0.68,  -0.60)   Error: 1.64
+Last SG, Last State: ( -0.41,   0.13), ( -0.87,  -0.60)  SG Improvement:-0.53489 
+
+episode:02900, mean:0.33, std:0.14, median:0.34, success:0.00
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Tiny reward, what happened?
+Goal, Curr: (-1.06,  0.87), (  0.33,  -0.60)   Error: 2.03
+Last SG, Last State: ( -1.44,  -0.82), (  0.04,  -0.60)  SG Improvement:-0.05726 
+
+Goal, Curr: (-0.95,  0.76), (  0.73,  -0.02)   Error: 1.85
+Last SG, Last State: ( -1.35,  -1.07), (  0.58,  -0.55)  SG Improvement:-0.36821 
+
+Goal, Curr: (-1.24,  0.79), (  0.73,  -0.43)   Error: 2.32
+Last SG, Last State: ( -1.31,  -0.94), (  0.52,  -0.60)  SG Improvement:-0.06136 
+
+Goal, Curr: (-1.20,  1.24), ( -0.13,  -0.60)   Error: 2.13
+Last SG, Last State: ( -1.50,  -0.93), ( -0.30,  -0.60)  SG Improvement:-0.02509 
+
+Goal, Curr: (-1.23,  1.14), ( -0.17,  -0.60)   Error: 2.03
+Last SG, Last State: ( -1.48,  -0.92), ( -0.34,  -0.60)  SG Improvement:-0.01637 
+
+Goal, Curr: (-1.03,  1.15), ( -0.37,  -0.60)   Error: 1.87
+Last SG, Last State: ( -1.53,  -0.99), ( -0.49,  -0.60)  SG Improvement:0.02390 
+
+Goal, Curr: (-0.86,  1.15), ( -0.54,  -0.60)   Error: 1.78
+Last SG, Last State: ( -1.65,  -1.06), ( -0.62,  -0.60)  SG Improvement:-0.02084 
+
+Goal, Curr: (-1.07,  0.78), ( -0.38,  -0.60)   Error: 1.54
+Last SG, Last State: ( -1.50,  -0.82), ( -0.52,  -0.60)  SG Improvement:-0.01792 
+
+Goal, Curr: (-1.14,  0.80), ( -0.10,  -0.60)   Error: 1.74
+Last SG, Last State: ( -1.39,  -0.64), ( -0.32,  -0.60)  SG Improvement:0.01010 
+
+Goal, Curr: (-0.86,  0.93), ( -0.32,  -0.60)   Error: 1.62
+Last SG, Last State: ( -1.55,  -0.78), ( -0.47,  -0.60)  SG Improvement:-0.00128 
+
+episode:03000, mean:0.09, std:0.33, median:0.16, success:0.00

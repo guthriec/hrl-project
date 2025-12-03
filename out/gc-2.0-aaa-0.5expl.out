@@ -1,0 +1,940 @@
+Using device: cpu
+gc-2.0-aaa-0.5expl
+Goal, Curr: (-0.87,  0.75), ( -0.32,  -0.60)   Error: 1.46
+Last SG, Last State: (  1.42,  -1.81), ( -0.45,  -0.60)  SG Improvement:0.03587 
+
+Goal, Curr: (-0.87,  1.01), (  0.01,  -0.60)   Error: 1.84
+Last SG, Last State: (  1.78,  -2.12), ( -0.10,  -0.60)  SG Improvement:0.04090 
+
+Goal, Curr: (-1.01,  0.75), (  0.10,  -0.60)   Error: 1.75
+Last SG, Last State: (  1.88,  -2.15), ( -0.01,  -0.60)  SG Improvement:0.04618 
+
+Goal, Curr: (-0.94,  1.06), (  0.28,  -0.60)   Error: 2.06
+Last SG, Last State: (  2.09,  -2.29), (  0.19,  -0.60)  SG Improvement:0.03886 
+
+Goal, Curr: (-0.80,  0.88), (  0.30,  -0.60)   Error: 1.84
+Last SG, Last State: (  2.12,  -2.26), (  0.22,  -0.60)  SG Improvement:0.04086 
+
+Goal, Curr: (-0.83,  1.19), (  0.28,  -0.60)   Error: 2.11
+Last SG, Last State: (  2.08,  -2.29), (  0.18,  -0.60)  SG Improvement:0.03910 
+
+Goal, Curr: (-1.22,  1.04), (  0.01,  -0.60)   Error: 2.05
+Last SG, Last State: (  1.77,  -2.19), ( -0.11,  -0.60)  SG Improvement:0.04162 
+
+Goal, Curr: (-1.22,  1.16), ( -0.01,  -0.60)   Error: 2.13
+Last SG, Last State: (  1.74,  -2.20), ( -0.13,  -0.60)  SG Improvement:0.04456 
+
+Goal, Curr: (-0.80,  1.02), (  0.02,  -0.60)   Error: 1.82
+Last SG, Last State: (  1.79,  -2.11), ( -0.09,  -0.60)  SG Improvement:0.04143 
+
+Goal, Curr: (-0.92,  0.97), ( -0.06,  -0.60)   Error: 1.79
+Last SG, Last State: (  1.70,  -2.08), ( -0.18,  -0.60)  SG Improvement:0.04009 
+
+episode:00100, mean:0.07, std:0.18, median:0.00, success:0.00
+Goal, Curr: (-0.77,  1.08), (  1.40,  -0.01)   Error: 2.43
+Last SG, Last State: (  2.92,   1.22), (  1.40,  -0.13)  SG Improvement:-2.40085 
+
+Goal, Curr: (-0.79,  0.76), (  1.40,   1.37)   Error: 2.27
+Last SG, Last State: (  3.40,   0.94), (  1.40,   1.26)  SG Improvement:-0.31592 
+
+Goal, Curr: (-1.23,  0.76), (  1.41,  -0.31)   Error: 2.84
+Last SG, Last State: (  2.32,   1.17), (  0.90,  -0.58)  SG Improvement:0.66336 
+
+Goal, Curr: (-0.90,  1.12), (  1.40,  -0.59)   Error: 2.87
+Last SG, Last State: (  3.31,  -2.79), (  1.36,  -0.83)  SG Improvement:-0.44736 
+
+Goal, Curr: (-0.97,  0.76), (  1.40,   0.00)   Error: 2.48
+Last SG, Last State: (  3.37,  -2.19), (  1.40,  -0.43)  SG Improvement:0.39146 
+
+Goal, Curr: (-0.94,  1.05), (  1.40,  -0.45)   Error: 2.77
+Last SG, Last State: (  3.31,  -2.73), (  1.34,  -0.70)  SG Improvement:-0.40625 
+
+Goal, Curr: (-1.04,  1.10), (  1.40,  -0.06)   Error: 2.70
+Last SG, Last State: (  3.40,  -2.52), (  1.40,  -0.39)  SG Improvement:-0.01906 
+
+Goal, Curr: (-0.86,  0.92), (  1.41,   0.52)   Error: 2.31
+Last SG, Last State: (  3.40,  -1.79), (  1.40,   0.14)  SG Improvement:0.17878 
+
+Goal, Curr: (-1.06,  0.90), (  1.40,  -0.33)   Error: 2.75
+Last SG, Last State: (  2.46,   1.22), (  1.03,  -0.47)  SG Improvement:0.64621 
+
+Goal, Curr: (-1.11,  0.87), (  1.40,   0.25)   Error: 2.59
+Last SG, Last State: (  3.40,  -2.04), (  1.40,  -0.16)  SG Improvement:0.15054 
+
+episode:00200, mean:-0.57, std:0.24, median:-0.57, success:0.00
+Log radii:  [ 0.6931472   0.6931472  -0.6931472   0.6931472   0.6931472  -0.51666415]
+Adjusted log radii:  [1.88314724 2.48314714 2.59685278 1.28314722 1.88314724 1.57333589]
+Goal, Curr: (-1.03,  1.15), (  1.37,   1.38)   Error: 2.41
+Last SG, Last State: (  3.40,   3.37), (  1.37,   1.40)  SG Improvement:-1.76090 
+
+Goal, Curr: (-0.89,  0.86), (  1.40,   0.92)   Error: 2.29
+Last SG, Last State: (  3.40,   2.06), (  1.40,   0.47)  SG Improvement:0.42223 
+
+Goal, Curr: (-0.86,  1.12), (  1.38,   1.40)   Error: 2.26
+Last SG, Last State: (  3.40,   2.75), (  1.40,   1.23)  SG Improvement:0.22101 
+
+Goal, Curr: (-1.03,  1.07), (  1.38,   1.40)   Error: 2.43
+Last SG, Last State: (  3.40,   2.81), (  1.40,   1.29)  SG Improvement:0.09450 
+
+Goal, Curr: (-0.79,  1.19), (  1.40,   1.03)   Error: 2.19
+Last SG, Last State: (  3.40,   2.14), (  1.40,   0.57)  SG Improvement:0.42671 
+
+Goal, Curr: (-0.82,  0.95), (  1.38,   1.40)   Error: 2.24
+Last SG, Last State: (  3.40,   2.84), (  1.40,   1.31)  SG Improvement:0.08191 
+
+Goal, Curr: (-0.99,  1.08), (  1.38,   1.40)   Error: 2.39
+Last SG, Last State: (  3.40,   2.80), (  1.40,   1.30)  SG Improvement:0.51289 
+
+Goal, Curr: (-0.84,  0.87), (  1.39,   1.40)   Error: 2.30
+Last SG, Last State: (  3.40,   2.58), (  1.40,   1.04)  SG Improvement:0.09342 
+
+Goal, Curr: (-0.84,  0.88), (  1.39,   1.40)   Error: 2.28
+Last SG, Last State: (  3.40,   2.73), (  1.40,   1.20)  SG Improvement:0.07989 
+
+Goal, Curr: (-1.00,  0.94), (  1.38,   1.40)   Error: 2.42
+Last SG, Last State: (  3.40,   2.83), (  1.40,   1.31)  SG Improvement:0.08587 
+
+episode:00300, mean:-0.31, std:0.18, median:-0.22, success:0.00
+Goal, Curr: (-0.86,  0.86), (  1.24,   1.40)   Error: 2.17
+Last SG, Last State: (  3.40,   3.36), (  1.30,   1.40)  SG Improvement:-2.18096 
+
+Goal, Curr: (-1.15,  0.85), (  1.29,   1.40)   Error: 2.51
+Last SG, Last State: (  3.40,   2.87), (  1.40,   1.40)  SG Improvement:0.33658 
+
+Goal, Curr: (-1.21,  1.22), (  1.13,   1.40)   Error: 2.34
+Last SG, Last State: (  3.40,   3.11), (  1.34,   1.40)  SG Improvement:-2.08207 
+
+Goal, Curr: (-1.02,  0.92), (  1.33,   1.40)   Error: 2.39
+Last SG, Last State: (  3.40,   2.76), (  1.40,   1.28)  SG Improvement:0.29674 
+
+Goal, Curr: (-0.83,  0.95), (  1.39,   1.40)   Error: 2.27
+Last SG, Last State: (  3.40,   2.44), (  1.40,   0.92)  SG Improvement:0.27089 
+
+Goal, Curr: (-1.16,  0.83), (  1.40,   1.41)   Error: 2.63
+Last SG, Last State: (  3.40,   2.41), (  1.40,   0.87)  SG Improvement:0.26731 
+
+Goal, Curr: (-1.21,  1.10), (  1.32,   1.40)   Error: 2.55
+Last SG, Last State: (  3.40,   3.05), (  1.37,   1.40)  SG Improvement:-2.03854 
+
+Goal, Curr: (-0.75,  1.10), (  0.99,   1.40)   Error: 1.77
+Last SG, Last State: (  3.36,   3.40), (  1.16,   1.40)  SG Improvement:-0.58617 
+
+Goal, Curr: (-0.91,  1.15), (  1.31,   1.40)   Error: 2.24
+Last SG, Last State: (  3.40,   2.80), (  1.40,   1.33)  SG Improvement:0.28481 
+
+Goal, Curr: (-0.93,  0.83), (  1.39,   1.40)   Error: 2.39
+Last SG, Last State: (  3.40,   2.48), (  1.40,   0.94)  SG Improvement:0.27262 
+
+episode:00400, mean:-0.29, std:0.35, median:-0.26, success:0.00
+Goal, Curr: (-0.96,  0.77), (  1.40,   1.40)   Error: 2.44
+Last SG, Last State: (  3.40,   3.02), (  1.40,   1.40)  SG Improvement:-1.33157 
+
+Goal, Curr: (-0.85,  1.21), (  1.40,   1.40)   Error: 2.25
+Last SG, Last State: (  3.40,   2.59), (  1.40,   1.11)  SG Improvement:0.01871 
+
+Goal, Curr: (-1.09,  0.90), (  1.40,   1.40)   Error: 2.54
+Last SG, Last State: (  3.40,   3.31), (  1.40,   1.40)  SG Improvement:-1.53168 
+
+Goal, Curr: (-0.99,  1.09), (  1.39,   1.40)   Error: 2.40
+Last SG, Last State: (  3.41,   2.55), (  1.40,   1.09)  SG Improvement:0.11046 
+
+Goal, Curr: (-0.76,  0.96), (  1.40,   1.40)   Error: 2.21
+Last SG, Last State: (  3.40,   2.95), (  1.40,   1.40)  SG Improvement:-1.53629 
+
+Goal, Curr: (-1.20,  0.96), (  1.40,   1.40)   Error: 2.63
+Last SG, Last State: (  3.40,   2.61), (  1.40,   1.10)  SG Improvement:0.23042 
+
+Goal, Curr: (-0.88,  1.15), (  1.40,   1.40)   Error: 2.29
+Last SG, Last State: (  3.40,   2.60), (  1.40,   1.08)  SG Improvement:0.20082 
+
+Goal, Curr: (-1.12,  0.97), (  1.40,   1.40)   Error: 2.56
+Last SG, Last State: (  3.40,   3.31), (  1.40,   1.40)  SG Improvement:-1.56484 
+
+Goal, Curr: (-0.90,  1.15), (  1.40,   1.40)   Error: 2.31
+Last SG, Last State: (  3.40,   2.57), (  1.40,   1.09)  SG Improvement:0.02175 
+
+Goal, Curr: (-1.21,  0.88), (  1.40,   1.40)   Error: 2.66
+Last SG, Last State: (  3.40,   3.40), (  1.40,   1.40)  SG Improvement:0.01570 
+
+episode:00500, mean:-0.41, std:0.35, median:-0.38, success:0.00
+Goal, Curr: (-0.77,  1.17), (  1.40,  -0.57)   Error: 2.78
+Last SG, Last State: (  3.40,   1.40), (  1.40,  -0.58)  SG Improvement:0.00484 
+
+Goal, Curr: (-0.86,  1.15), (  1.40,  -1.40)   Error: 3.40
+Last SG, Last State: (  3.40,   0.60), (  1.40,  -1.40)  SG Improvement:-0.00033 
+
+Goal, Curr: (-0.97,  1.04), (  1.40,  -1.40)   Error: 3.40
+Last SG, Last State: (  3.40,   0.60), (  1.40,  -1.40)  SG Improvement:-0.00113 
+
+Goal, Curr: (-1.07,  0.76), (  1.40,  -1.40)   Error: 3.28
+Last SG, Last State: (  3.40,   0.60), (  1.40,  -1.40)  SG Improvement:-0.00019 
+
+Goal, Curr: (-0.95,  0.88), (  1.40,  -1.40)   Error: 3.27
+Last SG, Last State: (  3.40,   0.60), (  1.40,  -1.40)  SG Improvement:-0.00078 
+
+Goal, Curr: (-0.84,  0.79), (  1.40,  -1.40)   Error: 3.14
+Last SG, Last State: (  3.40,   0.60), (  1.40,  -1.40)  SG Improvement:-0.00133 
+
+Goal, Curr: (-1.16,  1.11), (  1.40,  -0.85)   Error: 3.23
+Last SG, Last State: (  3.40,   1.15), (  1.40,  -0.85)  SG Improvement:0.00495 
+
+Goal, Curr: (-1.18,  0.85), (  1.40,  -0.97)   Error: 3.16
+Last SG, Last State: (  3.40,   1.05), (  1.40,  -0.96)  SG Improvement:0.00685 
+
+Goal, Curr: (-1.09,  1.20), (  1.40,  -1.40)   Error: 3.60
+Last SG, Last State: (  3.40,   0.60), (  1.40,  -1.40)  SG Improvement:0.00158 
+
+Goal, Curr: (-1.06,  1.22), (  1.40,  -0.73)   Error: 3.14
+Last SG, Last State: (  3.40,   1.26), (  1.40,  -0.73)  SG Improvement:0.00492 
+
+episode:00600, mean:-1.25, std:0.26, median:-1.23, success:0.00
+Goal, Curr: (-0.78,  1.00), (  1.39,   1.40)   Error: 2.20
+Last SG, Last State: ( -0.58,   2.84), (  1.40,   1.25)  SG Improvement:0.05858 
+
+Goal, Curr: (-0.86,  1.16), (  1.37,   1.40)   Error: 2.25
+Last SG, Last State: ( -0.58,   2.94), (  1.40,   1.37)  SG Improvement:0.07778 
+
+Goal, Curr: (-1.00,  1.16), (  1.40,   1.40)   Error: 2.41
+Last SG, Last State: ( -0.35,   3.40), (  1.40,   1.40)  SG Improvement:-0.19384 
+
+Goal, Curr: (-1.05,  0.77), (  1.40,   1.40)   Error: 2.53
+Last SG, Last State: ( -0.58,   3.08), (  1.40,   1.40)  SG Improvement:-0.52784 
+
+Goal, Curr: (-1.11,  1.24), (  1.40,   1.40)   Error: 2.52
+Last SG, Last State: ( -0.59,   3.08), (  1.40,   1.40)  SG Improvement:-0.59215 
+
+Goal, Curr: (-1.00,  0.77), (  1.40,   1.40)   Error: 2.48
+Last SG, Last State: ( -0.58,   3.00), (  1.40,   1.40)  SG Improvement:-0.48847 
+
+Goal, Curr: (-0.82,  1.02), (  1.40,   1.40)   Error: 2.25
+Last SG, Last State: ( -0.58,   3.29), (  1.38,   1.40)  SG Improvement:-0.69950 
+
+Goal, Curr: (-0.80,  0.91), (  1.40,   1.40)   Error: 2.25
+Last SG, Last State: ( -0.58,   3.08), (  1.40,   1.40)  SG Improvement:-0.63622 
+
+Goal, Curr: (-1.17,  1.03), (  1.40,   1.40)   Error: 2.60
+Last SG, Last State: ( -0.44,   3.40), (  1.40,   1.40)  SG Improvement:-0.22425 
+
+Goal, Curr: (-1.23,  0.95), (  1.40,   1.40)   Error: 2.66
+Last SG, Last State: ( -0.49,   3.40), (  1.40,   1.40)  SG Improvement:-0.18731 
+
+episode:00700, mean:-0.37, std:0.26, median:-0.39, success:0.00
+Goal, Curr: (-1.10,  0.83), (  1.31,  -1.12)   Error: 3.09
+Last SG, Last State: (  1.54,   1.48), (  1.21,  -0.90)  SG Improvement:0.23396 
+
+Goal, Curr: (-0.81,  0.82), (  1.28,  -0.91)   Error: 2.72
+Last SG, Last State: (  1.40,   1.65), (  1.16,  -0.64)  SG Improvement:0.30065 
+
+Goal, Curr: (-0.94,  0.97), (  1.23,  -0.77)   Error: 2.79
+Last SG, Last State: (  1.65,   1.20), (  1.24,  -0.91)  SG Improvement:-0.18626 
+
+Goal, Curr: (-1.10,  0.98), (  1.29,  -0.80)   Error: 2.98
+Last SG, Last State: (  1.67,   1.07), (  1.31,  -0.97)  SG Improvement:-0.16078 
+
+Goal, Curr: (-0.79,  1.24), (  1.24,  -0.87)   Error: 2.92
+Last SG, Last State: (  1.31,   1.72), (  1.11,  -0.56)  SG Improvement:0.41519 
+
+Goal, Curr: (-0.80,  0.98), (  1.27,  -0.91)   Error: 2.80
+Last SG, Last State: (  1.53,   1.48), (  1.26,  -0.84)  SG Improvement:0.08976 
+
+Goal, Curr: (-1.02,  1.13), (  1.27,  -0.96)   Error: 3.10
+Last SG, Last State: (  1.42,   1.65), (  1.12,  -0.64)  SG Improvement:0.39901 
+
+Goal, Curr: (-0.87,  0.90), (  1.34,  -1.04)   Error: 2.94
+Last SG, Last State: (  1.52,   1.59), (  1.20,  -0.78)  SG Improvement:0.30825 
+
+Goal, Curr: (-1.12,  0.80), (  1.33,  -1.07)   Error: 3.08
+Last SG, Last State: (  1.62,   1.27), (  1.32,  -1.02)  SG Improvement:-0.02235 
+
+Goal, Curr: (-1.15,  0.98), (  1.31,  -0.84)   Error: 3.06
+Last SG, Last State: (  1.72,   1.02), (  1.34,  -1.02)  SG Improvement:-0.15769 
+
+episode:00800, mean:-0.96, std:0.23, median:-0.92, success:0.00
+Goal, Curr: (-0.80,  1.00), (  1.40,   1.40)   Error: 2.23
+Last SG, Last State: (  0.75,   3.29), (  1.39,   1.40)  SG Improvement:0.18828 
+
+Goal, Curr: (-0.98,  1.11), (  1.40,   1.40)   Error: 2.40
+Last SG, Last State: (  0.83,   3.34), (  1.37,   1.40)  SG Improvement:0.16090 
+
+Goal, Curr: (-0.87,  1.16), (  1.40,   1.40)   Error: 2.28
+Last SG, Last State: (  0.52,   3.22), (  1.34,   1.40)  SG Improvement:0.07115 
+
+Goal, Curr: (-1.11,  1.15), (  1.40,   1.40)   Error: 2.52
+Last SG, Last State: (  0.85,   3.36), (  1.36,   1.40)  SG Improvement:0.15003 
+
+Goal, Curr: (-1.23,  0.92), (  1.40,   1.40)   Error: 2.67
+Last SG, Last State: (  0.75,   3.29), (  1.35,   1.40)  SG Improvement:0.20141 
+
+Goal, Curr: (-1.21,  1.15), (  1.40,   1.40)   Error: 2.62
+Last SG, Last State: (  0.79,   3.34), (  1.36,   1.40)  SG Improvement:0.13202 
+
+Goal, Curr: (-1.21,  1.08), (  1.40,   1.40)   Error: 2.63
+Last SG, Last State: (  0.80,   3.33), (  1.36,   1.40)  SG Improvement:0.15529 
+
+Goal, Curr: (-1.10,  0.90), (  1.40,   1.40)   Error: 2.54
+Last SG, Last State: (  0.77,   3.28), (  1.36,   1.40)  SG Improvement:0.21906 
+
+Goal, Curr: (-0.77,  0.98), (  1.40,   1.40)   Error: 2.21
+Last SG, Last State: (  0.75,   3.30), (  1.33,   1.40)  SG Improvement:0.21393 
+
+Goal, Curr: (-1.19,  0.84), (  1.40,   1.40)   Error: 2.65
+Last SG, Last State: (  0.76,   3.26), (  1.33,   1.40)  SG Improvement:0.23991 
+
+episode:00900, mean:-0.46, std:0.22, median:-0.50, success:0.00
+Log radii:  [ 0.16946238  0.6687492  -0.6931472  -0.6931472   0.6931472  -0.43485728]
+Adjusted log radii:  [1.9594624  2.1587491  0.49685287 1.0968529  1.28314722 1.35514283]
+Goal, Curr: (-0.91,  0.79), ( -1.36,  -0.68)   Error: 1.53
+Last SG, Last State: ( -2.22,  -1.73), ( -1.34,  -0.61)  SG Improvement:0.95933 
+
+Goal, Curr: (-1.06,  1.21), ( -1.40,  -0.61)   Error: 1.86
+Last SG, Last State: ( -1.19,  -0.64), ( -0.93,  -0.60)  SG Improvement:0.45304 
+
+Goal, Curr: (-0.92,  1.00), ( -0.88,  -0.87)   Error: 1.87
+Last SG, Last State: ( -0.48,  -1.87), ( -1.40,  -0.63)  SG Improvement:-3.28954 
+
+Goal, Curr: (-0.83,  0.99), ( -0.61,  -0.60)   Error: 1.60
+Last SG, Last State: ( -0.39,  -2.70), ( -0.44,  -0.61)  SG Improvement:0.96925 
+
+Goal, Curr: (-1.08,  0.92), ( -0.83,  -0.82)   Error: 1.76
+Last SG, Last State: ( -2.20,   0.22), ( -1.40,  -0.65)  SG Improvement:-5.84579 
+
+Goal, Curr: (-1.11,  0.96), ( -1.36,  -0.68)   Error: 1.65
+Last SG, Last State: ( -2.18,   0.22), ( -1.36,  -0.67)  SG Improvement:-3.31469 
+
+Goal, Curr: (-1.01,  0.97), ( -1.13,  -0.60)   Error: 1.58
+Last SG, Last State: ( -2.35,   0.49), ( -1.38,  -0.67)  SG Improvement:-5.10206 
+
+Goal, Curr: (-0.87,  1.04), ( -1.36,  -0.67)   Error: 1.77
+Last SG, Last State: ( -2.27,  -1.45), ( -1.34,  -0.61)  SG Improvement:1.16179 
+
+Goal, Curr: (-1.03,  0.98), ( -0.92,  -0.60)   Error: 1.58
+Last SG, Last State: (  0.11,   0.55), ( -0.46,  -0.60)  SG Improvement:-2.18970 
+
+Goal, Curr: (-1.01,  1.20), ( -0.86,  -0.88)   Error: 2.09
+Last SG, Last State: ( -1.86,  -1.22), ( -1.40,  -0.64)  SG Improvement:-2.46723 
+
+episode:01000, mean:0.30, std:0.14, median:0.29, success:0.00
+Goal, Curr: (-1.22,  0.89), (  0.22,  -0.60)   Error: 2.07
+Last SG, Last State: ( -0.81,  -0.43), ( -0.13,  -0.60)  SG Improvement:0.37809 
+
+Goal, Curr: (-1.22,  1.03), (  0.60,   0.15)   Error: 2.03
+Last SG, Last State: (  0.14,   0.17), (  0.61,  -0.45)  SG Improvement:0.98353 
+
+Goal, Curr: (-0.80,  0.97), (  0.58,   0.67)   Error: 1.42
+Last SG, Last State: (  1.12,   1.00), (  0.60,   0.08)  SG Improvement:-0.62072 
+
+Goal, Curr: (-0.90,  0.94), (  0.32,  -0.60)   Error: 1.97
+Last SG, Last State: ( -0.70,  -0.44), ( -0.03,  -0.60)  SG Improvement:0.36055 
+
+Goal, Curr: (-1.20,  1.21), ( -0.67,  -0.60)   Error: 1.89
+Last SG, Last State: ( -1.24,  -0.80), ( -0.49,  -0.60)  SG Improvement:-0.16198 
+
+Goal, Curr: (-1.03,  0.86), (  0.70,   0.30)   Error: 1.82
+Last SG, Last State: (  0.37,   0.14), (  0.64,  -0.29)  SG Improvement:0.76959 
+
+Goal, Curr: (-0.98,  0.93), (  0.37,  -0.60)   Error: 2.04
+Last SG, Last State: ( -0.65,  -0.39), ( -0.00,  -0.60)  SG Improvement:0.36586 
+
+Goal, Curr: (-0.84,  0.85), (  0.69,  -0.19)   Error: 1.85
+Last SG, Last State: (  0.01,   0.04), (  0.43,  -0.60)  SG Improvement:0.54515 
+
+Goal, Curr: (-0.75,  0.81), (  0.64,   0.43)   Error: 1.44
+Last SG, Last State: (  1.72,   0.81), (  0.60,  -0.16)  SG Improvement:-1.08519 
+
+Goal, Curr: (-0.91,  1.19), (  0.60,   0.23)   Error: 1.78
+Last SG, Last State: (  0.42,   0.05), (  0.65,  -0.30)  SG Improvement:1.01673 
+
+episode:01100, mean:0.21, std:0.28, median:0.11, success:0.00
+Goal, Curr: (-1.05,  0.88), ( -1.40,  -0.60)   Error: 1.52
+Last SG, Last State: ( -1.88,  -1.30), ( -1.40,  -0.60)  SG Improvement:-0.00142 
+
+Goal, Curr: (-0.91,  1.03), ( -1.40,  -0.60)   Error: 1.70
+Last SG, Last State: ( -1.88,  -1.35), ( -1.40,  -0.60)  SG Improvement:0.00085 
+
+Goal, Curr: (-1.00,  1.18), ( -1.40,  -0.60)   Error: 1.82
+Last SG, Last State: ( -1.75,  -1.29), ( -1.40,  -0.60)  SG Improvement:-0.00315 
+
+Goal, Curr: (-0.89,  1.01), ( -1.40,  -0.60)   Error: 1.69
+Last SG, Last State: ( -1.89,  -1.35), ( -1.40,  -0.60)  SG Improvement:0.00121 
+
+Goal, Curr: (-0.87,  1.11), ( -1.40,  -0.60)   Error: 1.79
+Last SG, Last State: ( -1.86,  -1.35), ( -1.40,  -0.60)  SG Improvement:0.00374 
+
+Goal, Curr: (-1.18,  1.03), ( -1.40,  -0.60)   Error: 1.64
+Last SG, Last State: ( -1.74,  -1.22), ( -1.40,  -0.60)  SG Improvement:0.00047 
+
+Goal, Curr: (-0.99,  1.06), ( -1.40,  -0.60)   Error: 1.71
+Last SG, Last State: ( -1.81,  -1.31), ( -1.40,  -0.60)  SG Improvement:-0.00030 
+
+Goal, Curr: (-0.77,  0.80), ( -1.40,  -0.60)   Error: 1.54
+Last SG, Last State: ( -2.03,  -1.43), ( -1.40,  -0.60)  SG Improvement:0.00006 
+
+Goal, Curr: (-0.81,  1.18), ( -1.40,  -0.60)   Error: 1.87
+Last SG, Last State: ( -1.85,  -1.37), ( -1.40,  -0.60)  SG Improvement:0.00139 
+
+Goal, Curr: (-0.83,  1.16), ( -1.40,  -0.60)   Error: 1.85
+Last SG, Last State: ( -1.84,  -1.37), ( -1.40,  -0.60)  SG Improvement:0.00011 
+
+episode:01200, mean:0.31, std:0.14, median:0.34, success:0.00
+Goal, Curr: (-0.84,  0.91), ( -1.40,  -0.70)   Error: 1.71
+Last SG, Last State: ( -3.22,   0.41), ( -1.40,  -0.60)  SG Improvement:-0.21119 
+
+Goal, Curr: (-0.83,  0.92), ( -1.34,  -0.73)   Error: 1.73
+Last SG, Last State: ( -1.26,   0.57), ( -1.40,  -0.71)  SG Improvement:0.22312 
+
+Goal, Curr: (-1.01,  0.89), ( -1.38,  -0.68)   Error: 1.61
+Last SG, Last State: ( -1.26,   0.71), ( -1.40,  -0.61)  SG Improvement:0.35640 
+
+Goal, Curr: (-0.86,  0.86), ( -1.40,  -1.02)   Error: 1.95
+Last SG, Last State: ( -1.31,   0.47), ( -1.40,  -0.77)  SG Improvement:-1.93016 
+
+Goal, Curr: (-1.20,  1.22), ( -1.40,  -0.97)   Error: 2.20
+Last SG, Last State: ( -1.23,   0.64), ( -1.40,  -0.72)  SG Improvement:-1.65750 
+
+Goal, Curr: (-0.80,  0.77), ( -1.40,  -0.97)   Error: 1.83
+Last SG, Last State: ( -1.36,   0.45), ( -1.40,  -0.73)  SG Improvement:-2.11704 
+
+Goal, Curr: (-0.84,  0.91), ( -1.40,  -0.60)   Error: 1.62
+Last SG, Last State: ( -2.73,   0.64), ( -1.36,  -0.82)  SG Improvement:-0.23367 
+
+Goal, Curr: (-0.82,  0.97), ( -1.40,  -0.60)   Error: 1.67
+Last SG, Last State: ( -1.34,   0.55), ( -1.38,  -0.70)  SG Improvement:-2.40166 
+
+Goal, Curr: (-0.80,  1.03), ( -1.40,  -0.60)   Error: 1.74
+Last SG, Last State: ( -1.34,   0.55), ( -1.38,  -0.70)  SG Improvement:-2.40418 
+
+Goal, Curr: (-0.88,  0.79), ( -1.40,  -0.66)   Error: 1.54
+Last SG, Last State: ( -1.88,   0.52), ( -1.40,  -0.63)  SG Improvement:0.80720 
+
+episode:01300, mean:0.13, std:0.17, median:0.14, success:0.00
+Goal, Curr: (-1.10,  1.08), ( -1.40,  -0.72)   Error: 1.82
+Last SG, Last State: ( -1.59,   0.45), ( -1.40,  -0.61)  SG Improvement:0.30774 
+
+Goal, Curr: (-0.78,  1.20), ( -1.38,  -0.78)   Error: 2.08
+Last SG, Last State: ( -2.07,   0.02), ( -1.40,  -0.68)  SG Improvement:-0.79390 
+
+Goal, Curr: (-0.91,  0.93), ( -1.40,  -0.61)   Error: 1.62
+Last SG, Last State: ( -3.36,   0.38), ( -1.40,  -0.60)  SG Improvement:-0.40755 
+
+Goal, Curr: (-0.85,  1.01), ( -1.40,  -0.60)   Error: 1.71
+Last SG, Last State: ( -2.03,   0.29), ( -1.37,  -0.73)  SG Improvement:-2.42909 
+
+Goal, Curr: (-0.94,  1.08), ( -1.40,  -0.62)   Error: 1.77
+Last SG, Last State: ( -3.36,   0.30), ( -1.40,  -0.60)  SG Improvement:-0.35256 
+
+Goal, Curr: (-0.96,  0.81), ( -1.37,  -0.78)   Error: 1.65
+Last SG, Last State: ( -1.68,   0.51), ( -1.40,  -0.66)  SG Improvement:0.11621 
+
+Goal, Curr: (-1.00,  0.92), ( -1.40,  -0.60)   Error: 1.57
+Last SG, Last State: ( -3.35,  -0.51), ( -1.33,  -0.81)  SG Improvement:-0.69867 
+
+Goal, Curr: (-0.99,  0.97), ( -1.35,  -0.73)   Error: 1.74
+Last SG, Last State: ( -2.06,   0.12), ( -1.39,  -0.71)  SG Improvement:-2.54106 
+
+Goal, Curr: (-0.84,  0.92), ( -1.37,  -0.72)   Error: 1.72
+Last SG, Last State: ( -1.65,   0.53), ( -1.40,  -0.61)  SG Improvement:0.39363 
+
+Goal, Curr: (-1.03,  1.09), ( -1.40,  -0.63)   Error: 1.76
+Last SG, Last State: ( -3.36,   0.24), ( -1.40,  -0.60)  SG Improvement:-0.32445 
+
+episode:01400, mean:0.29, std:0.08, median:0.27, success:0.00
+Goal, Curr: (-0.94,  1.19), ( -1.33,  -0.66)   Error: 1.89
+Last SG, Last State: ( -3.37,   0.64), ( -1.40,  -0.61)  SG Improvement:0.05781 
+
+Goal, Curr: (-0.79,  1.10), ( -1.40,  -0.60)   Error: 1.81
+Last SG, Last State: ( -2.91,   0.48), ( -1.33,  -0.67)  SG Improvement:-0.52924 
+
+Goal, Curr: (-1.11,  1.06), ( -1.33,  -0.68)   Error: 1.76
+Last SG, Last State: ( -3.38,   0.59), ( -1.40,  -0.62)  SG Improvement:0.12474 
+
+Goal, Curr: (-1.07,  1.09), ( -1.33,  -0.69)   Error: 1.79
+Last SG, Last State: ( -3.38,   0.60), ( -1.40,  -0.62)  SG Improvement:0.08929 
+
+Goal, Curr: (-1.23,  0.79), ( -1.33,  -0.68)   Error: 1.47
+Last SG, Last State: ( -3.38,   0.58), ( -1.40,  -0.62)  SG Improvement:0.07488 
+
+Goal, Curr: (-0.95,  1.03), ( -1.40,  -0.65)   Error: 1.74
+Last SG, Last State: ( -3.36,   0.68), ( -1.40,  -0.60)  SG Improvement:-0.39816 
+
+Goal, Curr: (-0.86,  0.85), ( -1.33,  -0.66)   Error: 1.58
+Last SG, Last State: ( -3.37,   0.60), ( -1.40,  -0.61)  SG Improvement:0.05135 
+
+Goal, Curr: (-0.82,  1.09), ( -1.40,  -0.63)   Error: 1.82
+Last SG, Last State: ( -3.31,   0.46), ( -1.40,  -0.60)  SG Improvement:-1.50386 
+
+Goal, Curr: (-1.17,  0.89), ( -1.33,  -0.68)   Error: 1.58
+Last SG, Last State: ( -3.38,   0.57), ( -1.40,  -0.62)  SG Improvement:0.12412 
+
+Goal, Curr: (-1.17,  0.97), ( -1.33,  -0.79)   Error: 1.76
+Last SG, Last State: ( -2.48,   0.62), ( -1.40,  -0.72)  SG Improvement:-0.05078 
+
+episode:01500, mean:0.27, std:0.13, median:0.28, success:0.00
+Goal, Curr: (-0.92,  1.02), ( -1.40,  -0.81)   Error: 1.89
+Last SG, Last State: ( -3.40,   0.90), ( -1.40,  -0.78)  SG Improvement:0.00652 
+
+Goal, Curr: (-1.07,  1.09), ( -1.40,  -0.84)   Error: 1.96
+Last SG, Last State: ( -3.40,   0.89), ( -1.40,  -0.82)  SG Improvement:-0.03048 
+
+Goal, Curr: (-0.81,  1.10), ( -1.40,  -0.82)   Error: 2.00
+Last SG, Last State: ( -3.40,   0.90), ( -1.40,  -0.80)  SG Improvement:0.00282 
+
+Goal, Curr: (-0.88,  1.20), ( -1.40,  -0.81)   Error: 2.07
+Last SG, Last State: ( -3.40,   0.91), ( -1.40,  -0.78)  SG Improvement:0.00631 
+
+Goal, Curr: (-0.75,  0.90), ( -1.40,  -0.82)   Error: 1.84
+Last SG, Last State: ( -3.40,   0.89), ( -1.40,  -0.80)  SG Improvement:0.00115 
+
+Goal, Curr: (-0.90,  0.80), ( -1.40,  -0.84)   Error: 1.71
+Last SG, Last State: ( -3.40,   0.88), ( -1.40,  -0.82)  SG Improvement:-0.03129 
+
+Goal, Curr: (-0.91,  0.94), ( -1.40,  -0.81)   Error: 1.82
+Last SG, Last State: ( -3.40,   0.90), ( -1.40,  -0.78)  SG Improvement:0.00653 
+
+Goal, Curr: (-0.82,  0.86), ( -1.40,  -0.82)   Error: 1.78
+Last SG, Last State: ( -3.40,   0.89), ( -1.40,  -0.80)  SG Improvement:0.00183 
+
+Goal, Curr: (-0.79,  0.98), ( -1.40,  -0.84)   Error: 1.92
+Last SG, Last State: ( -3.40,   0.89), ( -1.40,  -0.82)  SG Improvement:-0.04058 
+
+Goal, Curr: (-1.20,  0.95), ( -1.40,  -0.82)   Error: 1.78
+Last SG, Last State: ( -3.40,   0.89), ( -1.40,  -0.80)  SG Improvement:0.00216 
+
+episode:01600, mean:0.10, std:0.12, median:0.11, success:0.00
+Goal, Curr: (-0.92,  1.18), ( -1.40,  -0.60)   Error: 1.84
+Last SG, Last State: ( -3.40,   0.82), ( -1.40,  -0.60)  SG Improvement:-0.00340 
+
+Goal, Curr: (-0.86,  0.76), ( -1.40,  -0.60)   Error: 1.47
+Last SG, Last State: ( -3.40,   0.80), ( -1.40,  -0.60)  SG Improvement:-0.00078 
+
+Goal, Curr: (-0.93,  0.82), ( -1.40,  -0.60)   Error: 1.50
+Last SG, Last State: ( -3.40,   0.80), ( -1.40,  -0.60)  SG Improvement:0.00010 
+
+Goal, Curr: (-1.02,  1.10), ( -1.40,  -0.60)   Error: 1.74
+Last SG, Last State: ( -3.27,   0.60), ( -1.40,  -0.60)  SG Improvement:0.04049 
+
+Goal, Curr: (-1.15,  0.93), ( -1.40,  -0.60)   Error: 1.55
+Last SG, Last State: ( -3.40,   0.79), ( -1.40,  -0.60)  SG Improvement:0.00022 
+
+Goal, Curr: (-0.91,  1.18), ( -1.40,  -0.60)   Error: 1.85
+Last SG, Last State: ( -3.40,   0.82), ( -1.40,  -0.60)  SG Improvement:0.00042 
+
+Goal, Curr: (-1.00,  0.85), ( -1.40,  -0.60)   Error: 1.51
+Last SG, Last State: ( -3.40,   0.79), ( -1.40,  -0.60)  SG Improvement:-0.00082 
+
+Goal, Curr: (-1.07,  1.13), ( -1.40,  -0.60)   Error: 1.77
+Last SG, Last State: ( -3.40,   0.80), ( -1.40,  -0.60)  SG Improvement:0.00044 
+
+Goal, Curr: (-0.91,  1.16), ( -1.40,  -0.63)   Error: 1.86
+Last SG, Last State: ( -3.40,   0.81), ( -1.40,  -0.63)  SG Improvement:-0.00029 
+
+Goal, Curr: (-0.91,  0.95), ( -1.40,  -0.79)   Error: 1.81
+Last SG, Last State: ( -3.18,   0.87), ( -1.40,  -0.79)  SG Improvement:0.34336 
+
+episode:01700, mean:0.36, std:0.12, median:0.36, success:0.00
+Goal, Curr: (-1.10,  1.18), ( -1.40,  -0.85)   Error: 2.05
+Last SG, Last State: ( -3.29,   0.55), ( -1.40,  -0.82)  SG Improvement:-0.02030 
+
+Goal, Curr: (-1.13,  1.04), ( -1.40,  -0.77)   Error: 1.83
+Last SG, Last State: ( -3.34,  -0.04), ( -1.40,  -0.71)  SG Improvement:-0.28626 
+
+Goal, Curr: (-0.79,  1.09), ( -1.40,  -0.88)   Error: 2.06
+Last SG, Last State: ( -3.33,   0.39), ( -1.40,  -0.83)  SG Improvement:0.00511 
+
+Goal, Curr: (-0.89,  1.22), ( -1.40,  -0.98)   Error: 2.25
+Last SG, Last State: ( -3.34,   0.37), ( -1.40,  -0.93)  SG Improvement:0.00311 
+
+Goal, Curr: (-0.90,  0.96), ( -1.40,  -0.69)   Error: 1.73
+Last SG, Last State: ( -3.32,   0.29), ( -1.40,  -0.63)  SG Improvement:0.01323 
+
+Goal, Curr: (-0.81,  1.03), ( -1.40,  -0.84)   Error: 1.96
+Last SG, Last State: ( -3.33,   0.40), ( -1.40,  -0.79)  SG Improvement:0.00384 
+
+Goal, Curr: (-1.01,  0.84), ( -1.40,  -0.86)   Error: 1.74
+Last SG, Last State: ( -3.34,   0.23), ( -1.40,  -0.80)  SG Improvement:-0.09740 
+
+Goal, Curr: (-0.87,  0.97), ( -1.40,  -1.24)   Error: 2.27
+Last SG, Last State: ( -3.37,   0.19), ( -1.40,  -1.22)  SG Improvement:0.00685 
+
+Goal, Curr: (-0.84,  0.82), ( -1.40,  -1.27)   Error: 2.16
+Last SG, Last State: ( -3.38,   0.15), ( -1.40,  -1.25)  SG Improvement:0.00466 
+
+Goal, Curr: (-1.13,  1.19), ( -1.40,  -0.81)   Error: 2.02
+Last SG, Last State: ( -3.26,   0.60), ( -1.40,  -0.76)  SG Improvement:-0.38065 
+
+episode:01800, mean:0.04, std:0.23, median:0.04, success:0.00
+Goal, Curr: (-0.95,  1.11), ( -1.40,  -1.40)   Error: 2.55
+Last SG, Last State: ( -3.16,  -0.34), ( -1.40,  -1.40)  SG Improvement:-0.00187 
+
+Goal, Curr: (-0.81,  1.14), ( -1.40,  -1.40)   Error: 2.60
+Last SG, Last State: ( -3.17,  -0.35), ( -1.40,  -1.40)  SG Improvement:-0.00242 
+
+Goal, Curr: (-1.05,  0.91), ( -1.40,  -1.40)   Error: 2.34
+Last SG, Last State: ( -3.16,  -0.39), ( -1.40,  -1.40)  SG Improvement:-0.00382 
+
+Goal, Curr: (-1.17,  1.05), ( -1.40,  -1.40)   Error: 2.45
+Last SG, Last State: ( -3.12,  -0.33), ( -1.40,  -1.40)  SG Improvement:0.00227 
+
+Goal, Curr: (-1.04,  0.88), ( -1.40,  -1.40)   Error: 2.31
+Last SG, Last State: ( -3.16,  -0.39), ( -1.40,  -1.40)  SG Improvement:-0.00334 
+
+Goal, Curr: (-0.95,  1.11), ( -1.40,  -1.40)   Error: 2.55
+Last SG, Last State: ( -3.15,  -0.33), ( -1.40,  -1.40)  SG Improvement:0.00084 
+
+Goal, Curr: (-0.95,  1.14), ( -1.40,  -1.40)   Error: 2.58
+Last SG, Last State: ( -3.15,  -0.33), ( -1.40,  -1.40)  SG Improvement:-0.00067 
+
+Goal, Curr: (-0.78,  0.99), ( -1.40,  -1.40)   Error: 2.47
+Last SG, Last State: ( -3.16,  -0.37), ( -1.40,  -1.40)  SG Improvement:0.00393 
+
+Goal, Curr: (-1.02,  1.20), ( -1.40,  -1.40)   Error: 2.63
+Last SG, Last State: ( -3.14,  -0.31), ( -1.40,  -1.40)  SG Improvement:-0.00105 
+
+Goal, Curr: (-0.83,  0.86), ( -1.40,  -1.40)   Error: 2.33
+Last SG, Last State: ( -3.19,  -0.42), ( -1.40,  -1.40)  SG Improvement:-0.00357 
+
+episode:01900, mean:-0.35, std:0.13, median:-0.34, success:0.00
+Goal, Curr: (-1.05,  1.01), ( -1.40,  -1.40)   Error: 2.43
+Last SG, Last State: ( -3.10,  -0.51), ( -1.40,  -1.40)  SG Improvement:0.00000 
+
+Goal, Curr: (-1.15,  0.83), ( -1.40,  -1.40)   Error: 2.25
+Last SG, Last State: ( -3.11,  -0.53), ( -1.40,  -1.40)  SG Improvement:-0.00000 
+
+Goal, Curr: (-1.18,  1.05), ( -1.40,  -1.40)   Error: 2.46
+Last SG, Last State: ( -3.07,  -0.49), ( -1.40,  -1.40)  SG Improvement:0.00000 
+
+Goal, Curr: (-0.86,  0.87), ( -1.40,  -1.40)   Error: 2.33
+Last SG, Last State: ( -3.15,  -0.55), ( -1.40,  -1.40)  SG Improvement:-0.00000 
+
+Goal, Curr: (-0.80,  1.00), ( -1.40,  -1.40)   Error: 2.47
+Last SG, Last State: ( -3.15,  -0.53), ( -1.40,  -1.40)  SG Improvement:0.00000 
+
+Goal, Curr: (-0.85,  1.21), ( -1.40,  -1.40)   Error: 2.66
+Last SG, Last State: ( -3.12,  -0.49), ( -1.40,  -1.40)  SG Improvement:0.00039 
+
+Goal, Curr: (-0.83,  0.98), ( -1.40,  -1.40)   Error: 2.44
+Last SG, Last State: ( -3.15,  -0.53), ( -1.40,  -1.40)  SG Improvement:0.00000 
+
+Goal, Curr: (-0.97,  0.94), ( -1.40,  -1.40)   Error: 2.38
+Last SG, Last State: ( -3.13,  -0.52), ( -1.40,  -1.40)  SG Improvement:0.00000 
+
+Goal, Curr: (-1.19,  1.21), ( -1.40,  -1.40)   Error: 2.62
+Last SG, Last State: ( -3.03,  -0.46), ( -1.40,  -1.40)  SG Improvement:0.00000 
+
+Goal, Curr: (-0.89,  0.78), ( -1.40,  -1.40)   Error: 2.24
+Last SG, Last State: ( -3.15,  -0.56), ( -1.40,  -1.40)  SG Improvement:-0.00018 
+
+episode:02000, mean:-0.43, std:0.17, median:-0.42, success:0.00
+Goal, Curr: (-1.24,  1.01), ( -1.40,  -1.40)   Error: 2.42
+Last SG, Last State: ( -3.34,  -0.44), ( -1.40,  -1.40)  SG Improvement:-0.00001 
+
+Goal, Curr: (-0.87,  0.93), ( -1.40,  -1.40)   Error: 2.39
+Last SG, Last State: ( -3.37,  -0.39), ( -1.40,  -1.40)  SG Improvement:-0.00000 
+
+Goal, Curr: (-0.89,  1.14), ( -1.40,  -1.40)   Error: 2.59
+Last SG, Last State: ( -3.36,  -0.40), ( -1.40,  -1.40)  SG Improvement:-0.00000 
+
+Goal, Curr: (-1.20,  0.76), ( -1.40,  -1.40)   Error: 2.17
+Last SG, Last State: ( -3.36,  -0.41), ( -1.40,  -1.40)  SG Improvement:0.00000 
+
+Goal, Curr: (-0.99,  0.88), ( -1.40,  -1.40)   Error: 2.31
+Last SG, Last State: ( -3.37,  -0.40), ( -1.40,  -1.40)  SG Improvement:-0.00000 
+
+Goal, Curr: (-0.84,  1.07), ( -1.40,  -1.40)   Error: 2.53
+Last SG, Last State: ( -3.36,  -0.39), ( -1.40,  -1.40)  SG Improvement:-0.00000 
+
+Goal, Curr: (-1.19,  1.19), ( -1.40,  -1.40)   Error: 2.59
+Last SG, Last State: ( -3.34,  -0.45), ( -1.40,  -1.40)  SG Improvement:-0.00001 
+
+Goal, Curr: (-1.08,  1.24), ( -1.40,  -1.40)   Error: 2.65
+Last SG, Last State: ( -3.34,  -0.44), ( -1.40,  -1.40)  SG Improvement:0.00001 
+
+Goal, Curr: (-0.79,  1.04), ( -1.40,  -1.40)   Error: 2.52
+Last SG, Last State: ( -3.37,  -0.39), ( -1.40,  -1.40)  SG Improvement:0.00000 
+
+Goal, Curr: (-1.24,  1.10), ( -1.40,  -1.40)   Error: 2.51
+Last SG, Last State: ( -3.34,  -0.45), ( -1.40,  -1.40)  SG Improvement:0.00002 
+
+episode:02100, mean:-0.39, std:0.14, median:-0.41, success:0.00
+Log radii:  [ 0.15256613  0.6292758  -0.6931472  -0.6931472  -0.6931472   0.46594387]
+Adjusted log radii:  [0.44256616 2.11927581 0.79685289 2.29685283 1.39685297 1.65594387]
+Goal, Curr: (-0.99,  1.03), ( -1.40,  -1.40)   Error: 2.47
+Last SG, Last State: ( -3.39,  -0.17), ( -1.40,  -1.40)  SG Improvement:-0.00000 
+
+Goal, Curr: (-1.24,  0.79), ( -1.40,  -1.40)   Error: 2.19
+Last SG, Last State: ( -3.39,  -0.18), ( -1.40,  -1.40)  SG Improvement:0.00000 
+
+Goal, Curr: (-1.02,  0.83), ( -1.40,  -1.40)   Error: 2.26
+Last SG, Last State: ( -3.39,  -0.15), ( -1.40,  -1.40)  SG Improvement:-0.00000 
+
+Goal, Curr: (-0.95,  1.25), ( -1.40,  -1.40)   Error: 2.68
+Last SG, Last State: ( -3.39,  -0.20), ( -1.40,  -1.40)  SG Improvement:0.00000 
+
+Goal, Curr: (-1.03,  1.21), ( -1.40,  -1.40)   Error: 2.64
+Last SG, Last State: ( -3.39,  -0.21), ( -1.40,  -1.40)  SG Improvement:-0.00000 
+
+Goal, Curr: (-0.79,  1.25), ( -1.40,  -1.40)   Error: 2.72
+Last SG, Last State: ( -3.39,  -0.17), ( -1.40,  -1.40)  SG Improvement:-0.00001 
+
+Goal, Curr: (-1.21,  1.11), ( -1.40,  -1.40)   Error: 2.52
+Last SG, Last State: ( -3.39,  -0.22), ( -1.40,  -1.40)  SG Improvement:-0.00000 
+
+Goal, Curr: (-0.89,  0.79), ( -1.40,  -1.40)   Error: 2.25
+Last SG, Last State: ( -3.39,  -0.13), ( -1.40,  -1.40)  SG Improvement:-0.00000 
+
+Goal, Curr: (-0.76,  1.12), ( -1.40,  -1.40)   Error: 2.60
+Last SG, Last State: ( -3.39,  -0.15), ( -1.40,  -1.40)  SG Improvement:-0.00000 
+
+Goal, Curr: (-0.98,  1.16), ( -1.40,  -1.40)   Error: 2.59
+Last SG, Last State: ( -3.39,  -0.19), ( -1.40,  -1.40)  SG Improvement:-0.00001 
+
+episode:02200, mean:-0.43, std:0.15, median:-0.39, success:0.00
+Goal, Curr: (-0.95,  0.80), ( -1.40,  -1.40)   Error: 2.25
+Last SG, Last State: ( -3.40,   0.16), ( -1.40,  -1.40)  SG Improvement:-0.00266 
+
+Goal, Curr: (-1.04,  1.25), ( -1.40,  -1.40)   Error: 2.67
+Last SG, Last State: ( -3.40,   0.18), ( -1.40,  -1.40)  SG Improvement:-0.01093 
+
+Goal, Curr: (-0.87,  1.21), ( -1.40,  -1.40)   Error: 2.66
+Last SG, Last State: ( -3.40,   0.17), ( -1.40,  -1.40)  SG Improvement:0.00753 
+
+Goal, Curr: (-0.88,  0.98), ( -1.40,  -1.40)   Error: 2.43
+Last SG, Last State: ( -3.40,   0.18), ( -1.40,  -1.40)  SG Improvement:-0.01409 
+
+Goal, Curr: (-1.20,  0.79), ( -1.40,  -1.40)   Error: 2.20
+Last SG, Last State: ( -3.40,   0.15), ( -1.40,  -1.40)  SG Improvement:0.00229 
+
+Goal, Curr: (-0.89,  0.83), ( -1.40,  -1.40)   Error: 2.29
+Last SG, Last State: ( -3.40,   0.16), ( -1.40,  -1.40)  SG Improvement:0.00402 
+
+Goal, Curr: (-1.01,  0.90), ( -1.40,  -1.40)   Error: 2.33
+Last SG, Last State: ( -3.40,   0.16), ( -1.40,  -1.40)  SG Improvement:-0.00280 
+
+Goal, Curr: (-0.91,  0.93), ( -1.40,  -1.40)   Error: 2.38
+Last SG, Last State: ( -3.40,   0.17), ( -1.40,  -1.40)  SG Improvement:-0.01012 
+
+Goal, Curr: (-1.00,  1.09), ( -1.40,  -1.40)   Error: 2.52
+Last SG, Last State: ( -3.40,   0.17), ( -1.40,  -1.40)  SG Improvement:-0.01154 
+
+Goal, Curr: (-1.15,  1.19), ( -1.40,  -1.40)   Error: 2.60
+Last SG, Last State: ( -3.40,   0.17), ( -1.40,  -1.40)  SG Improvement:-0.00169 
+
+episode:02300, mean:-0.48, std:0.09, median:-0.42, success:0.00
+Goal, Curr: (-0.80,  1.16), ( -1.40,  -1.40)   Error: 2.63
+Last SG, Last State: ( -3.32,   0.21), ( -1.37,  -1.40)  SG Improvement:0.04042 
+
+Goal, Curr: (-0.91,  1.12), ( -1.40,  -1.40)   Error: 2.56
+Last SG, Last State: ( -3.40,   0.04), ( -1.40,  -1.40)  SG Improvement:0.00202 
+
+Goal, Curr: (-0.89,  0.78), ( -1.40,  -1.40)   Error: 2.23
+Last SG, Last State: ( -3.40,   0.05), ( -1.40,  -1.40)  SG Improvement:0.00002 
+
+Goal, Curr: (-0.78,  0.85), ( -1.40,  -1.40)   Error: 2.33
+Last SG, Last State: ( -3.34,   0.23), ( -1.39,  -1.40)  SG Improvement:0.04145 
+
+Goal, Curr: (-0.88,  1.10), ( -1.40,  -1.40)   Error: 2.55
+Last SG, Last State: ( -3.38,   0.24), ( -1.40,  -1.40)  SG Improvement:-0.01385 
+
+Goal, Curr: (-0.78,  0.98), ( -1.40,  -1.40)   Error: 2.45
+Last SG, Last State: ( -3.40,   0.06), ( -1.40,  -1.40)  SG Improvement:-0.00000 
+
+Goal, Curr: (-0.93,  1.25), ( -1.40,  -1.40)   Error: 2.69
+Last SG, Last State: ( -3.40,   0.04), ( -1.40,  -1.40)  SG Improvement:0.00012 
+
+Goal, Curr: (-1.23,  1.24), ( -1.40,  -1.40)   Error: 2.64
+Last SG, Last State: ( -3.40,   0.00), ( -1.40,  -1.40)  SG Improvement:0.00022 
+
+Goal, Curr: (-0.86,  0.75), ( -1.40,  -1.40)   Error: 2.22
+Last SG, Last State: ( -3.40,   0.05), ( -1.40,  -1.40)  SG Improvement:-0.00000 
+
+Goal, Curr: (-1.06,  0.92), ( -1.40,  -1.40)   Error: 2.34
+Last SG, Last State: ( -3.40,   0.02), ( -1.40,  -1.40)  SG Improvement:-0.00005 
+
+episode:02400, mean:-0.51, std:0.10, median:-0.51, success:0.00
+Goal, Curr: (-0.96,  1.05), ( -1.40,  -1.40)   Error: 2.49
+Last SG, Last State: ( -3.40,   0.10), ( -1.40,  -1.40)  SG Improvement:-0.00004 
+
+Goal, Curr: (-0.81,  1.22), ( -1.20,  -1.40)   Error: 2.64
+Last SG, Last State: ( -3.19,   0.03), ( -1.19,  -1.40)  SG Improvement:0.00301 
+
+Goal, Curr: (-0.79,  0.79), ( -1.40,  -1.40)   Error: 2.28
+Last SG, Last State: ( -3.40,   0.12), ( -1.40,  -1.40)  SG Improvement:-0.00254 
+
+Goal, Curr: (-0.81,  0.96), ( -1.40,  -1.40)   Error: 2.43
+Last SG, Last State: ( -3.40,   0.12), ( -1.40,  -1.40)  SG Improvement:0.00068 
+
+Goal, Curr: (-1.09,  1.04), ( -1.40,  -1.40)   Error: 2.46
+Last SG, Last State: ( -3.40,   0.10), ( -1.40,  -1.40)  SG Improvement:-0.01023 
+
+Goal, Curr: (-1.24,  0.95), ( -1.40,  -1.40)   Error: 2.36
+Last SG, Last State: ( -3.40,   0.06), ( -1.40,  -1.40)  SG Improvement:0.00017 
+
+Goal, Curr: (-1.17,  0.99), ( -1.01,  -1.40)   Error: 2.39
+Last SG, Last State: ( -3.01,  -0.12), ( -1.00,  -1.40)  SG Improvement:0.00288 
+
+Goal, Curr: (-1.04,  1.04), ( -1.40,  -1.40)   Error: 2.47
+Last SG, Last State: ( -3.40,   0.10), ( -1.40,  -1.40)  SG Improvement:-0.01187 
+
+Goal, Curr: (-1.17,  1.12), ( -1.00,  -1.40)   Error: 2.53
+Last SG, Last State: ( -3.00,  -0.12), ( -1.00,  -1.40)  SG Improvement:0.00082 
+
+Goal, Curr: (-1.16,  1.15), ( -1.30,  -1.40)   Error: 2.55
+Last SG, Last State: ( -3.28,   0.05), ( -1.29,  -1.40)  SG Improvement:0.00864 
+
+episode:02500, mean:-0.47, std:0.18, median:-0.52, success:0.00
+Log radii:  [-0.29104733  0.4648792   0.6931472   0.05292466 -0.24401027  0.34731635]
+Adjusted log radii:  [0.89895272 2.254879   0.68314719 2.4429245  1.54598975 1.53731632]
+Goal, Curr: (-0.92,  0.89), ( -1.40,  -1.40)   Error: 2.33
+Last SG, Last State: ( -3.40,  -1.16), ( -1.40,  -1.40)  SG Improvement:0.00014 
+
+Goal, Curr: (-0.83,  0.96), ( -1.40,  -1.40)   Error: 2.42
+Last SG, Last State: ( -3.35,  -0.08), ( -1.40,  -1.40)  SG Improvement:-0.21649 
+
+Goal, Curr: (-1.09,  1.21), ( -1.40,  -1.40)   Error: 2.62
+Last SG, Last State: ( -3.40,  -1.13), ( -1.40,  -1.40)  SG Improvement:0.00099 
+
+Goal, Curr: (-1.16,  1.03), ( -1.40,  -1.40)   Error: 2.44
+Last SG, Last State: ( -3.40,  -1.14), ( -1.40,  -1.40)  SG Improvement:0.00075 
+
+Goal, Curr: (-0.84,  0.99), ( -1.40,  -1.40)   Error: 2.46
+Last SG, Last State: ( -3.40,  -1.14), ( -1.40,  -1.40)  SG Improvement:0.00004 
+
+Goal, Curr: (-0.90,  1.09), ( -1.40,  -1.40)   Error: 2.54
+Last SG, Last State: ( -3.40,  -1.14), ( -1.40,  -1.40)  SG Improvement:0.00001 
+
+Goal, Curr: (-1.14,  1.14), ( -1.40,  -1.40)   Error: 2.55
+Last SG, Last State: ( -3.40,  -1.14), ( -1.40,  -1.40)  SG Improvement:0.00081 
+
+Goal, Curr: (-0.92,  0.77), ( -1.40,  -1.40)   Error: 2.22
+Last SG, Last State: ( -3.40,  -1.17), ( -1.40,  -1.40)  SG Improvement:0.00004 
+
+Goal, Curr: (-1.16,  0.96), ( -1.40,  -1.40)   Error: 2.37
+Last SG, Last State: ( -3.40,  -1.16), ( -1.40,  -1.40)  SG Improvement:0.00052 
+
+Goal, Curr: (-1.04,  1.01), ( -1.40,  -1.40)   Error: 2.44
+Last SG, Last State: ( -3.40,  -1.17), ( -1.40,  -1.40)  SG Improvement:0.00013 
+
+episode:02600, mean:-0.37, std:0.13, median:-0.36, success:0.00
+Goal, Curr: (-0.79,  1.03), ( -1.40,  -1.40)   Error: 2.51
+Last SG, Last State: ( -3.40,  -1.38), ( -1.40,  -1.40)  SG Improvement:0.01477 
+
+Goal, Curr: (-0.88,  1.06), ( -1.40,  -1.40)   Error: 2.51
+Last SG, Last State: ( -3.40,  -1.32), ( -1.40,  -1.40)  SG Improvement:0.00026 
+
+Goal, Curr: (-1.09,  0.76), ( -1.40,  -1.40)   Error: 2.18
+Last SG, Last State: ( -3.40,  -1.30), ( -1.40,  -1.40)  SG Improvement:-0.00096 
+
+Goal, Curr: (-1.04,  1.05), ( -1.40,  -1.40)   Error: 2.48
+Last SG, Last State: ( -3.40,  -1.29), ( -1.40,  -1.40)  SG Improvement:0.00014 
+
+Goal, Curr: (-1.06,  0.85), ( -1.40,  -1.40)   Error: 2.27
+Last SG, Last State: ( -3.40,  -1.29), ( -1.40,  -1.40)  SG Improvement:0.00014 
+
+Goal, Curr: (-1.02,  0.96), ( -1.40,  -1.09)   Error: 2.09
+Last SG, Last State: ( -3.40,  -1.52), ( -1.40,  -1.09)  SG Improvement:-0.00258 
+
+Goal, Curr: (-0.81,  0.96), ( -1.40,  -1.40)   Error: 2.43
+Last SG, Last State: ( -3.40,  -1.27), ( -1.40,  -1.40)  SG Improvement:0.00581 
+
+Goal, Curr: (-1.09,  0.77), ( -1.40,  -1.40)   Error: 2.19
+Last SG, Last State: ( -3.40,  -1.74), ( -1.40,  -1.40)  SG Improvement:-0.00030 
+
+Goal, Curr: (-0.93,  1.02), ( -1.40,  -1.08)   Error: 2.15
+Last SG, Last State: ( -3.40,  -1.50), ( -1.40,  -1.08)  SG Improvement:-0.00060 
+
+Goal, Curr: (-1.19,  0.88), ( -1.40,  -1.16)   Error: 2.04
+Last SG, Last State: ( -3.40,  -1.66), ( -1.40,  -1.15)  SG Improvement:-0.00034 
+
+episode:02700, mean:-0.29, std:0.15, median:-0.28, success:0.00
+Goal, Curr: (-1.03,  0.81), ( -1.40,  -1.40)   Error: 2.24
+Last SG, Last State: ( -3.40,  -0.70), ( -1.40,  -1.40)  SG Improvement:0.00505 
+
+Goal, Curr: (-0.79,  0.97), ( -1.40,  -1.36)   Error: 2.41
+Last SG, Last State: ( -3.40,  -0.19), ( -1.40,  -1.40)  SG Improvement:0.05761 
+
+Goal, Curr: (-0.80,  1.06), ( -1.40,  -1.40)   Error: 2.54
+Last SG, Last State: ( -3.40,  -0.80), ( -1.40,  -1.40)  SG Improvement:0.00419 
+
+Goal, Curr: (-1.25,  0.79), ( -1.40,  -1.40)   Error: 2.19
+Last SG, Last State: ( -3.40,  -0.79), ( -1.40,  -1.40)  SG Improvement:-0.00013 
+
+Goal, Curr: (-0.91,  0.79), ( -1.40,  -1.25)   Error: 2.09
+Last SG, Last State: ( -3.40,  -1.11), ( -1.40,  -1.37)  SG Improvement:-0.05743 
+
+Goal, Curr: (-1.14,  0.87), ( -1.40,  -1.40)   Error: 2.28
+Last SG, Last State: ( -3.40,  -0.76), ( -1.40,  -1.40)  SG Improvement:0.00044 
+
+Goal, Curr: (-1.14,  0.76), ( -1.40,  -1.40)   Error: 2.17
+Last SG, Last State: ( -3.40,  -0.77), ( -1.40,  -1.40)  SG Improvement:-0.00016 
+
+Goal, Curr: (-1.06,  1.23), ( -1.40,  -1.40)   Error: 2.65
+Last SG, Last State: ( -3.40,  -0.12), ( -1.40,  -1.40)  SG Improvement:-0.08930 
+
+Goal, Curr: (-1.04,  1.23), ( -1.40,  -1.40)   Error: 2.66
+Last SG, Last State: ( -3.40,  -0.78), ( -1.40,  -1.40)  SG Improvement:-0.00198 
+
+Goal, Curr: (-1.06,  1.16), ( -1.40,  -1.40)   Error: 2.58
+Last SG, Last State: ( -3.40,  -0.75), ( -1.40,  -1.40)  SG Improvement:0.00181 
+
+episode:02800, mean:-0.38, std:0.13, median:-0.36, success:0.00
+Goal, Curr: (-0.92,  0.95), ( -1.30,  -0.60)   Error: 1.59
+Last SG, Last State: ( -3.33,  -1.19), ( -1.34,  -0.60)  SG Improvement:-0.03360 
+
+Goal, Curr: (-0.90,  0.94), ( -1.36,  -0.60)   Error: 1.61
+Last SG, Last State: ( -3.27,  -1.19), ( -1.31,  -0.60)  SG Improvement:0.07097 
+
+Goal, Curr: (-1.02,  0.94), ( -1.37,  -0.60)   Error: 1.58
+Last SG, Last State: ( -3.33,  -1.21), ( -1.38,  -0.60)  SG Improvement:0.15502 
+
+Goal, Curr: (-1.18,  1.02), ( -1.40,  -1.40)   Error: 2.43
+Last SG, Last State: ( -3.40,  -0.36), ( -1.40,  -1.40)  SG Improvement:0.01509 
+
+Goal, Curr: (-0.98,  1.00), ( -1.38,  -0.60)   Error: 1.65
+Last SG, Last State: ( -3.37,  -1.18), ( -1.40,  -0.60)  SG Improvement:-0.01561 
+
+Goal, Curr: (-1.23,  1.13), ( -1.40,  -1.40)   Error: 2.54
+Last SG, Last State: ( -3.40,  -0.25), ( -1.40,  -1.40)  SG Improvement:-0.00863 
+
+Goal, Curr: (-1.21,  1.22), ( -1.40,  -1.40)   Error: 2.62
+Last SG, Last State: ( -3.40,  -0.60), ( -1.40,  -1.40)  SG Improvement:0.00288 
+
+Goal, Curr: (-1.12,  0.78), ( -1.32,  -0.59)   Error: 1.39
+Last SG, Last State: ( -3.23,  -1.29), ( -1.27,  -0.60)  SG Improvement:0.10058 
+
+Goal, Curr: (-0.84,  1.18), ( -1.40,  -1.06)   Error: 2.32
+Last SG, Last State: ( -3.27,   0.93), ( -1.40,  -1.13)  SG Improvement:-2.72732 
+
+Goal, Curr: (-1.21,  0.80), ( -1.40,  -1.40)   Error: 2.20
+Last SG, Last State: ( -3.40,  -0.26), ( -1.40,  -1.40)  SG Improvement:0.00262 
+
+episode:02900, mean:0.09, std:0.35, median:0.17, success:0.00
+Goal, Curr: (-1.24,  1.16), ( -1.40,  -1.40)   Error: 2.56
+Last SG, Last State: ( -3.40,  -0.71), ( -1.40,  -1.40)  SG Improvement:0.00013 
+
+Goal, Curr: (-1.16,  1.05), ( -1.40,  -0.71)   Error: 1.77
+Last SG, Last State: ( -3.40,  -0.78), ( -1.40,  -0.71)  SG Improvement:0.01007 
+
+Goal, Curr: (-0.92,  0.83), ( -1.40,  -1.40)   Error: 2.28
+Last SG, Last State: ( -3.40,  -0.67), ( -1.40,  -1.40)  SG Improvement:0.00445 
+
+Goal, Curr: (-0.77,  1.12), ( -1.38,  -0.62)   Error: 1.84
+Last SG, Last State: ( -3.36,  -0.43), ( -1.35,  -0.60)  SG Improvement:-0.08591 
+
+Goal, Curr: (-0.96,  1.15), ( -1.40,  -0.60)   Error: 1.81
+Last SG, Last State: ( -3.40,  -0.62), ( -1.40,  -0.60)  SG Improvement:0.10517 
+
+Goal, Curr: (-1.12,  0.93), ( -1.40,  -1.40)   Error: 2.34
+Last SG, Last State: ( -3.40,  -0.71), ( -1.40,  -1.40)  SG Improvement:0.00040 
+
+Goal, Curr: (-1.17,  0.92), ( -1.40,  -1.40)   Error: 2.33
+Last SG, Last State: ( -3.40,  -0.66), ( -1.40,  -1.40)  SG Improvement:0.00297 
+
+Goal, Curr: (-0.89,  0.86), ( -1.40,  -1.40)   Error: 2.31
+Last SG, Last State: ( -3.40,  -0.78), ( -1.40,  -1.40)  SG Improvement:0.00432 
+
+Goal, Curr: (-1.11,  0.90), ( -1.40,  -1.40)   Error: 2.32
+Last SG, Last State: ( -3.40,  -0.95), ( -1.40,  -1.40)  SG Improvement:0.00440 
+
+Goal, Curr: (-0.76,  0.99), ( -1.40,  -1.29)   Error: 2.37
+Last SG, Last State: ( -3.40,  -0.94), ( -1.40,  -1.34)  SG Improvement:-0.16703 
+
+episode:03000, mean:-0.18, std:0.22, median:-0.22, success:0.00
